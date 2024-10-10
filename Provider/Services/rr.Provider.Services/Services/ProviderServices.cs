@@ -80,13 +80,13 @@ namespace rr.Provider.Services
 
         public IDataDefinition GetOrCreateScriptDataValue (TScriptDefinitionData definitionData)
         {
-            if (DataValueList.TryGetValue (definitionData.VariableName, out var data)) {
+            if (DefinitionDataList.TryGetValue (definitionData.VariableName, out var data)) {
                 return data.DataDefinition;
             }
 
             definitionData.AddDataDefinition (EventSystem.GetDataDefinition (RealName (definitionData.VariableName)));
 
-            DataValueList [ definitionData.VariableName ] = definitionData;
+            DefinitionDataList [ definitionData.VariableName ] = definitionData;
 
             return definitionData.DataDefinition;
         }
@@ -109,14 +109,11 @@ namespace rr.Provider.Services
 
         #region Property
         List<UHandlerModule> HandlerModuleList { get; set; } = [];
-        Dictionary<string, TScriptDefinitionData> DataValueList { get; set; } = [];
+        Dictionary<string, TScriptDefinitionData> DefinitionDataList { get; set; } = [];
         #endregion
 
         #region Support
-        string RealName (string name)
-        {
-            return "LOCAL:RR_" + name;
-        }
+        string RealName (string name) => "LOCAL:RR_" + name;
         #endregion
     };
     //---------------------------//
