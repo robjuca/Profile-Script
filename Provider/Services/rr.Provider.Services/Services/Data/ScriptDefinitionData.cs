@@ -23,7 +23,8 @@ namespace rr.Provider.Services
         #endregion
 
         #region Members
-        public void AddVariableValue (string variableValue) => VariableValue = variableValue;
+        public void AddVariableName (string variableName) => VariableName = VariableName;
+        public void AddVariableValue (string variableValue = default) => VariableValue = variableValue;
         public void AddDataDefinition (IDataDefinition dataDefinition) => DataDefinition = dataDefinition;
         #endregion
 

@@ -84,7 +84,7 @@ namespace rr.Shell
             var variablesNames = Enum.GetNames (typeof (UReceiverModule));
 
             foreach (string name in variablesNames) {
-                scriptData.AddVariableValue (name);
+                scriptData.AddVariableN (name);
                 dataList.Add (scriptData);
             }
 
