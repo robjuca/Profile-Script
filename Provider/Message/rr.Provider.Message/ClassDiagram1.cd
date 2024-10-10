@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="rr.Provider.Message.THandleMessage" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAABAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Message\HandleMessage.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="rr.Provider.Message.TMessageInternal">
+    <Position X="0.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>QAAAAABAAAEBIEAIgAAAMAAIAAAAAQCgUAAAAAAgAhA=</HashCode>
+      <FileName>Message\ModuleMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="rr.Provider.Message.TMessageData">
+    <Position X="4" Y="0.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAEAAEAAgAAAkAAIAAAAAUQAUAAAAAAAIAA=</HashCode>
+      <FileName>Message\ModuleMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="rr.Provider.Message.TModuleGroup">
+    <Position X="4" Y="5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>QAAAAABAAAAAAEAIAAAAIAAIAAAAAUAgEAAAAAAAIAA=</HashCode>
+      <FileName>Message\ModuleMessage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="rr.Provider.Message.IHandleMessageModule">
+    <Position X="9.25" Y="2.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Message\Interfaces\IHandle.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="rr.Provider.Message.IModulePresentation">
+    <Position X="9" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Message\Interfaces\IModulePresentation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="10" />
+</ClassDiagram>

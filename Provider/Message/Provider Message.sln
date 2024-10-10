@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35209.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Message", "Message", "{DB147591-4AEF-4445-B4ED-453E0BC14E0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rr.Provider.Message", "rr.Provider.Message\rr.Provider.Message.csproj", "{56B30D2C-58EB-4867-86AE-5F46C22CAFE2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56B30D2C-58EB-4867-86AE-5F46C22CAFE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56B30D2C-58EB-4867-86AE-5F46C22CAFE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56B30D2C-58EB-4867-86AE-5F46C22CAFE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56B30D2C-58EB-4867-86AE-5F46C22CAFE2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{56B30D2C-58EB-4867-86AE-5F46C22CAFE2} = {DB147591-4AEF-4445-B4ED-453E0BC14E0C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F11BF387-2C86-4476-9302-F7CEB242D4D5}
+	EndGlobalSection
+EndGlobal

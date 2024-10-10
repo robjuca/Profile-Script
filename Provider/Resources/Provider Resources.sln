@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35209.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{9C87F10A-574E-4F26-8A02-EC23024A0D2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rr.Provider.Resources", "rr.Provider.Resources\rr.Provider.Resources.csproj", "{BFA8A640-FD93-4026-865A-A1FAF2F6999D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFA8A640-FD93-4026-865A-A1FAF2F6999D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFA8A640-FD93-4026-865A-A1FAF2F6999D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFA8A640-FD93-4026-865A-A1FAF2F6999D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFA8A640-FD93-4026-865A-A1FAF2F6999D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BFA8A640-FD93-4026-865A-A1FAF2F6999D} = {9C87F10A-574E-4F26-8A02-EC23024A0D2D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6C95404-279F-40CA-95F1-CB4CA2B0780A}
+	EndGlobalSection
+EndGlobal

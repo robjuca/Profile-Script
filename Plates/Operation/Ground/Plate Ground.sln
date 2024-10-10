@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35309.182
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plate", "Plate", "{9AF5896E-40F7-4B34-BB78-1F858A4B8851}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rr.Plate.GroundOpe", "rr.Plate.GroundOpe\rr.Plate.GroundOpe.csproj", "{F1704F25-47CD-4E0E-833D-E11CCCAC98AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1704F25-47CD-4E0E-833D-E11CCCAC98AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1704F25-47CD-4E0E-833D-E11CCCAC98AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1704F25-47CD-4E0E-833D-E11CCCAC98AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1704F25-47CD-4E0E-833D-E11CCCAC98AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F1704F25-47CD-4E0E-833D-E11CCCAC98AA} = {9AF5896E-40F7-4B34-BB78-1F858A4B8851}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C5221D45-9AA0-4CF6-9CF7-BF348A3D596D}
+	EndGlobalSection
+EndGlobal
