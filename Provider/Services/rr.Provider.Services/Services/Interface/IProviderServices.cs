@@ -21,10 +21,10 @@ namespace rr.Provider.Services
         void DiscoverModules (IList<Assembly> modules);
         void ConfigureModules (IEnumerable<object> modules);
 
-        void CreateScriptDataValue<T> (IList <TScriptDefinitionData<T>> scriptData);
-        IDataDefinition GetOrCreateScriptDataValue<T> (TScriptDefinitionData<T> definitionData);
-        string GetScriptDataValue<T> (TScriptDefinitionData<T> definitionData);
-        void SetScriptDataValue<T> (TScriptDefinitionData<T> definitionData);
+        void CreateScriptDataValue (IList <TScriptDefinitionData> scriptData);
+        IDataDefinition GetOrCreateScriptDataValue (TScriptDefinitionData definitionData);
+        string GetScriptDataValue (TScriptDefinitionData definitionData);
+        void SetScriptDataValue (TScriptDefinitionData definitionData);
     }
     //---------------------------//
 

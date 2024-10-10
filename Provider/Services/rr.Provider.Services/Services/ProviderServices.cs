@@ -69,7 +69,7 @@ namespace rr.Provider.Services
             }
         }
 
-        public void CreateScriptDataValue<T> (IList<TScriptDefinitionData<T>> scriptDataList)
+        public void CreateScriptDataValue (IList<TScriptDefinitionData> scriptDataList)
         {
             if (scriptDataList is not null) {
                 foreach (var variableData in scriptDataList) {
@@ -78,7 +78,7 @@ namespace rr.Provider.Services
             }
         }
 
-        public IDataDefinition GetOrCreateScriptDataValue<T> (TScriptDefinitionData<T> definitionData)
+        public IDataDefinition GetOrCreateScriptDataValue (TScriptDefinitionData definitionData)
         {
             if (DataValueList.TryGetValue (definitionData.VariableName, out var data)) {
                 return data.DataDefinition;
@@ -86,19 +86,19 @@ namespace rr.Provider.Services
 
             definitionData.AddDataDefinition (EventSystem.GetDataDefinition (RealName (definitionData.VariableName)));
 
-            DataValueList [ definitionData.VariableName ] = definitionData.Clone ();
+            DataValueList [ definitionData.VariableName ] = definitionData;
 
             return definitionData.DataDefinition;
         }
 
-        public string GetScriptDataValue<T> (TScriptDefinitionData<T> definitionData)
+        public string GetScriptDataValue (TScriptDefinitionData definitionData)
         {
             var data = GetOrCreateScriptDataValue (definitionData);
 
             return data.GetValueAs<string> ();
         }
 
-        public void SetScriptDataValue<T> (TScriptDefinitionData<T> definitionData)
+        public void SetScriptDataValue (TScriptDefinitionData definitionData)
         {
             var data = GetOrCreateScriptDataValue (definitionData);
 
@@ -109,7 +109,7 @@ namespace rr.Provider.Services
 
         #region Property
         List<UHandlerModule> HandlerModuleList { get; set; } = [];
-        Dictionary<string, TScriptDefinitionData<Enum>> DataValueList { get; set; } = [];
+        Dictionary<string, TScriptDefinitionData> DataValueList { get; set; } = [];
         #endregion
 
         #region Support

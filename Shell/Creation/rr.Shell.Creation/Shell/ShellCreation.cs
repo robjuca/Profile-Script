@@ -14,11 +14,9 @@ using rr.Provider.Services;
 using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Scripting;
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.IO;
 using System.Reflection;
 //---------------------------//
 
