@@ -78,17 +78,17 @@ namespace rr.Shell
         void Initialize ()
         {
             // Receiver
-            var receiver = new List<TScriptDefinitionData<UReceiverModule>> ();
-            var scriptData = TScriptDefinitionData<UReceiverModule>.CreateDefault ();
+            var dataList = new List<TScriptDefinitionData> ();
+            var scriptData = TScriptDefinitionData.CreateDefault ();
 
             var variablesNames = Enum.GetNames (typeof (UReceiverModule));
 
             foreach (string name in variablesNames) {
-                scriptData.AddVariableScriptEnum (TEnumExtension.ToEnum<UReceiverModule> (name));
-                receiver.Add (scriptData);
+                scriptData.AddVariableValue (name);
+                dataList.Add (scriptData);
             }
 
-            Services.CreateScriptDataValue (receiver);
+            Services.CreateScriptDataValue (dataList);
         }
         #endregion
     };
