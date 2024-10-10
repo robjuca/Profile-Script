@@ -29,7 +29,7 @@ namespace rr.Provider.Services
         #endregion
 
         #region Static
-        static public TScriptDefinitionData CreateDefault () => new () { VariableName = default, VariableValue = default };
+        static public TScriptDefinitionData CreateDefault () => new () { VariableName = string.Empty, VariableValue = string.Empty };
         #endregion
     };
     //---------------------------//

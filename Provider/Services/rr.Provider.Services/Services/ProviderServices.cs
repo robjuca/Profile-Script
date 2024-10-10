@@ -80,13 +80,13 @@ namespace rr.Provider.Services
 
         public IDataDefinition GetOrCreateScriptDataValue (TScriptDefinitionData definitionData)
         {
-            if (DefinitionDataList.TryGetValue (definitionData.VariableName, out var data)) {
+            if (DefinitionDataList.TryGetValue (definitionData.Key, out var data)) {
                 return data.DataDefinition;
             }
 
             definitionData.AddDataDefinition (EventSystem.GetDataDefinition (RealName (definitionData.VariableName)));
 
-            DefinitionDataList [ definitionData.VariableName ] = definitionData;
+            DefinitionDataList [ definitionData.Key ] = definitionData;
 
             return definitionData.DataDefinition;
         }
