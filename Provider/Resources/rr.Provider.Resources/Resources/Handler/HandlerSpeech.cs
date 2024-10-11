@@ -12,10 +12,10 @@ namespace rr.Provider.Resources
     public enum UHandlerSpeech
     {
         SPEECH_BATTERY_OPE,
-        SPEECH_DEVICE_INIT,
+        //SPEECH_DEVICE_INIT,
         SPEECH_DOOR_OPE,
         SPEECH_ENABLE_BATTERY_OPE,
-        SPEECH_ENABLE_DEVICE_INIT,
+        //SPEECH_ENABLE_DEVICE_INIT,
         SPEECH_ENABLE_DOOR_OPE,
         SPEECH_ENABLE_ENGINE_OPE,
         SPEECH_ENABLE_FUEL_OPE,

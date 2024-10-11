@@ -25,7 +25,7 @@ namespace rr.Plate.DeviceInit
     public enum UHandlerSpeech
     {
         SPEECH_DEVICE_INIT,
-        SPEECH_ENABLE_DEVICE_INIT,
+        SPEECH_DEVICE_INIT_ENABLE,
     };
     //---------------------------// 
     #endregion
