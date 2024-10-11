@@ -15,6 +15,7 @@ using rr.Provider.Services;
 using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Events;
 
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 //---------------------------//
 
@@ -46,10 +47,10 @@ namespace rr.Plate.DeviceInit
         {
             SelectActiveModule (Module);
 
-            //ModuleData = [];
-            ActionPresentation = THandlerModulePresentation.Create (Module);
+            HandlerData = [];
+            HandlerModulePresentation = THandlerModulePresentation.Create (Module);
 
-            //ActionPresentation.NextModule += OnNextModule;
+            //HandlerModulePresentation.NextModule += OnNextModule;
         }
         #endregion
 
@@ -62,7 +63,7 @@ namespace rr.Plate.DeviceInit
                     if (message.RequestParam (out IApplication app)) {
                         app.SubscribeToSystemEvent (SPADSystemEvents.GameStateChanged, OnGameStateChanged);
 
-                        CreateModuleData (); // just once
+                        CreateHandlerData (); // just once
                     }
                 }
 
@@ -70,7 +71,7 @@ namespace rr.Plate.DeviceInit
                 if (message.IsAction (UMessageAction.PROFILE_LOADED)) {
                     ProfileLoad = true;
                     SelectActiveModule (Module);
-                    //ActionPresentation.Ready (ModuleData);
+                    //HandlerModulePresentation.Ready (HandlerData);
 
                     SelectGameState (EventSystem.GetDataDefinition ("LOCAL:GAMESTATE")?.GetValue ().ToString ());
                 }
@@ -78,14 +79,14 @@ namespace rr.Plate.DeviceInit
                 // PROFILE_UNLOADED
                 if (message.IsAction (UMessageAction.PROFILE_UNLOADED)) {
                     ProfileLoad = false;
-                    //ActionPresentation.Cleanup ();
+                    //HandlerModulePresentation.Cleanup ();
                 }
 
                 if (IsActiveModule) {
                     // SCRIPT_ACTION (from Process_Dispatcher)
                     if (message.IsAction (UMessageAction.SCRIPT_ACTION)) {
                         if (message.RequestParam (out TActionDispatcherEventArgs eventArgs)) {
-                            ActionPresentation.ProcessAction (eventArgs);
+                            HandlerModulePresentation.ProcessAction (eventArgs);
                         }
                     }
                 }
@@ -119,52 +120,35 @@ namespace rr.Plate.DeviceInit
 
         #region Property
         bool ProfileLoad { get; set; }
-        //List<TModuleHandlerData> ModuleData { get; set; }
-        THandlerModulePresentation ActionPresentation { get; set; }
+        List<THandlerData> HandlerData { get; set; }
+        THandlerModulePresentation HandlerModulePresentation { get; set; }
         #endregion
 
         #region Support
-        void CreateModuleData ()
+        void CreateHandlerData ()
         {
-            //ModuleData.Clear ();
+            HandlerData.Clear ();
 
-            //var data = TModuleData.Create (Module, UCodeId.C0DE_100);
-            //data.AddSpeech (Resources.RES_DeviceInitBriefing);
-            //ModuleData.Add (data);
+            var data = THandlerData.Create (Module);
 
-            //data = TModuleData.Create (Module, UCodeId.C0DE_200);
-            //data.AddSpeech (Resources.RES_DeviceInitReady);
-            //ModuleData.Add (data);
-
-            //data = TModuleData.Create (Module, UCodeId.C0DE_300);
-            //data.AddSpeech (Resources.RES_DeviceInitEnd);
-            //ModuleData.Add (data);
-
-            //data = TModuleData.Create (Module, UCodeId.C0DE_400);
-            //data.AddSpeech (Resources.RES_DeviceInitDone);
-            //data.AddNextModule (UModuleId.GROUND_OPE);
-            //ModuleData.Add (data);
         }
 
         void SelectGameState (string state)
         {
             var gameState = TEnumExtension.ToEnum<SimulationGamestate> (state);
 
-
             // Briefing
-            if (gameState.Equals(SimulationGamestate.Briefing)) {
-                //ActionPresentation.NextCodeId (UCodeId.C0DE_100, wait: true);
+            if (gameState.Equals (SimulationGamestate.Briefing)) {
+                //HandlerModulePresentation.NextCodeId (UCodeId.C0DE_100, wait: true);
             }
 
             // Ready (Flying)
             if (gameState.Equals (SimulationGamestate.Flying)) {
-                //ActionPresentation.NextCodeId (UCodeId.C0DE_200);
+                //HandlerModulePresentation.NextCodeId (UCodeId.C0DE_200);
             }
         }
         #endregion
     };
-
-
     //---------------------------//
 
 }  // namespace

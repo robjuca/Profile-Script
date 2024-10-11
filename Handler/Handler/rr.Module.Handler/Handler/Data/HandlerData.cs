@@ -20,7 +20,7 @@ namespace rr.Module.Handler
 
         #region Handler Data
         public THandlerSpeechData HandlerSpeechData { get; private set; }
-        public THandlerHandlerModuleData HandlerHandlerModuleData { get; private set; }
+        public THandlerModuleData HandlerModuleData { get; private set; }
         public THandlerMessageData HandlerMessageData { get; set; }
         #endregion
 
@@ -37,7 +37,7 @@ namespace rr.Module.Handler
             return new () {
                 Module = module,
                 HandlerSpeechData = THandlerSpeechData.Create (module),
-                HandlerHandlerModuleData = THandlerHandlerModuleData.Create (module),
+                HandlerModuleData = THandlerModuleData.Create (module),
                 HandlerMessageData = THandlerMessageData.Create (module)
             };
         }

@@ -9,8 +9,8 @@ using rr.Provider.Resources;
 
 namespace rr.Module.Handler
 {
-    //----- THandlerHandlerModuleData
-    public class THandlerHandlerModuleData
+    //----- THandlerModuleData
+    public class THandlerModuleData
     {
         #region Property
         public UHandlerModule HandlerModule { get; private set; }
@@ -18,7 +18,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        static public THandlerHandlerModuleData Create (UHandlerModule HandlerModule) => new () { HandlerModule = HandlerModule };
+        static public THandlerModuleData Create (UHandlerModule handlerModule) => new () { HandlerModule = handlerModule };
         #endregion
     };
     //---------------------------//
