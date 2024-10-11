@@ -18,7 +18,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        static public THandlerMessageData Create (UHandlerModule HandlerModule) => new () { HandlerModule = HandlerModule };
+        static public THandlerMessageData Create (UHandlerModule handler) => new () { HandlerModule = handler };
         #endregion
     };
     //---------------------------//

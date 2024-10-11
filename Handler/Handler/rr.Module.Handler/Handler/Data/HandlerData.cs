@@ -6,6 +6,7 @@
 //----- Include
 using rr.Library.Extension;
 using rr.Provider.Resources;
+using rr.Provider.Services;
 //---------------------------//
 
 namespace rr.Module.Handler
@@ -15,7 +16,7 @@ namespace rr.Module.Handler
     {
         #region Property
         public UHandlerModule Module { get; private set; }
-        //public bool HasModule => Module.Equals (UHandlerModule.NONE) is false;
+        public bool HasModule => Module.Equals (UHandlerModule.NONE) is false;
         #endregion
 
         #region Handler Data
@@ -32,13 +33,13 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        public static THandlerData Create (UHandlerModule module)
+        public static THandlerData Create (IProviderServices services, UHandlerModule handler)
         {
             return new () {
-                Module = module,
-                HandlerSpeechData = THandlerSpeechData.Create (module),
-                HandlerModuleData = THandlerModuleData.Create (module),
-                HandlerMessageData = THandlerMessageData.Create (module)
+                Module = handler,
+                HandlerSpeechData = THandlerSpeechData.Create (services, handler),
+                HandlerModuleData = THandlerModuleData.Create (handler),
+                HandlerMessageData = THandlerMessageData.Create (handler)
             };
         }
         #endregion

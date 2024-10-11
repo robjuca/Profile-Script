@@ -26,6 +26,7 @@ namespace rr.Provider.Resources
         SHELL_BOOTSTRAPPER,
         //SHELL_STEPS,
         PROCESS_DISPATCHER,
+        NONE,
     };
     //---------------------------//
 
