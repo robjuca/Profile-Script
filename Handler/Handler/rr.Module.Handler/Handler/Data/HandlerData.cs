@@ -38,8 +38,8 @@ namespace rr.Module.Handler
             return new () {
                 Module = handler,
                 HandlerSpeechData = THandlerSpeechData.Create (services, handler),
-                HandlerModuleData = THandlerModuleData.Create (handler),
-                HandlerMessageData = THandlerMessageData.Create (handler)
+                HandlerModuleData = THandlerModuleData.Create (services, handler),
+                HandlerMessageData = THandlerMessageData.Create (services, handler)
             };
         }
         #endregion

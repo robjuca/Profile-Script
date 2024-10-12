@@ -5,6 +5,7 @@
 
 //----- Include
 using rr.Provider.Resources;
+using rr.Provider.Services;
 //---------------------------//
 
 namespace rr.Module.Handler
@@ -18,7 +19,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        static public THandlerMessageData Create (UHandlerModule handler) => new () { HandlerModule = handler };
+        static public THandlerMessageData Create (IProviderServices services, UHandlerModule handler) => new () { HandlerModule = handler };
         #endregion
     };
     //---------------------------//

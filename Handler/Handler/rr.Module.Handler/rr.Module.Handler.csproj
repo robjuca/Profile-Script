@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Handler\Data\HandlerDataBase.cs" />
     <Compile Include="Handler\Operation\Condition\HandlerCondition.cs" />
     <Compile Include="Handler\Data\HandlerMessageData.cs" />
     <Compile Include="Handler\Data\HandlerModuleData.cs" />
