@@ -73,7 +73,7 @@ namespace rr.Plate.DeviceInit
                     SelectActiveModule (Module);
                     //HandlerModulePresentation.Ready (HandlerData);
 
-                    SelectGameState (EventSystem.GetDataDefinition ("LOCAL:GAMESTATE")?.GetValue ().ToString ());
+                    SelectGameState ();
                 }
 
                 // PROFILE_UNLOADED
@@ -133,18 +133,16 @@ namespace rr.Plate.DeviceInit
 
         }
 
-        void SelectGameState (string state)
+        void SelectGameState (string state = default)
         {
-            var gameState = TEnumExtension.ToEnum<SimulationGamestate> (state);
+            switch (Services.RequestGameState (state)) {
+                case SimulationGamestate.Briefing:
+                    //HandlerModulePresentation.NextCodeId (UCodeId.C0DE_100, wait: true);
+                    break;
 
-            // Briefing
-            if (gameState.Equals (SimulationGamestate.Briefing)) {
-                //HandlerModulePresentation.NextCodeId (UCodeId.C0DE_100, wait: true);
-            }
-
-            // Ready (Flying)
-            if (gameState.Equals (SimulationGamestate.Flying)) {
-                //HandlerModulePresentation.NextCodeId (UCodeId.C0DE_200);
+                case SimulationGamestate.Flying:
+                    //HandlerModulePresentation.NextCodeId (UCodeId.C0DE_200);
+                    break;
             }
         }
         #endregion

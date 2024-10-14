@@ -4,8 +4,10 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Library.Extension;
 using rr.Provider.Resources;
 
+using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Configuration;
 using SPAD.neXt.Interfaces.Events;
 
@@ -103,6 +105,19 @@ namespace rr.Provider.Services
             var data = GetOrCreateScriptDataValue (definitionData);
 
             data?.SetRawValue (definitionData.VariableValue);
+        }
+
+        public SimulationGamestate RequestGameState (string state = default)
+        {
+            var definitionData = TScriptDefinitionData.Create ("GAMESTATE");
+
+            if (state.Equals (default)) {
+                definitionData.AddVariableValue (GetScriptDataValue (definitionData));
+
+                return definitionData.GameState;
+            }
+
+            return TEnumExtension.ToEnum<SimulationGamestate> (state);
         }
         #endregion
         #endregion

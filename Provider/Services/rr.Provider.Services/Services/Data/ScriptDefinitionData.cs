@@ -5,6 +5,9 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Library.Extension;
+
+using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Configuration;
 //---------------------------//
 
@@ -20,6 +23,7 @@ namespace rr.Provider.Services
         public string VariableValue { get; private set; }
         public IDataDefinition DataDefinition { get; private set; }
         public bool IsEmpty => string.IsNullOrEmpty (VariableName);
+        public SimulationGamestate GameState => TEnumExtension.ToEnum<SimulationGamestate> (VariableValue);
         #endregion
 
         #region Members
@@ -30,6 +34,7 @@ namespace rr.Provider.Services
 
         #region Static
         static public TScriptDefinitionData CreateDefault () => new () { VariableName = string.Empty, VariableValue = string.Empty };
+        static public TScriptDefinitionData Create (string variableName) => new () { VariableName = variableName, VariableValue = string.Empty };
         #endregion
     };
     //---------------------------//

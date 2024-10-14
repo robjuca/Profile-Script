@@ -4,6 +4,7 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Configuration;
 
 using System;
@@ -25,6 +26,8 @@ namespace rr.Provider.Services
         IDataDefinition GetOrCreateScriptDataValue (TScriptDefinitionData definitionData);
         string GetScriptDataValue (TScriptDefinitionData definitionData);
         void SetScriptDataValue (TScriptDefinitionData definitionData);
+
+        SimulationGamestate RequestGameState (string state = default);
     }
     //---------------------------//
 
