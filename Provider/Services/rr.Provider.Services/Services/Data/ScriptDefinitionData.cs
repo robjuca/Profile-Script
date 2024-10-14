@@ -9,6 +9,8 @@ using rr.Library.Extension;
 
 using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Configuration;
+
+using System.Diagnostics.SymbolStore;
 //---------------------------//
 
 namespace rr.Provider.Services
@@ -19,22 +21,30 @@ namespace rr.Provider.Services
         #region Property
         public string Key => VariableName;
         public string VariableName { get; private set; }
-        public string VariableRealName => "LOCAL:RR_" + VariableName;
+        public string VariableRealName => (UseLocalOnly ? "Local:" : "LOCAL:RR_") + VariableName;
         public string VariableValue { get; private set; }
         public IDataDefinition DataDefinition { get; private set; }
         public bool IsEmpty => string.IsNullOrEmpty (VariableName);
+        public bool UseLocalOnly { get; private set; }
         public SimulationGamestate GameState => TEnumExtension.ToEnum<SimulationGamestate> (VariableValue);
         #endregion
 
         #region Members
-        public void AddVariableName (string variableName) => VariableName = variableName;
+        public void AddVariableName (string variableName, bool useLocal = false)
+        {
+            VariableName = variableName;
+            UseLocalOnly = useLocal;
+        }
+
         public void AddVariableValue (string variableValue = default) => VariableValue = variableValue;
         public void AddDataDefinition (IDataDefinition dataDefinition) => DataDefinition = dataDefinition;
         #endregion
 
         #region Static
         static public TScriptDefinitionData CreateDefault () => new () { VariableName = string.Empty, VariableValue = string.Empty };
-        static public TScriptDefinitionData Create (string variableName) => new () { VariableName = variableName, VariableValue = string.Empty };
+        static public TScriptDefinitionData Create (
+            string variableName,
+            bool useLocal = false) => new () { VariableName = variableName, UseLocalOnly = useLocal, VariableValue = string.Empty };
         #endregion
     };
     //---------------------------//

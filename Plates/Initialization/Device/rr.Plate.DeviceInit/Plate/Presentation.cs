@@ -5,7 +5,6 @@
 
 //----- Include
 using rr.Library.EventAggregator;
-using rr.Library.Extension;
 using rr.Module.Handler;
 using rr.Provider.Message;
 using rr.Provider.Presentation;
@@ -129,7 +128,7 @@ namespace rr.Plate.DeviceInit
         {
             HandlerData.Clear ();
 
-            var data = THandlerData.Create (Module);
+            //var data = THandlerData.Create (Module);
 
         }
 

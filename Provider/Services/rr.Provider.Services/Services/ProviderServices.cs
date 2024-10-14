@@ -88,6 +88,10 @@ namespace rr.Provider.Services
 
             definitionData.AddDataDefinition (EventSystem.GetDataDefinition (RealName (definitionData.VariableName)));
 
+            if (definitionData.UseLocalOnly) {
+                definitionData.AddDataDefinition (EventSystem.GetDataDefinition ("LOCAL:" + definitionData.VariableName));
+            }
+
             DefinitionDataList [ definitionData.Key ] = definitionData;
 
             return definitionData.DataDefinition;
@@ -97,7 +101,9 @@ namespace rr.Provider.Services
         {
             var data = GetOrCreateScriptDataValue (definitionData);
 
-            return data.GetValueAs<string> ();
+            var obj = data.GetRawValue();
+
+            return obj is null ? string.Empty : obj.ToString ();    
         }
 
         public void SetScriptDataValue (TScriptDefinitionData definitionData)
@@ -109,9 +115,9 @@ namespace rr.Provider.Services
 
         public SimulationGamestate RequestGameState (string state = default)
         {
-            var definitionData = TScriptDefinitionData.Create ("GAMESTATE");
+            var definitionData = TScriptDefinitionData.Create ("GAMESTATE", useLocal: true);
 
-            if (state.Equals (default)) {
+            if (string.IsNullOrEmpty (state)) {
                 definitionData.AddVariableValue (GetScriptDataValue (definitionData));
 
                 return definitionData.GameState;
