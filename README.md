@@ -8,3 +8,6 @@ CREATION MESSAGE
 
 DISPATCHER MESSAGE
 ![Dispatcher Message](https://github.com/user-attachments/assets/c86ff5b5-5b82-4bb7-86c6-49d315e959ec)
+
+HANDLER SPEECH
+![HandlerSpeech](https://github.com/user-attachments/assets/20aa7d8a-c0e8-414a-a203-989e893e6ae9)
