@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="rr.Provider.Services.TScriptDefinitionData">
+    <Position X="1.25" Y="1" Width="2" />
+    <Members>
+      <Method Name="Create" Hidden="true" />
+      <Method Name="CreateDefault" Hidden="true" />
+      <Property Name="IsEmpty" Hidden="true" />
+      <Property Name="Key" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AABAASAAAAACABUgAEEAAAAIAAAAAEAAAAAAAAAAIAA=</HashCode>
+      <FileName>Services\Data\ScriptDefinitionData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="rr.Provider.Services.IProviderServices">
+    <Position X="7.25" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAgAQAAAAAAAAAEEAAEAAAAAAAAAAAAAAAAABAAQ=</HashCode>
+      <FileName>Services\Interface\IProviderServices.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="10" />
+</ClassDiagram>

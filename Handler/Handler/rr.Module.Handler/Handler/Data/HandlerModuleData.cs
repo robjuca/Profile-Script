@@ -13,6 +13,12 @@ namespace rr.Module.Handler
     //----- THandlerModuleData
     public class THandlerModuleData : THandlerDataBase
     {
+        #region Property
+
+        // Validate
+        public bool Validate => HasModule; 
+        #endregion
+
         #region Constructor
         THandlerModuleData (IProviderServices services, UHandlerModule handlerModule)
           : base (services, handlerModule)

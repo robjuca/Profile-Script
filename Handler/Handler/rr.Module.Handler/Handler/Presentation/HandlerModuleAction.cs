@@ -23,7 +23,7 @@ namespace rr.Module.Handler
         THandlerModuleAction ()
         {
             HandlerDataList = [];
-            HandlerCondition = THandlerCondition.Create ();
+            HandlerCondition = THandlerModule.Create ();
             HandlerAction = THandlerAction.Create ();
             HandlerSpeech = THandlerSpeech.Create ();
 
@@ -97,7 +97,7 @@ namespace rr.Module.Handler
         bool Code40 { get; set; }
         THandlerData HandlerData => HandlerDataList [ ActionIndex ];
         THandlerSpeech HandlerSpeech { get; set; }
-        THandlerCondition HandlerCondition { get; set; }
+        THandlerModule HandlerCondition { get; set; }
         THandlerAction HandlerAction { get; set; }
         bool Wait { get; set; }
         UHandlerModule ParentModule { get; set; }

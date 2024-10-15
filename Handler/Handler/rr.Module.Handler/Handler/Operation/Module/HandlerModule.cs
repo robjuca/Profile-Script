@@ -1,50 +1,38 @@
-﻿
-/*----------------------------------------------------------------
+﻿/*----------------------------------------------------------------
   Copyright (C) 2001 R&R Soft - All rights reserved.
   author: Roberto Oliveira Jucá    
 ----------------------------------------------------------------*/
 
 //----- Include
-using rr.Provider.Resources.Properties;
-
-using SPAD.neXt.Interfaces;
-using SPAD.neXt.Interfaces.Events;
-
-using System.Diagnostics.Contracts;
 //---------------------------//
 
 namespace rr.Module.Handler
 {
-    //----- THandlerCondition
-    public class THandlerCondition
+    //----- THandlerModule
+    public class THandlerModule
     {
         #region Members
-        public void Process (THandlerData data) => Select (data);
+        public void Process (THandlerModuleData handlerModuleData) => Select (handlerModuleData);
         #endregion
 
         #region Support
-        bool Select (THandlerData data)
+        void Select (THandlerModuleData handlerModuleData)
         {
-            var res = false;
-
-            Contract.Requires (data != null);
-
-            //if (data.HasModule) {
+            //if (handlerModuleData.HasModule) {
             //    res = true;
 
             //    //EventSystem.CreateNewLocal (
             //    //    Resources.RES_MODULE_ID,
             //    //    "String",
             //    //     VARIABLE_SCOPE.SESSION,
-            //    //     data.ModuleActionCondition);
+            //    //     handlerModuleData.ModuleActionCondition);
             //}
 
-            return res;
         }
         #endregion
 
         #region Static
-        public static THandlerCondition Create () => new ();
+        public static THandlerModule Create () => new ();
         #endregion
     };
     //---------------------------//

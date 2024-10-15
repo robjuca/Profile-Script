@@ -67,7 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Handler\Data\HandlerDataBase.cs" />
-    <Compile Include="Handler\Operation\Condition\HandlerCondition.cs" />
+    <Compile Include="Handler\Operation\Module\HandlerModule.cs" />
     <Compile Include="Handler\Data\HandlerMessageData.cs" />
     <Compile Include="Handler\Data\HandlerModuleData.cs" />
     <Compile Include="Handler\Data\HandlerSpeechData.cs" />
@@ -79,7 +79,10 @@
     <Compile Include="Handler\Operation\Speech\HandlerSpeech.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)"  D:\SPAD.neXt\Addons /Y</PostBuildEvent>
