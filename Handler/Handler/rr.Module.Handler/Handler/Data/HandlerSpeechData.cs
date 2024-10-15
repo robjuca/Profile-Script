@@ -14,9 +14,54 @@ namespace rr.Module.Handler
     public class THandlerSpeechData : THandlerDataBase
     {
         #region Property
-        public string SpeechText { get; private set; }
-        public string SpeechResource { get; private set; }
-        public string SpeechResourceEnable { get; private set; }
+        // Text
+        public string SpeechTextVariableName { get; private set; }
+        public string SpeechTextVariableValue { get; private set; }
+
+        // Text Enable
+        public string SpeechTextEnableVariableName { get; private set; }
+        public string SpeechTextEnableVariableValue { get; private set; }
+
+        // Validate
+        public bool Validate => HasModule & ValidateText & ValidateTextEnable;
+
+        // Validate Text
+        public bool ValidateText
+        {
+            get
+            {
+                bool res = false;
+
+                if (string.IsNullOrEmpty (SpeechTextVariableName) is false
+                    &
+                    string.IsNullOrEmpty (SpeechTextVariableValue) is false)
+                {
+                    res = true;
+                }
+
+                return res;
+            }
+        }
+
+        // Validate Text Enable
+        public bool ValidateTextEnable
+        {
+            get
+            {
+                bool res = false;
+
+                if (string.IsNullOrEmpty (SpeechTextEnableVariableName) is false
+                    &
+                    string.IsNullOrEmpty (SpeechTextEnableVariableValue) is false) 
+                {
+                    res = true;
+                }
+
+                return res;
+            }
+        }
+
+        // Misc
         public UReturnCodeId ReturnCode { get; set; }
         public bool CleanupEnable => ReturnCode.Equals (UReturnCodeId.SPEECH_DISABLE);
         public bool CleanupSpeech => ReturnCode.Equals (UReturnCodeId.SPEECH_DONE);
@@ -30,9 +75,13 @@ namespace rr.Module.Handler
         #endregion
 
         #region Members
-        public void AddText (string text) => SpeechText = text;
-        public void AddSpeechResource (string data) => SpeechResource = data;
-        public void AddSpeechResourceEnable (string data) => SpeechResourceEnable = data;
+        // Text
+        public void AddSpeechTextVariableName (string textVariableName) => SpeechTextVariableName = textVariableName;
+        public void AddSpeechTextVariableValue (string textVariableValue) => SpeechTextVariableValue = textVariableValue;
+
+        // Text Enable
+        public void AddSpeechTextEnableVariableName (string textEnableVariableName) => SpeechTextEnableVariableName = textEnableVariableName;
+        public void AddSpeechTextEnableVariableValue (string textEnableVariableValue) => SpeechTextEnableVariableValue = textEnableVariableValue;
         #endregion
 
         #region Static

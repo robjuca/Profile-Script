@@ -9,8 +9,6 @@ using rr.Library.Extension;
 
 using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Configuration;
-
-using System.Diagnostics.SymbolStore;
 //---------------------------//
 
 namespace rr.Provider.Services
@@ -42,6 +40,11 @@ namespace rr.Provider.Services
 
         #region Static
         static public TScriptDefinitionData CreateDefault () => new () { VariableName = string.Empty, VariableValue = string.Empty };
+
+        static public TScriptDefinitionData Create (
+            string variableName,
+            string variableValue) => new () { VariableName = variableName, VariableValue = variableValue };
+
         static public TScriptDefinitionData Create (
             string variableName,
             bool useLocal = false) => new () { VariableName = variableName, UseLocalOnly = useLocal, VariableValue = string.Empty };

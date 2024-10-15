@@ -22,7 +22,7 @@ namespace rr.Module.Handler
         #region Handler Data
         public THandlerSpeechData HandlerSpeechData { get; private set; }
         public THandlerModuleData HandlerModuleData { get; private set; }
-        public THandlerMessageData HandlerMessageData { get; set; }
+        public THandlerMessageData HandlerMessageData { get; private set; }
         #endregion
 
         #region Interface

@@ -4,8 +4,7 @@
 ----------------------------------------------------------------*/
 
 //----- Include
-using SPAD.neXt.Interfaces;
-using SPAD.neXt.Interfaces.Events;
+using rr.Provider.Services;
 //---------------------------//
 
 namespace rr.Module.Handler
@@ -14,46 +13,50 @@ namespace rr.Module.Handler
     public class THandlerSpeech
     {
         #region Members
-        public void Process (THandlerSpeechData data) => Select (data);
+        public void Process (THandlerSpeechData handlerData) => Select (handlerData);
 
         public void ActionReturnCode (THandlerSpeechData data)
         {
-            //if (data is not null) {
-            //    if (data.CleanupEnable) {
-            //        CleanupEnable (data);
+            //if (handlerData is not null) {
+            //    if (handlerData.CleanupEnable) {
+            //        CleanupEnable (handlerData);
             //    }
 
-            //    if (data.CleanupSpeech) {
-            //        CleanupSpeech (data);
+            //    if (handlerData.CleanupSpeech) {
+            //        CleanupSpeech (handlerData);
             //    }
             //}
         }
         #endregion
 
         #region Support
-        bool Select (THandlerSpeechData data)
+        void Select (THandlerSpeechData handlerData)
         {
-            var res = false;
+            if (handlerData is not null) {
+                if (handlerData.Validate) {
+                    var definitionData = TScriptDefinitionData.CreateDefault ();
 
-            if (data is not null) {
-                if (data.HasModule) {
-                    res = true;
-                    EventSystem.CreateNewLocal (data.SpeechResource, "String", VARIABLE_SCOPE.SESSION, data.SpeechText);
-                    EventSystem.CreateNewLocal (data.SpeechResourceEnable, "Int", VARIABLE_SCOPE.SESSION, 1);
+                    // text
+                    definitionData.AddVariableName (handlerData.SpeechTextVariableName);
+                    definitionData.AddVariableValue (handlerData.SpeechTextVariableValue);
+                    handlerData.Services.SetScriptDataValue (definitionData);
+
+                    // text enable
+                    definitionData.AddVariableName (handlerData.SpeechTextEnableVariableName);
+                    definitionData.AddVariableValue (handlerData.SpeechTextEnableVariableValue);
+                    handlerData.Services.SetScriptDataValue (definitionData);
                 }
             }
-
-            return res;
         }
 
-        //void CleanupSpeech (THandlerSpeechData data) => EventSystem.CreateNewLocal (
-        //        data.SpeechText,
+        //void CleanupSpeech (THandlerSpeechData handlerData) => EventSystem.CreateNewLocal (
+        //        handlerData.SpeechText,
         //        "String",
         //        VARIABLE_SCOPE.SESSION,
         //        string.Empty);
 
-        //void CleanupEnable (THandlerSpeechData data) => EventSystem.CreateNewLocal (
-        //        data.SpeechResourceEnable,
+        //void CleanupEnable (THandlerSpeechData handlerData) => EventSystem.CreateNewLocal (
+        //        handlerData.SpeechResourceEnable,
         //        "Int",
         //        VARIABLE_SCOPE.SESSION,
         //        0);
