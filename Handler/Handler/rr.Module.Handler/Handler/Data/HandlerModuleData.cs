@@ -11,15 +11,19 @@ using rr.Provider.Services;
 namespace rr.Module.Handler
 {
     //----- THandlerModuleData
-    public class THandlerModuleData
+    public class THandlerModuleData : THandlerDataBase
     {
-        #region Property
-        public UHandlerModule HandlerModule { get; private set; }
-        //public bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
+        #region Constructor
+        THandlerModuleData (IProviderServices services, UHandlerModule handlerModule)
+          : base (services, handlerModule)
+        {
+        }
         #endregion
 
         #region Static
-        static public THandlerModuleData Create (IProviderServices services, UHandlerModule handler) => new () { HandlerModule = handler };
+        static public THandlerModuleData Create (
+            IProviderServices services,
+            UHandlerModule handlerModule) => new (services, handlerModule);
         #endregion
     };
     //---------------------------//

@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+/*----------------------------------------------------------------
+  Copyright (C) 2001 R&R Soft - All rights reserved.
+  author: Roberto Oliveira Jucá    
+----------------------------------------------------------------*/
 
-namespace rr.Module.Handler.Handler.Data
+//----- Include
+using rr.Provider.Resources;
+using rr.Provider.Services;
+//---------------------------//
+
+namespace rr.Module.Handler
 {
-    internal class HandlerDataBase
+    //----- THandlerDataBase
+    public class THandlerDataBase (IProviderServices services, UHandlerModule handlerModule)
     {
-    }
-}
+        #region Property
+        public UHandlerModule HandlerModule { get; private set; } = handlerModule;
+        public bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
+        public IProviderServices Services { get; private set; } = services;
+        #endregion
+    };
+    //---------------------------//
+
+}  // namespace

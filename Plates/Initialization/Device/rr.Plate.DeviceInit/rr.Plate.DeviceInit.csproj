@@ -33,6 +33,9 @@
   <PropertyGroup>
     <LangVersion>12</LangVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Properties\Device.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="rr.Library.EventAggregator, Version=1.0.2024.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -92,6 +95,9 @@
     <Compile Include="ModuleCatalog.cs" />
     <Compile Include="Plate\Presentation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Device.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

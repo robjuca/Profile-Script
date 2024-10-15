@@ -46,7 +46,7 @@ namespace rr.Plate.DeviceInit
         {
             SelectActiveModule (Module);
 
-            HandlerData = [];
+            HandlerDataList = [];
             HandlerModulePresentation = THandlerModulePresentation.Create (Module);
 
             //HandlerModulePresentation.NextModule += OnNextModule;
@@ -70,7 +70,7 @@ namespace rr.Plate.DeviceInit
                 if (message.IsAction (UMessageAction.PROFILE_LOADED)) {
                     ProfileLoad = true;
                     SelectActiveModule (Module);
-                    //HandlerModulePresentation.Ready (HandlerData);
+                    //HandlerModulePresentation.Ready (HandlerDataList);
 
                     SelectGameState ();
                 }
@@ -119,16 +119,16 @@ namespace rr.Plate.DeviceInit
 
         #region Property
         bool ProfileLoad { get; set; }
-        List<THandlerData> HandlerData { get; set; }
+        List<THandlerData> HandlerDataList { get; set; }
         THandlerModulePresentation HandlerModulePresentation { get; set; }
         #endregion
 
         #region Support
         void CreateHandlerData ()
         {
-            HandlerData.Clear ();
+            HandlerDataList.Clear ();
 
-            //var data = THandlerData.Create (Module);
+            var handlerData = THandlerData.Create (Services, Module);
 
         }
 

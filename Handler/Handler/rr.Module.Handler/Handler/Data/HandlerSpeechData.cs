@@ -11,17 +11,22 @@ using rr.Provider.Services;
 namespace rr.Module.Handler
 {
     //----- THandlerSpeechData
-    public class THandlerSpeechData
+    public class THandlerSpeechData : THandlerDataBase
     {
         #region Property
-        public UHandlerModule HandlerModule { get; private set; }
-        public bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
         public string SpeechText { get; private set; }
         public string SpeechResource { get; private set; }
         public string SpeechResourceEnable { get; private set; }
         public UReturnCodeId ReturnCode { get; set; }
         public bool CleanupEnable => ReturnCode.Equals (UReturnCodeId.SPEECH_DISABLE);
         public bool CleanupSpeech => ReturnCode.Equals (UReturnCodeId.SPEECH_DONE);
+        #endregion
+
+        #region Constructor
+        THandlerSpeechData (IProviderServices services, UHandlerModule handlerModule)
+          : base (services, handlerModule)
+        {
+        }
         #endregion
 
         #region Members
@@ -31,7 +36,9 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        static public THandlerSpeechData Create (IProviderServices services, UHandlerModule handler) => new () { HandlerModule = handler };
+        static public THandlerSpeechData Create (
+           IProviderServices services,
+           UHandlerModule handlerModule) => new (services, handlerModule);
         #endregion
     };
     //---------------------------//

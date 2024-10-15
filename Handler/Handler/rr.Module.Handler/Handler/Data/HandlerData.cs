@@ -33,13 +33,13 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        public static THandlerData Create (IProviderServices services, UHandlerModule handler)
+        public static THandlerData Create (IProviderServices services, UHandlerModule handlerModule)
         {
             return new () {
-                Module = handler,
-                HandlerSpeechData = THandlerSpeechData.Create (services, handler),
-                HandlerModuleData = THandlerModuleData.Create (services, handler),
-                HandlerMessageData = THandlerMessageData.Create (services, handler)
+                Module = handlerModule,
+                HandlerSpeechData = THandlerSpeechData.Create (services, handlerModule),
+                HandlerModuleData = THandlerModuleData.Create (services, handlerModule),
+                HandlerMessageData = THandlerMessageData.Create (services, handlerModule)
             };
         }
         #endregion
