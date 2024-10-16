@@ -10,4 +10,4 @@ DISPATCHER MESSAGE
 ![Dispatcher Message](https://github.com/user-attachments/assets/c86ff5b5-5b82-4bb7-86c6-49d315e959ec)
 
 HANDLER SPEECH
-![HandlerSpeech](https://github.com/user-attachments/assets/20aa7d8a-c0e8-414a-a203-989e893e6ae9)
+![Screenshot 2024-10-16 101224](https://github.com/user-attachments/assets/72e87c67-f05c-452b-9612-a296b64e549f)
