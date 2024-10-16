@@ -28,6 +28,8 @@ namespace rr.Plate.DeviceInit
     {
         // Module Handler
         MODULE_NAME_DEVICE_INIT,            // must match with RECEIVER_MODULE_NAME
+
+        // Message to Module
         MODULE_MESSAGE_DEVICE_INIT,         // message to decode (UMessageName) RECEIVER_MODULE_MESSAGE
 
         // Speech Handler
@@ -128,8 +130,6 @@ namespace rr.Plate.DeviceInit
         bool ProfileLoad { get; set; }
         List<THandlerData> HandlerDataList { get; set; }
         THandlerModulePresentation HandlerModulePresentation { get; set; }
-        string SpeechTextVariableName => TEnumExtension.AsString (UVariableName.SPEECH_TEXT_DEVICE_INIT);
-        string SpeechTextEnableVariableName => TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_DEVICE_INIT);
         #endregion
 
         #region Support
@@ -139,21 +139,24 @@ namespace rr.Plate.DeviceInit
 
             var handlerData = THandlerData.Create (Services, Module);
 
-            #region module to handler
-            //handlerData.HandlerModuleData.
+            #region common
+            handlerData.HandlerModuleData.AddModuleVariableName (TEnumExtension.AsString (UVariableName.MODULE_NAME_DEVICE_INIT));
+            handlerData.HandlerModuleData.AddModuleVariableValue (TEnumExtension.AsString (Module));
+
+            handlerData.HandlerMessageData.AddMessageVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
+
+            handlerData.HandlerSpeechData.AddSpeechTextEnableVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
+            handlerData.HandlerSpeechData.AddSpeechTextVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
+            handlerData.HandlerSpeechData.AddSpeechTextEnableVariableValue (Resources.RES_TRUE);
             #endregion
 
-           
+            // Text and Message - Begin
+            handlerData.HandlerSpeechData.AddSpeechTextVariableValue (
+                "check instructions: aircraft cold and dark mode: park break on: honeycomb device:all switches: off all levers: idle gear down:when ready: set beacon switch on and off:waiting..."
+            );
 
-            #region text to play
-            // text to play (TextVariableName, TextVariableValue)
-            handlerData.HandlerSpeechData.AddSpeechTextVariableName (SpeechTextVariableName);
-            handlerData.HandlerSpeechData.AddSpeechTextVariableValue ("");
-
-            // enable to play (EnableVariableName, EnableVariableValue)
-            handlerData.HandlerSpeechData.AddSpeechTextEnableVariableName (SpeechTextEnableVariableName);
-            handlerData.HandlerSpeechData.AddSpeechTextEnableVariableValue (Resources.RES_TRUE); 
-            #endregion
+            handlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (UMessageValue.Begin));
+            HandlerDataList.Add (handlerData);  // add to list
         }
 
         void SelectGameState (string state = default)

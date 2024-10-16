@@ -51,7 +51,7 @@ namespace rr.Module.Handler
         #region Members
         // Message
         public void AddMessageVariableName (string variableName) => MessageVariableName = variableName;
-        public void AddModuleVariableValue (string variableValue) => MessageVariableValue = variableValue;
+        public void AddMessageVariableValue (string variableValue) => MessageVariableValue = variableValue;
         #endregion
 
         #region Static
