@@ -15,18 +15,18 @@ namespace rr.Module.Handler
         #region Members
         public void Process (THandlerSpeechData handlerData) => Select (handlerData);
 
-        public void ActionReturnCode (THandlerSpeechData data)
-        {
-            //if (handlerData is not null) {
-            //    if (handlerData.CleanupEnable) {
-            //        CleanupEnable (handlerData);
-            //    }
+        //public void ActionReturnCode (THandlerSpeechData data)
+        //{
+        //    //if (handlerData is not null) {
+        //    //    if (handlerData.CleanupEnable) {
+        //    //        CleanupEnable (handlerData);
+        //    //    }
 
-            //    if (handlerData.CleanupSpeech) {
-            //        CleanupSpeech (handlerData);
-            //    }
-            //}
-        }
+        //    //    if (handlerData.CleanupSpeech) {
+        //    //        CleanupSpeech (handlerData);
+        //    //    }
+        //    //}
+        //}
         #endregion
 
         #region Support
@@ -39,11 +39,13 @@ namespace rr.Module.Handler
                     // text
                     definitionData.AddVariableName (handlerData.SpeechTextVariableName);
                     definitionData.AddVariableValue (handlerData.SpeechTextVariableValue);
+
                     handlerData.Services.SetScriptDataValue (definitionData);
 
                     // text enable
                     definitionData.AddVariableName (handlerData.SpeechTextEnableVariableName);
                     definitionData.AddVariableValue (handlerData.SpeechTextEnableVariableValue);
+
                     handlerData.Services.SetScriptDataValue (definitionData);
                 }
             }

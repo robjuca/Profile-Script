@@ -13,11 +13,45 @@ namespace rr.Module.Handler
     //----- THandlerMessageData
     public class THandlerMessageData : THandlerDataBase
     {
+        #region Property
+        // Variable Message Name
+        public string MessageVariableName { get; private set; }
+
+        // Variable Message Value
+        public string MessageVariableValue { get; private set; }
+
+        // Validate
+        public bool Validate => HasModule & ValidateMessageNameAndValue;
+
+        // Validate Message Name and Value
+        public bool ValidateMessageNameAndValue
+        {
+            get
+            {
+                bool res = false;
+
+                if (string.IsNullOrEmpty (MessageVariableName) is false
+                    &
+                    string.IsNullOrEmpty (MessageVariableValue) is false) {
+                    res = true;
+                }
+
+                return res;
+            }
+        }
+        #endregion
+
         #region Constructor
         THandlerMessageData (IProviderServices services, UHandlerModule handlerModule)
            : base (services, handlerModule)
         {
-        } 
+        }
+        #endregion
+
+        #region Members
+        // Message
+        public void AddMessageVariableName (string variableName) => MessageVariableName = variableName;
+        public void AddModuleVariableValue (string variableValue) => MessageVariableValue = variableValue;
         #endregion
 
         #region Static

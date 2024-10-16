@@ -69,7 +69,7 @@ namespace rr.Module.Handler
 
             // speech done
             if (eventArgs.IsCode40 & Wait is false) {
-                ProcessCondition ();
+                //ProcessCondition ();
             }
 
             // internal code
@@ -106,7 +106,7 @@ namespace rr.Module.Handler
         #region Support
         void NextAction () => ActionIndex++;
         //void ProcessSpeech () => HandlerSpeech.Process (HandlerData);
-        void ProcessCondition () => HandlerCondition.Process (HandlerData);
+        //void ProcessCondition () => HandlerCondition.Process (HandlerData);
         #endregion
 
         #region Static

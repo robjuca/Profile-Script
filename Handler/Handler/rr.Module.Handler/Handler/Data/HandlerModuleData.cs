@@ -14,9 +14,31 @@ namespace rr.Module.Handler
     public class THandlerModuleData : THandlerDataBase
     {
         #region Property
+        // Variable Module Name
+        public string ModuleVariableName { get; private set; }
+
+        // Variable Module Value
+        public string ModuleVariableValue { get; private set; }
 
         // Validate
-        public bool Validate => HasModule; 
+        public bool Validate => HasModule & ValidateModuleNameAndValue;
+
+        // Validate Module Name and Value
+        public bool ValidateModuleNameAndValue
+        {
+            get
+            {
+                bool res = false;
+
+                if (string.IsNullOrEmpty (ModuleVariableName) is false
+                    &
+                    string.IsNullOrEmpty (ModuleVariableValue) is false) {
+                    res = true;
+                }
+
+                return res;
+            }
+        }
         #endregion
 
         #region Constructor
@@ -24,6 +46,12 @@ namespace rr.Module.Handler
           : base (services, handlerModule)
         {
         }
+        #endregion
+
+        #region Members
+        // Module
+        public void AddModuleVariableName (string variableName) => ModuleVariableName = variableName;
+        public void AddModuleVariableValue (string variableValue) => ModuleVariableValue = variableValue;
         #endregion
 
         #region Static

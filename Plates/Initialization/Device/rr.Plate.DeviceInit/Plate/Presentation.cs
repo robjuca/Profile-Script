@@ -23,8 +23,8 @@ using System.ComponentModel.Composition;
 namespace rr.Plate.DeviceInit
 {
     #region Data
-    //----- UHandler
-    public enum UHandler
+    //----- UVariableName
+    public enum UVariableName               // (Variable Name)
     {
         // Module Handler
         MODULE_NAME_DEVICE_INIT,            // must match with RECEIVER_MODULE_NAME
@@ -128,8 +128,8 @@ namespace rr.Plate.DeviceInit
         bool ProfileLoad { get; set; }
         List<THandlerData> HandlerDataList { get; set; }
         THandlerModulePresentation HandlerModulePresentation { get; set; }
-        string SpeechTextVariableName => TEnumExtension.AsString (UHandlerSpeech.SPEECH_TEXT_DEVICE_INIT);
-        string SpeechTextEnableVariableName => TEnumExtension.AsString (UHandlerSpeech.SPEECH_ENABLE_DEVICE_INIT);
+        string SpeechTextVariableName => TEnumExtension.AsString (UVariableName.SPEECH_TEXT_DEVICE_INIT);
+        string SpeechTextEnableVariableName => TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_DEVICE_INIT);
         #endregion
 
         #region Support
@@ -140,12 +140,10 @@ namespace rr.Plate.DeviceInit
             var handlerData = THandlerData.Create (Services, Module);
 
             #region module to handler
-
+            //handlerData.HandlerModuleData.
             #endregion
 
-            #region message to module
-
-            #endregion
+           
 
             #region text to play
             // text to play (TextVariableName, TextVariableValue)

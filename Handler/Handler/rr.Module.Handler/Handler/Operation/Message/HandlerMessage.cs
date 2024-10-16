@@ -9,23 +9,23 @@ using rr.Provider.Services;
 
 namespace rr.Module.Handler
 {
-    //----- THandlerModule
-    public class THandlerModule
+    //----- THandlerMessage
+    public class THandlerMessage
     {
         #region Members
-        public void Process (THandlerModuleData handlerData) => Select (handlerData);
+        public void Process (THandlerMessageData handlerData) => Select (handlerData);
         #endregion
 
         #region Support
-        void Select (THandlerModuleData handlerData)
+        void Select (THandlerMessageData handlerData)
         {
             if (handlerData is not null) {
                 if (handlerData.Validate) {
                     var definitionData = TScriptDefinitionData.CreateDefault ();
 
-                    // Module
-                    definitionData.AddVariableName (handlerData.ModuleVariableName);
-                    definitionData.AddVariableValue (handlerData.ModuleVariableValue);
+                    // Message
+                    definitionData.AddVariableName (handlerData.MessageVariableName);
+                    definitionData.AddVariableValue (handlerData.MessageVariableValue);
 
                     handlerData.Services.SetScriptDataValue (definitionData);
                 }
@@ -34,7 +34,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        public static THandlerModule Create () => new ();
+        public static THandlerMessage Create () => new ();
         #endregion
     };
     //---------------------------//
