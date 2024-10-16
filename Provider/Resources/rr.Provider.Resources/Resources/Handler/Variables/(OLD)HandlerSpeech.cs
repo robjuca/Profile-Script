@@ -8,7 +8,7 @@
 
 namespace rr.Provider.Resources
 {
-    //----- UHandlerSpeech 
+    //----- UHandlerSpeech  DEPRECATED
     public enum UHandlerSpeech
     {
         SPEECH_BATTERY_OPE,

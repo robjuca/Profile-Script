@@ -8,7 +8,7 @@
 
 namespace rr.Provider.Resources
 {
-    //----- UHandlerModule 
+    //----- UHandlerModule DEPRECATED
     public enum UHandlerModule
     {
         DEVICE_INIT,

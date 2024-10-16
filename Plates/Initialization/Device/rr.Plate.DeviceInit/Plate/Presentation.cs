@@ -5,10 +5,12 @@
 
 //----- Include
 using rr.Library.EventAggregator;
+using rr.Library.Extension;
 using rr.Module.Handler;
 using rr.Provider.Message;
 using rr.Provider.Presentation;
 using rr.Provider.Resources;
+using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 
 using SPAD.neXt.Interfaces;
@@ -21,11 +23,16 @@ using System.ComponentModel.Composition;
 namespace rr.Plate.DeviceInit
 {
     #region Data
-    //----- UHandlerSpeech 
-    public enum UHandlerSpeech
+    //----- UHandler
+    public enum UHandler
     {
-        SPEECH_DEVICE_INIT,
-        SPEECH_DEVICE_INIT_ENABLE,
+        // Module Handler
+        MODULE_NAME_DEVICE_INIT,            // must match with RECEIVER_MODULE_NAME
+        MODULE_MESSAGE_DEVICE_INIT,         // message to decode (UMessageName) RECEIVER_MODULE_MESSAGE
+
+        // Speech Handler
+        SPEECH_TEXT_DEVICE_INIT,            // put text to play here
+        SPEECH_ENABLE_DEVICE_INIT,          // to play text condition enable (true or false)
     };
     //---------------------------// 
     #endregion
@@ -121,6 +128,8 @@ namespace rr.Plate.DeviceInit
         bool ProfileLoad { get; set; }
         List<THandlerData> HandlerDataList { get; set; }
         THandlerModulePresentation HandlerModulePresentation { get; set; }
+        string SpeechTextVariableName => TEnumExtension.AsString (UHandlerSpeech.SPEECH_TEXT_DEVICE_INIT);
+        string SpeechTextEnableVariableName => TEnumExtension.AsString (UHandlerSpeech.SPEECH_ENABLE_DEVICE_INIT);
         #endregion
 
         #region Support
@@ -130,6 +139,23 @@ namespace rr.Plate.DeviceInit
 
             var handlerData = THandlerData.Create (Services, Module);
 
+            #region module to handler
+
+            #endregion
+
+            #region message to module
+
+            #endregion
+
+            #region text to play
+            // text to play (TextVariableName, TextVariableValue)
+            handlerData.HandlerSpeechData.AddSpeechTextVariableName (SpeechTextVariableName);
+            handlerData.HandlerSpeechData.AddSpeechTextVariableValue ("");
+
+            // enable to play (EnableVariableName, EnableVariableValue)
+            handlerData.HandlerSpeechData.AddSpeechTextEnableVariableName (SpeechTextEnableVariableName);
+            handlerData.HandlerSpeechData.AddSpeechTextEnableVariableValue (Resources.RES_TRUE); 
+            #endregion
         }
 
         void SelectGameState (string state = default)

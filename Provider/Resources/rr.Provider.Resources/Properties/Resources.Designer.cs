@@ -61,6 +61,15 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to False.
+        /// </summary>
+        public static string RES_FALSE {
+            get {
+                return ResourceManager.GetString("RES_FALSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -80.
         /// </summary>
         public static string RES_NEXT_PLATE_CODE {
@@ -102,6 +111,15 @@ namespace rr.Provider.Resources.Properties {
         public static string RES_SPEECH_DONE_CODE {
             get {
                 return ResourceManager.GetString("RES_SPEECH_DONE_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to True.
+        /// </summary>
+        public static string RES_TRUE {
+            get {
+                return ResourceManager.GetString("RES_TRUE", resourceCulture);
             }
         }
     }

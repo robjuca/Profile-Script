@@ -59,14 +59,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Action\ActionDispatcherArgs.cs" />
-    <Compile Include="Resources\Handler\HandlerSpeech.cs" />
+    <Compile Include="Resources\Handler\Variables\HandlerMessage.cs" />
+    <Compile Include="Resources\Handler\Variables\%28OLD%29HandlerModule.cs" />
+    <Compile Include="Resources\Handler\Variables\%28OLD%29HandlerSpeech.cs" />
     <Compile Include="Resources\Interfaces\IModule.cs" />
     <Compile Include="Resources\Interfaces\IDefault.cs" />
     <Compile Include="Resources\Handler\Receiver\ReceiverModule.cs" />
-    <Compile Include="Resources\Handler\Variables\ValueMessage.cs" />
-    <Compile Include="Resources\Handler\HandlerModule.cs" />
     <Compile Include="Resources\Action\MessageAction.cs" />
-    <Compile Include="Resources\Handler\HandlerMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

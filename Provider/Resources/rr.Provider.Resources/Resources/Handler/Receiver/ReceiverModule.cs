@@ -11,8 +11,8 @@ namespace rr.Provider.Resources
     //----- UReceiverModule 
     public enum UReceiverModule
     {
-        RECEIVER_MODULE_HANDLER,
-        RECEIVER_MODULE,
+        RECEIVER_MODULE_NAME,
+        RECEIVER_MODULE_MESSAGE,
     };
     //---------------------------//
 
