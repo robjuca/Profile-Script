@@ -19,22 +19,22 @@ namespace rr.Provider.Services
         #region Property
         public string Key => VariableName;
         public string VariableName { get; private set; }
-        public string VariableRealName => (UseLocalOnly ? "Local:" : "LOCAL:RR_") + VariableName;
+        public string VariableRealName => (UseLocalOnly ? "LOCAL:" : "LOCAL:RR_") + VariableName;
         public string VariableValue { get; private set; }
         public IDataDefinition DataDefinition { get; private set; }
         public bool IsEmpty => string.IsNullOrEmpty (VariableName);
         public bool UseLocalOnly { get; private set; }
-        public SimulationGamestate GameState => TEnumExtension.ToEnum<SimulationGamestate> (VariableValue);
+        public SimulationGamestate GameState => string.IsNullOrEmpty (VariableValue) ? SimulationGamestate.Loading : TEnumExtension.ToEnum<SimulationGamestate> (VariableValue);
         #endregion
 
         #region Members
-        public void AddVariableName (string variableName, bool useLocal = false)
+        public void AddVariableName (string varName, bool useLocal = false)
         {
-            VariableName = variableName;
+            VariableName = varName;
             UseLocalOnly = useLocal;
         }
 
-        public void AddVariableValue (string variableValue = default) => VariableValue = variableValue;
+        public void AddVariableValue (string varValue) => VariableValue = varValue;
         public void AddDataDefinition (IDataDefinition dataDefinition) => DataDefinition = dataDefinition;
 
         public TScriptDefinitionData Clone ()

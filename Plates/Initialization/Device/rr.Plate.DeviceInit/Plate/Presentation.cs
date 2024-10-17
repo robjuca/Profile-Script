@@ -71,7 +71,9 @@ namespace rr.Plate.DeviceInit
                     if (message.RequestParam (out IApplication app)) {
                         app.SubscribeToSystemEvent (SPADSystemEvents.GameStateChanged, OnGameStateChanged);
 
-                        CreateHandlerData (); // just once
+                        // just once
+                        CreateVariables ();
+                        CreateHandlerData ();
                     }
                 }
 
@@ -134,6 +136,30 @@ namespace rr.Plate.DeviceInit
         #endregion
 
         #region Support
+        void CreateVariables ()
+        {
+            var data = TScriptDefinitionData.CreateDefault ();
+
+            // Module Handler
+            data.AddVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
+            data.AddVariableValue (Resources.RES_EMPTY);
+            Services.SetScriptDataValue (data);
+
+            // Message to Module
+            data.AddVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
+            data.AddVariableValue (Resources.RES_EMPTY);
+            Services.SetScriptDataValue (data);
+
+            // Speech Handler
+            data.AddVariableName (ToString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
+            data.AddVariableValue (Resources.RES_EMPTY);
+            Services.SetScriptDataValue (data);
+
+            data.AddVariableName (ToString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
+            data.AddVariableValue (Resources.RES_FALSE);
+            Services.SetScriptDataValue (data);
+        }
+
         void CreateHandlerData ()
         {
             HandlerDataList.Clear ();
@@ -141,14 +167,14 @@ namespace rr.Plate.DeviceInit
             HandlerData = THandlerData.Create (Services, Module);
 
             #region common
-            HandlerData.HandlerModuleData.AddModuleVariableName (TEnumExtension.AsString (UVariableName.MODULE_NAME_DEVICE_INIT));
+            HandlerData.HandlerModuleData.AddModuleVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
             HandlerData.HandlerModuleData.AddModuleVariableValue (TEnumExtension.AsString (Module));
 
-            HandlerData.HandlerMessageData.AddMessageVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
+            HandlerData.HandlerMessageData.AddMessageVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
 
-            HandlerData.HandlerSpeechData.AddSpeechTextEnableVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
+            HandlerData.HandlerSpeechData.AddSpeechTextEnableVariableName (ToString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
             HandlerData.HandlerSpeechData.AddSpeechTextEnableVariableValue (Resources.RES_TRUE);
-            HandlerData.HandlerSpeechData.AddSpeechTextVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
+            HandlerData.HandlerSpeechData.AddSpeechTextVariableName (ToString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
             #endregion
 
             // Text and Message - Begin
@@ -187,6 +213,11 @@ namespace rr.Plate.DeviceInit
                     break;
                 }
             }
+        }
+
+        string ToString (UVariableName name)
+        {
+            return TEnumExtension.AsString (name);
         }
         #endregion
     };
