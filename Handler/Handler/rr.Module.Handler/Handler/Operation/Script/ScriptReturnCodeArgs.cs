@@ -31,7 +31,8 @@ namespace rr.Module.Handler
         public UReturnCodeId CodeType { get; set; }
         public UHandlerModule Module { get; set; }
         public int ActionReturnCode { get; set; }
-        public bool IsCode40 => CodeType.Equals (UReturnCodeId.SPEECH_DONE);
+        public bool IsSpeechDisable => CodeType.Equals (UReturnCodeId.SPEECH_DISABLE);
+        public bool IsSpeechDone => CodeType.Equals (UReturnCodeId.SPEECH_DONE);
         public bool IsNextStep => CodeType.Equals (UReturnCodeId.NEXT_STEP);
         public bool IsNextModule => CodeType.Equals (UReturnCodeId.NEXT_MODULE);
         public bool IsUCodeId => CodeType.Equals (UReturnCodeId.INTERNAL_CODE);
@@ -46,14 +47,15 @@ namespace rr.Module.Handler
         public static TScriptReturnCodeArgs CreateDefault ()
         {
             var obj = new TScriptReturnCodeArgs {
-                //CodeType = UReturnCodeId.NONE,
-                //Module = UHandlerModule.NONE,
+                CodeType = UReturnCodeId.NONE,
+                Module = UHandlerModule.NONE,
                 ActionReturnCode = 0
             };
 
             return obj;
         }
-        public static TScriptReturnCodeArgs Create (UReturnCodeId codeType, TActionDispatcherEventArgs eventArgs)
+
+        public static TScriptReturnCodeArgs Create (UReturnCodeId codeType, TScriptActionDispatcherEventArgs eventArgs)
         {
             var obj = new TScriptReturnCodeArgs {
                 CodeType = codeType,

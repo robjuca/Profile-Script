@@ -34,8 +34,7 @@ namespace rr.Module.Handler
 
                 if (string.IsNullOrEmpty (SpeechTextVariableName) is false
                     &
-                    string.IsNullOrEmpty (SpeechTextVariableValue) is false)
-                {
+                    string.IsNullOrEmpty (SpeechTextVariableValue) is false) {
                     res = true;
                 }
 
@@ -52,19 +51,13 @@ namespace rr.Module.Handler
 
                 if (string.IsNullOrEmpty (SpeechTextEnableVariableName) is false
                     &
-                    string.IsNullOrEmpty (SpeechTextEnableVariableValue) is false) 
-                {
+                    string.IsNullOrEmpty (SpeechTextEnableVariableValue) is false) {
                     res = true;
                 }
 
                 return res;
             }
         }
-
-        // Misc
-        public UReturnCodeId ReturnCode { get; set; }
-        public bool CleanupEnable => ReturnCode.Equals (UReturnCodeId.SPEECH_DISABLE);
-        public bool CleanupSpeech => ReturnCode.Equals (UReturnCodeId.SPEECH_DONE);
         #endregion
 
         #region Constructor
@@ -82,12 +75,30 @@ namespace rr.Module.Handler
         // Text Enable
         public void AddSpeechTextEnableVariableName (string textEnableVariableName) => SpeechTextEnableVariableName = textEnableVariableName;
         public void AddSpeechTextEnableVariableValue (string textEnableVariableValue) => SpeechTextEnableVariableValue = textEnableVariableValue;
+
+        public void CopyFrom (THandlerSpeechData alias)
+        {
+            if (alias is not null) {
+                AddSpeechTextVariableName (alias.SpeechTextVariableName);
+                AddSpeechTextVariableValue (alias.SpeechTextVariableValue);
+                AddSpeechTextEnableVariableName (alias.SpeechTextEnableVariableName);
+                AddSpeechTextEnableVariableValue (alias.SpeechTextEnableVariableValue);
+            }
+        }
         #endregion
 
         #region Static
         static public THandlerSpeechData Create (
            IProviderServices services,
            UHandlerModule handlerModule) => new (services, handlerModule);
+
+        static public THandlerSpeechData Clone (THandlerSpeechData alias)
+        {
+            var handler = Create (alias.Services, alias.HandlerModule);
+            handler.CopyFrom (alias);
+
+            return handler;
+        }
         #endregion
     };
     //---------------------------//

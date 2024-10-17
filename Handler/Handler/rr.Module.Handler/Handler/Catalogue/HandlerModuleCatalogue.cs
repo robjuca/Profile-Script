@@ -4,6 +4,7 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Library.Message;
 using rr.Provider.Resources;
 
 using System.Collections.Generic;
@@ -22,30 +23,25 @@ namespace rr.Module.Handler
         THandlerModuleCatalogue ()
         {
             HandlerDataList = [];
-            HandlerCondition = THandlerModule.Create ();    // ?????
-            HandlerAction = TScriptReturnCode.Create ();       // ?????
+
+            HandlerModule = THandlerModule.Create ();
+            HandlerMessage = THandlerMessage.Create ();
             HandlerSpeech = THandlerSpeech.Create ();
 
-            HandlerAction.ActionReturnCodeDispatcher += OnActionReturnCodeDispatcher;
+            ScriptReturnCode = TScriptReturnCode.Create ();
+
+            ScriptReturnCode.ScriptReturnCodeDispatcher += OnScriptReturnCodeDispatcher;
         }
         #endregion
 
         #region Members
-        //public void Cleanup ()
-        //{
-        //    ActionIndex = 0;
-        //    Code40 = true;
-
-        //    HandlerDataList.Clear ();
-
-        //    HandlerSpeech.Cleanup ();
-        //    HandlerCondition.Cleanup ();
-        //}
+        public void Execute (THandlerData data)
+        {
+            HandlerSpeech.Process (data.HandlerSpeechData);
+        }
 
         public void AddHandlerData (IList<THandlerData> data)
         {
-            //Cleanup ();
-
             if (data is not null) {
                 HandlerDataList = new List<THandlerData> (data);
                 HandlerDataList.Sort ();
@@ -54,20 +50,20 @@ namespace rr.Module.Handler
 
         public void ProcessScriptAction (TScriptActionDispatcherEventArgs eventArgs)
         {
-            //HandlerAction.ProcessAction (eventArgs); // from Dispatcher
+            ScriptReturnCode.ProcessScriptReturnCode (eventArgs); // from Dispatcher
         }
         #endregion
 
         #region Event
-        void OnActionReturnCodeDispatcher (object sender, TScriptReturnCodeArgs eventArgs)
+        void OnScriptReturnCodeDispatcher (object sender, TScriptReturnCodeArgs eventArgs)
         {
             // from TScriptReturnCode
 
-            //HandlerSpeech.ActionReturnCode (eventArgs);
-            //HandlerCondition.ActionReturnCode (eventArgs);
+            HandlerSpeech.ActionReturnCode (eventArgs);
+            //HandlerModule.ActionReturnCode (eventArgs);
 
             // speech done
-            if (eventArgs.IsCode40 & Wait is false) {
+            if (eventArgs.IsSpeechDone & Wait is false) {
                 //ProcessCondition ();
             }
 
@@ -77,7 +73,7 @@ namespace rr.Module.Handler
 
             // next step
             if (eventArgs.IsNextStep) {
-                NextAction ();
+                //NextAction ();
                 //ProcessSpeech ();
             }
 
@@ -96,8 +92,9 @@ namespace rr.Module.Handler
         bool Code40 { get; set; }
         THandlerData HandlerData => HandlerDataList [ ActionIndex ];
         THandlerSpeech HandlerSpeech { get; set; }
-        THandlerModule HandlerCondition { get; set; }
-        TScriptReturnCode HandlerAction { get; set; }
+        THandlerModule HandlerModule { get; set; }
+        THandlerMessage HandlerMessage { get; set; }
+        TScriptReturnCode ScriptReturnCode { get; set; }
         bool Wait { get; set; }
         UHandlerModule ParentModule { get; set; }
         #endregion
@@ -105,7 +102,7 @@ namespace rr.Module.Handler
         #region Support
         void NextAction () => ActionIndex++;
         //void ProcessSpeech () => HandlerSpeech.Process (HandlerData);
-        //void ProcessCondition () => HandlerCondition.Process (HandlerData);
+        //void ProcessCondition () => HandlerModule.Process (HandlerData);
         #endregion
 
         #region Static

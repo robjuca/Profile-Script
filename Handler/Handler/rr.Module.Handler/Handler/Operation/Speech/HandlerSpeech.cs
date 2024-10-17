@@ -4,6 +4,7 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 //---------------------------//
 
@@ -15,53 +16,56 @@ namespace rr.Module.Handler
         #region Members
         public void Process (THandlerSpeechData handlerData) => Select (handlerData);
 
-        //public void ActionReturnCode (THandlerSpeechData data)
-        //{
-        //    //if (handlerData is not null) {
-        //    //    if (handlerData.CleanupEnable) {
-        //    //        CleanupEnable (handlerData);
-        //    //    }
-
-        //    //    if (handlerData.CleanupSpeech) {
-        //    //        CleanupSpeech (handlerData);
-        //    //    }
-        //    //}
-        //}
-        #endregion
-
-        #region Support
-        void Select (THandlerSpeechData handlerData)
+        public void ActionReturnCode (TScriptReturnCodeArgs args)
         {
-            if (handlerData is not null) {
-                if (handlerData.Validate) {
+            if (args is not null) {
+                if (HandlerSpeechData.Validate) {
                     var definitionData = TScriptDefinitionData.CreateDefault ();
 
-                    // text
-                    definitionData.AddVariableName (handlerData.SpeechTextVariableName);
-                    definitionData.AddVariableValue (handlerData.SpeechTextVariableValue);
+                    if (args.IsSpeechDisable) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
+                        definitionData.AddVariableValue (Resources.RES_FALSE);
 
-                    handlerData.Services.SetScriptDataValue (definitionData);
+                        HandlerSpeechData.Services.SetScriptDataValue (definitionData);
+                    }
 
-                    // text enable
-                    definitionData.AddVariableName (handlerData.SpeechTextEnableVariableName);
-                    definitionData.AddVariableValue (handlerData.SpeechTextEnableVariableValue);
+                    if (args.IsSpeechDone) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
 
-                    handlerData.Services.SetScriptDataValue (definitionData);
+                    }
                 }
             }
         }
+        #endregion
 
-        //void CleanupSpeech (THandlerSpeechData handlerData) => EventSystem.CreateNewLocal (
-        //        handlerData.SpeechText,
-        //        "String",
-        //        VARIABLE_SCOPE.SESSION,
-        //        string.Empty);
+        #region Property
+        THandlerSpeechData HandlerSpeechData { get; set; }
+        #endregion
 
-        //void CleanupEnable (THandlerSpeechData handlerData) => EventSystem.CreateNewLocal (
-        //        handlerData.SpeechResourceEnable,
-        //        "Int",
-        //        VARIABLE_SCOPE.SESSION,
-        //        0);
+        #region Support
+        void Select (THandlerSpeechData data)
+        {
+            if (data is not null) {
+                if (data.Validate) {
+                    HandlerSpeechData = THandlerSpeechData.Clone (data);
+
+                    var definitionData = TScriptDefinitionData.CreateDefault ();
+
+                    // text
+                    definitionData.AddVariableName (data.SpeechTextVariableName);
+                    definitionData.AddVariableValue (data.SpeechTextVariableValue);
+
+                    data.Services.SetScriptDataValue (definitionData);
+
+                    // text enable
+                    definitionData.AddVariableName (data.SpeechTextEnableVariableName);
+                    definitionData.AddVariableValue (data.SpeechTextEnableVariableValue);
+
+                    data.Services.SetScriptDataValue (definitionData);
+                }
+            }
+        }
         #endregion
 
         #region Static

@@ -93,8 +93,8 @@ namespace rr.Plate.DeviceInit
                 if (IsActiveModule) {
                     // SCRIPT_ACTION (from Process_Dispatcher)
                     if (message.IsAction (UMessageAction.SCRIPT_ACTION)) {
-                        if (message.RequestParam (out TActionDispatcherEventArgs eventArgs)) {
-                            HandlerModuleCatalogue.ProcessAction (eventArgs);
+                        if (message.RequestParam (out TScriptActionDispatcherEventArgs eventArgs)) {
+                            HandlerModuleCatalogue.ProcessScriptAction (eventArgs);
                         }
                     }
                 }
@@ -163,23 +163,29 @@ namespace rr.Plate.DeviceInit
         void SelectGameState (string state = default)
         {
             switch (Services.RequestGameState (state)) {
-                case SimulationGamestate.Briefing:
+                case SimulationGamestate.Briefing: {
                     // Text and Message - Briefing
                     HandlerData.HandlerSpeechData.AddSpeechTextVariableValue (
                         "game state not ready, waiting for aircraft on ground"
                     );
 
                     HandlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (SimulationGamestate.Briefing));
-                    break;
+                    HandlerModuleCatalogue.Execute (HandlerData);
 
-                case SimulationGamestate.Flying:
+                    break;
+                }
+
+                case SimulationGamestate.Flying: {
                     // Text and Message - Flying
                     HandlerData.HandlerSpeechData.AddSpeechTextVariableValue (
                         ""
                     );
 
                     HandlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (SimulationGamestate.Flying));
+                    HandlerModuleCatalogue.Execute (HandlerData);
+
                     break;
+                }
             }
         }
         #endregion

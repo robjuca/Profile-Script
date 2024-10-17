@@ -4,6 +4,7 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Provider.Resources;
 using rr.Provider.Resources.Properties;
 
 using System;
@@ -15,15 +16,15 @@ namespace rr.Module.Handler
     public class TScriptReturnCode
     {
         #region Event
-        public event EventHandler<TScriptReturnCodeArgs> ActionReturnCodeDispatcher;
+        public event EventHandler<TScriptReturnCodeArgs> ScriptReturnCodeDispatcher;
         #endregion
 
         #region Members
-        public void ProcessAction (TActionDispatcherEventArgs eventArgs) => Select (eventArgs);
+        public void ProcessScriptReturnCode (TScriptActionDispatcherEventArgs eventArgs) => Select (eventArgs);
         #endregion
 
         #region Support
-        void Select (TActionDispatcherEventArgs eventArgs)
+        void Select (TScriptActionDispatcherEventArgs eventArgs)
         {
             TScriptReturnCodeArgs args = TScriptReturnCodeArgs.CreateDefault ();
 
@@ -48,7 +49,7 @@ namespace rr.Module.Handler
             }
 
             if (args.IsEmpty is false) {
-                ActionReturnCodeDispatcher?.Invoke (this, args);
+                ScriptReturnCodeDispatcher?.Invoke (this, args);
             }
         }
         #endregion

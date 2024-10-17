@@ -61,6 +61,15 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;&quot;.
+        /// </summary>
+        public static string RES_EMPTY {
+            get {
+                return ResourceManager.GetString("RES_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to False.
         /// </summary>
         public static string RES_FALSE {

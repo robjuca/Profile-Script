@@ -50,7 +50,7 @@ namespace rr.Process.Dispatcher
         #endregion
 
         #region Event
-        public void OnActionDispatcher (object sender, TActionDispatcherEventArgs eventArgs)
+        public void OnActionDispatcher (object sender, TScriptActionDispatcherEventArgs eventArgs)
         {
             var message = TMessageInternal.CreateDefault (Module, UMessageAction.SCRIPT_ACTION);
             message.SelectParam (TParamInfo.Create (eventArgs));
@@ -69,12 +69,12 @@ namespace rr.Process.Dispatcher
             #region Interface
             public void Execute (IApplication app, ISPADEventArgs eventArgs)
             {
-                ActionDispatcher?.Invoke (this, TActionDispatcherEventArgs.Create (eventArgs));
+                ActionDispatcher?.Invoke (this, TScriptActionDispatcherEventArgs.Create (eventArgs));
             }
             #endregion
 
             #region Event
-            public static event EventHandler<TActionDispatcherEventArgs> ActionDispatcher;
+            public static event EventHandler<TScriptActionDispatcherEventArgs> ActionDispatcher;
             #endregion
         };
         #endregion
