@@ -9,7 +9,7 @@
 namespace rr.Provider.Resources
 {
     //----- UMessageAction
-    public enum UMessageAction
+    public enum UMessageAction // ?????????
     {
         NONE = 0,
         //BEGIN,

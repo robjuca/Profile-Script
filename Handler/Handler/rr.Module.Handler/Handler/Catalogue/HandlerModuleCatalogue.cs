@@ -22,8 +22,8 @@ namespace rr.Module.Handler
         THandlerModuleCatalogue ()
         {
             HandlerDataList = [];
-            HandlerCondition = THandlerModule.Create ();
-            HandlerAction = THandlerAction.Create ();
+            HandlerCondition = THandlerModule.Create ();    // ?????
+            HandlerAction = THandlerAction.Create ();       // ?????
             HandlerSpeech = THandlerSpeech.Create ();
 
             HandlerAction.ActionReturnCodeDispatcher += OnActionReturnCodeDispatcher;
@@ -42,7 +42,7 @@ namespace rr.Module.Handler
         //    HandlerCondition.Cleanup ();
         //}
 
-        public void AddModuleData (IList<THandlerData> data)
+        public void AddHandlerData (IList<THandlerData> data)
         {
             //Cleanup ();
 
@@ -52,7 +52,7 @@ namespace rr.Module.Handler
             }
         }
 
-        public void ProcessAction (TActionDispatcherEventArgs eventArgs)
+        public void ProcessScriptAction (TActionDispatcherEventArgs eventArgs)
         {
             HandlerAction.ProcessAction (eventArgs); // from Dispatcher
         }

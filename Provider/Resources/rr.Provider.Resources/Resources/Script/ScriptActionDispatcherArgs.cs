@@ -12,8 +12,8 @@ using System.Collections.Generic;
 
 namespace rr.Provider.Resources
 {
-    //----- TActionDispatcherEventArgs
-    public class TActionDispatcherEventArgs : EventArgs
+    //----- TScriptActionDispatcherEventArgs
+    public class TScriptActionDispatcherEventArgs : EventArgs
     {
         #region Property
         public UHandlerModule Module { get; private set; }
@@ -22,7 +22,7 @@ namespace rr.Provider.Resources
         #endregion
 
         #region Constructor
-        TActionDispatcherEventArgs (ISPADEventArgs eventArgs)
+        TScriptActionDispatcherEventArgs (ISPADEventArgs eventArgs)
         {
             if (eventArgs is not null && eventArgs.NewValue is int newVal) {
                 ActionReturnCode = newVal;
@@ -32,7 +32,7 @@ namespace rr.Provider.Resources
             }
         }
 
-        static TActionDispatcherEventArgs ()
+        static TScriptActionDispatcherEventArgs ()
         {
             /// ROW /COL (SCRIPT PANEL)
             /// SCRIPT_1_1 -> PROFILE (NONE)     SCRIPT_1_2 -> GROUND_OPE,    SCRIPT_1_3 -> BATTERY_OPE,      SCRIPT_1_4 -> AIRCRAFT_OPE,
@@ -76,7 +76,7 @@ namespace rr.Provider.Resources
         #endregion
 
         #region Static
-        public static TActionDispatcherEventArgs Create (ISPADEventArgs eventArgs) => new (eventArgs);
+        public static TScriptActionDispatcherEventArgs Create (ISPADEventArgs eventArgs) => new (eventArgs);
         #endregion
     };
     //---------------------------//
