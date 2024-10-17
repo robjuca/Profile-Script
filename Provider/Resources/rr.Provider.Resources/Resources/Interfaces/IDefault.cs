@@ -8,6 +8,7 @@
 
 namespace rr.Provider.Resources
 {
+    //----- IDefault
     public interface IDefault
     {
 

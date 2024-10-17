@@ -8,6 +8,7 @@
 
 namespace rr.Provider.Resources
 {
+    //----- IModule
     public interface IModule
     {
         UHandlerModule HandlerModule { get; }
