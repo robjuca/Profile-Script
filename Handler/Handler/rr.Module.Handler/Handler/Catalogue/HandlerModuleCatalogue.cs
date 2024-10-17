@@ -23,7 +23,7 @@ namespace rr.Module.Handler
         {
             HandlerDataList = [];
             HandlerCondition = THandlerModule.Create ();    // ?????
-            HandlerAction = THandlerAction.Create ();       // ?????
+            HandlerAction = TScriptReturnCode.Create ();       // ?????
             HandlerSpeech = THandlerSpeech.Create ();
 
             HandlerAction.ActionReturnCodeDispatcher += OnActionReturnCodeDispatcher;
@@ -52,16 +52,16 @@ namespace rr.Module.Handler
             }
         }
 
-        public void ProcessScriptAction (TActionDispatcherEventArgs eventArgs)
+        public void ProcessScriptAction (TScriptActionDispatcherEventArgs eventArgs)
         {
-            HandlerAction.ProcessAction (eventArgs); // from Dispatcher
+            //HandlerAction.ProcessAction (eventArgs); // from Dispatcher
         }
         #endregion
 
         #region Event
-        void OnActionReturnCodeDispatcher (object sender, THandlerActionArgs eventArgs)
+        void OnActionReturnCodeDispatcher (object sender, TScriptReturnCodeArgs eventArgs)
         {
-            // from THandlerAction
+            // from TScriptReturnCode
 
             //HandlerSpeech.ActionReturnCode (eventArgs);
             //HandlerCondition.ActionReturnCode (eventArgs);
@@ -97,7 +97,7 @@ namespace rr.Module.Handler
         THandlerData HandlerData => HandlerDataList [ ActionIndex ];
         THandlerSpeech HandlerSpeech { get; set; }
         THandlerModule HandlerCondition { get; set; }
-        THandlerAction HandlerAction { get; set; }
+        TScriptReturnCode HandlerAction { get; set; }
         bool Wait { get; set; }
         UHandlerModule ParentModule { get; set; }
         #endregion

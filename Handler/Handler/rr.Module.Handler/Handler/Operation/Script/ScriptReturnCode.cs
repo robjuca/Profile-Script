@@ -4,7 +4,6 @@
 ----------------------------------------------------------------*/
 
 //----- Include
-using rr.Provider.Resources;
 using rr.Provider.Resources.Properties;
 
 using System;
@@ -12,11 +11,11 @@ using System;
 
 namespace rr.Module.Handler
 {
-    //----- THandlerAction
-    public class THandlerAction
+    //----- TScriptReturnCode
+    public class TScriptReturnCode
     {
         #region Event
-        public event EventHandler<THandlerActionArgs> ActionReturnCodeDispatcher;
+        public event EventHandler<TScriptReturnCodeArgs> ActionReturnCodeDispatcher;
         #endregion
 
         #region Members
@@ -26,26 +25,26 @@ namespace rr.Module.Handler
         #region Support
         void Select (TActionDispatcherEventArgs eventArgs)
         {
-            THandlerActionArgs args = THandlerActionArgs.CreateDefault ();
+            TScriptReturnCodeArgs args = TScriptReturnCodeArgs.CreateDefault ();
 
             // Clear RES_SPEECH_COMMIT (-50) 
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_SPEECH_DISABLE_CODE)) {
-                args = THandlerActionArgs.Create (UReturnCodeId.SPEECH_DISABLE, eventArgs);
+                args = TScriptReturnCodeArgs.Create (UReturnCodeId.SPEECH_DISABLE, eventArgs);
             }
 
             // Speech done (-40) 
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_SPEECH_DONE_CODE)) {
-                args = THandlerActionArgs.Create (UReturnCodeId.SPEECH_DONE, eventArgs);
+                args = TScriptReturnCodeArgs.Create (UReturnCodeId.SPEECH_DONE, eventArgs);
             }
 
             // Clear RES_MODULE_ID (-100) - Next Step
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_NEXT_STEP_CODE)) {
-                args = THandlerActionArgs.Create (UReturnCodeId.NEXT_STEP, eventArgs);
+                args = TScriptReturnCodeArgs.Create (UReturnCodeId.NEXT_STEP, eventArgs);
             }
 
             // Step DONE (-80) - must go to next plate
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_NEXT_PLATE_CODE)) {
-                args = THandlerActionArgs.Create (UReturnCodeId.NEXT_MODULE, eventArgs);
+                args = TScriptReturnCodeArgs.Create (UReturnCodeId.NEXT_MODULE, eventArgs);
             }
 
             if (args.IsEmpty is false) {
@@ -55,7 +54,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        public static THandlerAction Create () => new ();
+        public static TScriptReturnCode Create () => new ();
         #endregion
     };
     //---------------------------//

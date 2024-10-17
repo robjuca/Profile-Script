@@ -24,8 +24,8 @@ namespace rr.Module.Handler
     //---------------------------//
     #endregion
 
-    //----- THandlerActionArgs
-    public class THandlerActionArgs : EventArgs
+    //----- TScriptReturnCodeArgs
+    public class TScriptReturnCodeArgs : EventArgs
     {
         #region Property
         public UReturnCodeId CodeType { get; set; }
@@ -43,9 +43,9 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        public static THandlerActionArgs CreateDefault ()
+        public static TScriptReturnCodeArgs CreateDefault ()
         {
-            var obj = new THandlerActionArgs {
+            var obj = new TScriptReturnCodeArgs {
                 //CodeType = UReturnCodeId.NONE,
                 //Module = UHandlerModule.NONE,
                 ActionReturnCode = 0
@@ -53,9 +53,9 @@ namespace rr.Module.Handler
 
             return obj;
         }
-        public static THandlerActionArgs Create (UReturnCodeId codeType, TActionDispatcherEventArgs eventArgs)
+        public static TScriptReturnCodeArgs Create (UReturnCodeId codeType, TActionDispatcherEventArgs eventArgs)
         {
-            var obj = new THandlerActionArgs {
+            var obj = new TScriptReturnCodeArgs {
                 CodeType = codeType,
                 Module = eventArgs.Module,
                 ActionReturnCode = eventArgs.ActionReturnCode
