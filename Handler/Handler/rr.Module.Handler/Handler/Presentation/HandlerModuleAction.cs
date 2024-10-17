@@ -6,7 +6,6 @@
 //----- Include
 using rr.Provider.Resources;
 
-using System;
 using System.Collections.Generic;
 //---------------------------//
 
