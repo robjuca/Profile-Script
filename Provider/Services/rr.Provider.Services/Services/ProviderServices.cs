@@ -92,7 +92,7 @@ namespace rr.Provider.Services
                 definitionData.AddDataDefinition (EventSystem.GetDataDefinition ("LOCAL:" + definitionData.VariableName));
             }
 
-            DefinitionDataList [ definitionData.Key ] = definitionData;
+            DefinitionDataList.Add (definitionData.Key, definitionData.Clone());
 
             return definitionData.DataDefinition;
         }
@@ -103,7 +103,7 @@ namespace rr.Provider.Services
 
             var obj = data.GetRawValue();
 
-            return obj is null ? string.Empty : obj.ToString ();    
+            return obj is null ? string.Empty : obj.ToString ();
         }
 
         public void SetScriptDataValue (TScriptDefinitionData definitionData)

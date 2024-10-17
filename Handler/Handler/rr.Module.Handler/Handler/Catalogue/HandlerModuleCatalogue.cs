@@ -59,8 +59,8 @@ namespace rr.Module.Handler
         {
             // from TScriptReturnCode
 
-            HandlerSpeech.ActionReturnCode (eventArgs);
-            //HandlerModule.ActionReturnCode (eventArgs);
+            HandlerSpeech.ScriptReturnCode (eventArgs);
+            //HandlerModule.ScriptReturnCode (eventArgs);
 
             // speech done
             if (eventArgs.IsSpeechDone & Wait is false) {

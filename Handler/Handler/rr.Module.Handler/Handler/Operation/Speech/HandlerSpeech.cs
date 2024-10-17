@@ -16,7 +16,7 @@ namespace rr.Module.Handler
         #region Members
         public void Process (THandlerSpeechData handlerData) => Select (handlerData);
 
-        public void ActionReturnCode (TScriptReturnCodeArgs args)
+        public void ScriptReturnCode (TScriptReturnCodeArgs args)
         {
             if (args is not null) {
                 if (HandlerSpeechData.Validate) {
@@ -33,6 +33,7 @@ namespace rr.Module.Handler
                         definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
                         definitionData.AddVariableValue (Resources.RES_EMPTY);
 
+                        HandlerSpeechData.Services.SetScriptDataValue (definitionData);
                     }
                 }
             }

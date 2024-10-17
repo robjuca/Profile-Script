@@ -36,6 +36,15 @@ namespace rr.Provider.Services
 
         public void AddVariableValue (string variableValue = default) => VariableValue = variableValue;
         public void AddDataDefinition (IDataDefinition dataDefinition) => DataDefinition = dataDefinition;
+
+        public TScriptDefinitionData Clone ()
+        {
+            var clone = Create (VariableName, UseLocalOnly);
+            clone.AddVariableValue (VariableValue);
+            clone.AddDataDefinition (DataDefinition);
+
+            return clone;
+        }
         #endregion
 
         #region Static

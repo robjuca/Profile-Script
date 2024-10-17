@@ -147,8 +147,8 @@ namespace rr.Plate.DeviceInit
             HandlerData.HandlerMessageData.AddMessageVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
 
             HandlerData.HandlerSpeechData.AddSpeechTextEnableVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
-            HandlerData.HandlerSpeechData.AddSpeechTextVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
             HandlerData.HandlerSpeechData.AddSpeechTextEnableVariableValue (Resources.RES_TRUE);
+            HandlerData.HandlerSpeechData.AddSpeechTextVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
             #endregion
 
             // Text and Message - Begin
