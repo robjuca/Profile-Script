@@ -11,15 +11,15 @@ using System.Collections.Generic;
 
 namespace rr.Module.Handler
 {
-    //----- THandlerModuleAction
-    public class THandlerModuleAction
+    //----- THandlerModuleCatalogue
+    public class THandlerModuleCatalogue
     {
         #region Event
         //public static event EventHandler<THandlerData> NextModule;
         #endregion
 
         #region Constructor
-        THandlerModuleAction ()
+        THandlerModuleCatalogue ()
         {
             HandlerDataList = [];
             HandlerCondition = THandlerModule.Create ();
@@ -109,7 +109,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        public static THandlerModuleAction Create (UHandlerModule parentModule) => new () { ParentModule = parentModule };
+        public static THandlerModuleCatalogue Create (UHandlerModule parentModule) => new () { ParentModule = parentModule };
         #endregion
     };
     //---------------------------//

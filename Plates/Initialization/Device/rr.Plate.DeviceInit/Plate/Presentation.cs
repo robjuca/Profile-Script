@@ -56,7 +56,7 @@ namespace rr.Plate.DeviceInit
             SelectActiveModule (Module);
 
             HandlerDataList = [];
-            HandlerModuleAction = THandlerModuleAction.Create (HandlerModule);
+            HandlerModuleCatalogue = THandlerModuleCatalogue.Create (HandlerModule);
 
             //HandlerModulePresentation.NextModule += OnNextModule;
         }
@@ -94,7 +94,7 @@ namespace rr.Plate.DeviceInit
                     // SCRIPT_ACTION (from Process_Dispatcher)
                     if (message.IsAction (UMessageAction.SCRIPT_ACTION)) {
                         if (message.RequestParam (out TActionDispatcherEventArgs eventArgs)) {
-                            HandlerModuleAction.ProcessAction (eventArgs);
+                            HandlerModuleCatalogue.ProcessAction (eventArgs);
                         }
                     }
                 }
@@ -129,7 +129,7 @@ namespace rr.Plate.DeviceInit
         #region Property
         bool ProfileLoad { get; set; }
         List<THandlerData> HandlerDataList { get; set; }
-        THandlerModuleAction HandlerModuleAction { get; set; }
+        THandlerModuleCatalogue HandlerModuleCatalogue { get; set; }
         public THandlerData HandlerData { get; set; }
         #endregion
 

@@ -75,7 +75,7 @@
     <Compile Include="Handler\Operation\Action\HandlerActionArgs.cs" />
     <Compile Include="Handler\Data\HandlerData.cs" />
     <Compile Include="Handler\Operation\Action\HandlerAction.cs" />
-    <Compile Include="Handler\Presentation\HandlerModuleAction.cs" />
+    <Compile Include="Handler\Catalogue\HandlerModuleCatalogue.cs" />
     <Compile Include="Handler\Operation\Speech\HandlerSpeech.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
