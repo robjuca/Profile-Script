@@ -55,7 +55,6 @@ namespace rr.Plate.DeviceInit
         {
             SelectActiveModule (Module);
 
-            HandlerDataList = [];
             HandlerModuleCatalogue = THandlerModuleCatalogue.Create (HandlerModule);
 
             //HandlerModulePresentation.NextModule += OnNextModule;
@@ -81,7 +80,7 @@ namespace rr.Plate.DeviceInit
                 if (message.IsAction (UMessageAction.PROFILE_LOADED)) {
                     ProfileLoad = true;
                     SelectActiveModule (Module);
-                    //HandlerModulePresentation.Ready (HandlerDataList);
+                    //HandlerModulePresentation.Ready (handlerDataList);
 
                     SelectGameState ();
                 }
@@ -130,9 +129,7 @@ namespace rr.Plate.DeviceInit
 
         #region Property
         bool ProfileLoad { get; set; }
-        List<THandlerData> HandlerDataList { get; set; }
         THandlerModuleCatalogue HandlerModuleCatalogue { get; set; }
-        public THandlerData HandlerData { get; set; }
         #endregion
 
         #region Support
@@ -162,54 +159,59 @@ namespace rr.Plate.DeviceInit
 
         void CreateHandlerData ()
         {
-            HandlerDataList.Clear ();
-
-            HandlerData = THandlerData.Create (Services, Module);
+            var handlerData = THandlerData.Create (Services, Module);
 
             #region common
-            HandlerData.HandlerModuleData.AddModuleVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
-            HandlerData.HandlerModuleData.AddModuleVariableValue (TEnumExtension.AsString (Module));
+            // Module
+            handlerData.HandlerModuleData.AddModuleVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
+            handlerData.HandlerModuleData.AddModuleVariableValue (TEnumExtension.AsString (Module));
 
-            HandlerData.HandlerMessageData.AddMessageVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
+            // Message
+            handlerData.HandlerMessageData.AddMessageVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
 
-            HandlerData.HandlerSpeechData.AddSpeechTextEnableVariableName (ToString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
-            HandlerData.HandlerSpeechData.AddSpeechTextEnableVariableValue (Resources.RES_TRUE);
-            HandlerData.HandlerSpeechData.AddSpeechTextVariableName (ToString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
+            // Speech
+            handlerData.HandlerSpeechData.AddSpeechTextVariableName (ToString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
+            handlerData.HandlerSpeechData.AddSpeechTextEnableVariableName (ToString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
+            handlerData.HandlerSpeechData.AddSpeechTextEnableVariableValue (Resources.RES_TRUE);
             #endregion
 
+            // Text and Message - Briefing
+            handlerData.HandlerSpeechData.AddSpeechTextVariableValue ("game state not ready, waiting for aircraft on ground");
+            handlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (SimulationGamestate.Briefing));
+
+            // only speech is enabled
+            handlerData.HandlerModuleData.EnableHandler (enable: false);
+            handlerData.HandlerMessageData.EnableHandler (enable: false);
+
+            HandlerModuleCatalogue.AddHandlerData (handlerData);  // add to list
+
+            // Text and Message - Flying
+            handlerData.HandlerSpeechData.AddSpeechTextVariableValue ("");
+            handlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (SimulationGamestate.Flying));
+
+            // all handlers enabled
+            handlerData.EnableAll ();
+
+            HandlerModuleCatalogue.AddHandlerData (handlerData);  // add to list
+
             // Text and Message - Begin
-            HandlerData.HandlerSpeechData.AddSpeechTextVariableValue (
+            handlerData.HandlerSpeechData.AddSpeechTextVariableValue (
                 "check instructions: aircraft cold and dark mode: park break on: honeycomb device:all switches: off all levers: idle gear down:when ready: set beacon switch on and off:waiting..."
             );
-
-            HandlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (UMessageValue.Begin));
-            HandlerDataList.Add (HandlerData);  // add to list
+            handlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (UMessageValue.Begin));
+            HandlerModuleCatalogue.AddHandlerData (handlerData);  // add to list
         }
 
         void SelectGameState (string state = default)
         {
             switch (Services.RequestGameState (state)) {
                 case SimulationGamestate.Briefing: {
-                    // Text and Message - Briefing
-                    HandlerData.HandlerSpeechData.AddSpeechTextVariableValue (
-                        "game state not ready, waiting for aircraft on ground"
-                    );
-
-                    HandlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (SimulationGamestate.Briefing));
-                    HandlerModuleCatalogue.Execute (HandlerData);
-
+                    HandlerModuleCatalogue.Execute (TEnumExtension.AsString (SimulationGamestate.Briefing));
                     break;
                 }
 
                 case SimulationGamestate.Flying: {
-                    // Text and Message - Flying
-                    HandlerData.HandlerSpeechData.AddSpeechTextVariableValue (
-                        ""
-                    );
-
-                    HandlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (SimulationGamestate.Flying));
-                    HandlerModuleCatalogue.Execute (HandlerData);
-
+                    HandlerModuleCatalogue.Execute (TEnumExtension.AsString (SimulationGamestate.Flying));
                     break;
                 }
             }

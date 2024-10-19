@@ -21,7 +21,7 @@ namespace rr.Module.Handler
         public string ModuleVariableValue { get; private set; }
 
         // Validate
-        public bool Validate => HasModule & ValidateModuleNameAndValue;
+        public bool Validate => IsEnable & HasModule & ValidateModuleNameAndValue;
 
         // Validate Module Name and Value
         public bool ValidateModuleNameAndValue

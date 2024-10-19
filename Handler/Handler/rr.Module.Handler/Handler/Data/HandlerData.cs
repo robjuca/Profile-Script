@@ -32,6 +32,15 @@ namespace rr.Module.Handler
         public override int GetHashCode () => (int) Module;
         #endregion
 
+        #region Members
+        public void EnableAll ()
+        {
+            HandlerSpeechData.EnableHandler ();
+            HandlerModuleData.EnableHandler ();
+            HandlerMessageData.EnableHandler ();
+        } 
+        #endregion
+
         #region Static
         public static THandlerData Create (IProviderServices services, UHandlerModule handlerModule)
         {

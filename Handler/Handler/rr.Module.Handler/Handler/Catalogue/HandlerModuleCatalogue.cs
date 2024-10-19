@@ -4,7 +4,6 @@
 ----------------------------------------------------------------*/
 
 //----- Include
-using rr.Library.Message;
 using rr.Provider.Resources;
 
 using System.Collections.Generic;
@@ -22,6 +21,7 @@ namespace rr.Module.Handler
         #region Constructor
         THandlerModuleCatalogue ()
         {
+            HandlerDataIndex = 0;
             HandlerDataList = [];
 
             HandlerModule = THandlerModule.Create ();
@@ -35,15 +35,17 @@ namespace rr.Module.Handler
         #endregion
 
         #region Members
-        public void Execute (THandlerData data)
+        public void Execute (string messageValue)
         {
-            HandlerSpeech.Process (data.HandlerSpeechData);
+            if (SelectMessageValue (messageValue)) {
+                ProcessAll ();
+            }
         }
 
-        public void AddHandlerData (IList<THandlerData> data)
+        public void AddHandlerData (THandlerData data)
         {
             if (data is not null) {
-                HandlerDataList = new List<THandlerData> (data);
+                HandlerDataList.Add (data);
                 HandlerDataList.Sort ();
             }
         }
@@ -88,9 +90,9 @@ namespace rr.Module.Handler
 
         #region Property
         List<THandlerData> HandlerDataList { get; set; }
-        int ActionIndex { get; set; }
+        int HandlerDataIndex { get; set; }
         bool Code40 { get; set; }
-        THandlerData HandlerData => HandlerDataList [ ActionIndex ];
+        THandlerData HandlerData => HandlerDataList [ HandlerDataIndex ];
         THandlerSpeech HandlerSpeech { get; set; }
         THandlerModule HandlerModule { get; set; }
         THandlerMessage HandlerMessage { get; set; }
@@ -100,7 +102,28 @@ namespace rr.Module.Handler
         #endregion
 
         #region Support
-        void NextAction () => ActionIndex++;
+        void ProcessAll ()
+        {
+            HandlerSpeech.Process (HandlerData.HandlerSpeechData);
+            HandlerMessage.Process (HandlerData.HandlerMessageData);
+            HandlerModule.Process (HandlerData.HandlerModuleData);
+        }
+
+        bool SelectMessageValue (string messageValue)
+        {
+            HandlerDataIndex = 0;
+
+            foreach (var data in HandlerDataList) {
+                if (data.HandlerMessageData.ContainsMessageValue (messageValue)) {
+                    return true; 
+                }
+
+                HandlerDataIndex++;
+            }
+
+            return false;
+        }
+        //void NextAction () => ActionIndex++;
         //void ProcessSpeech () => HandlerSpeech.Process (HandlerData);
         //void ProcessCondition () => HandlerModule.Process (HandlerData);
         #endregion

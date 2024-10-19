@@ -21,7 +21,7 @@ namespace rr.Module.Handler
         public string MessageVariableValue { get; private set; }
 
         // Validate
-        public bool Validate => HasModule & ValidateMessageNameAndValue;
+        public bool Validate => IsEnable & HasModule & ValidateMessageNameAndValue;
 
         // Validate Message Name and Value
         public bool ValidateMessageNameAndValue
@@ -52,6 +52,7 @@ namespace rr.Module.Handler
         // Message
         public void AddMessageVariableName (string variableName) => MessageVariableName = variableName;
         public void AddMessageVariableValue (string variableValue) => MessageVariableValue = variableValue;
+        public bool ContainsMessageValue (string messageValue) => MessageVariableValue.Equals (messageValue);
         #endregion
 
         #region Static

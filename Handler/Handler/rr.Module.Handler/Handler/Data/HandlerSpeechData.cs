@@ -23,7 +23,7 @@ namespace rr.Module.Handler
         public string SpeechTextEnableVariableValue { get; private set; }
 
         // Validate
-        public bool Validate => HasModule & ValidateText & ValidateTextEnable;
+        public bool Validate => IsEnable & HasModule & ValidateText & ValidateTextEnable;
 
         // Validate Text
         public bool ValidateText
