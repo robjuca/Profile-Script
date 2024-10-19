@@ -52,6 +52,14 @@ namespace rr.Module.Handler
         // Module
         public void AddModuleVariableName (string variableName) => ModuleVariableName = variableName;
         public void AddModuleVariableValue (string variableValue) => ModuleVariableValue = variableValue;
+
+        public void CopyFrom (THandlerModuleData alias)
+        {
+            if (alias is not null) {
+                AddModuleVariableName (alias.ModuleVariableName);
+                AddModuleVariableValue (alias.ModuleVariableValue);
+            }
+        }
         #endregion
 
         #region Static

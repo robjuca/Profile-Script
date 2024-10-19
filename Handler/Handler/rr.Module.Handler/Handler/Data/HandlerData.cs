@@ -17,6 +17,7 @@ namespace rr.Module.Handler
         #region Property
         public UHandlerModule Module { get; private set; }
         public bool HasModule => Module.Equals (UHandlerModule.NONE) is false;
+        public int HandlerIndex { get; private set; }
         #endregion
 
         #region Handler Data
@@ -26,10 +27,10 @@ namespace rr.Module.Handler
         #endregion
 
         #region Interface
-        public int CompareTo (THandlerData compareStep) => compareStep is null ? 1 : TEnumExtension.AsInt (Module).CompareTo (TEnumExtension.AsInt (compareStep.Module));
-        public bool Equals (THandlerData other) => other is not null && Module.Equals (other.Module);
+        public int CompareTo (THandlerData compareStep) => compareStep is null ? 1 : HandlerIndex.CompareTo (compareStep.HandlerIndex);
+        public bool Equals (THandlerData other) => other is not null && HandlerIndex.Equals (other.HandlerIndex);
         public override bool Equals (object other) => (other is THandlerData data) && Equals (data);
-        public override int GetHashCode () => (int) Module;
+        public override int GetHashCode () => HandlerIndex;
         #endregion
 
         #region Members
@@ -38,13 +39,34 @@ namespace rr.Module.Handler
             HandlerSpeechData.EnableHandler ();
             HandlerModuleData.EnableHandler ();
             HandlerMessageData.EnableHandler ();
-        } 
+        }
+
+        public void PumpHandlerIndex () => HandlerIndex++;
+        public void SetHandlerIndex (int index) => HandlerIndex = index;
+        public void ClearPumpHandler () => HandlerIndex = 0;
+
+        public THandlerData Clone ()
+        {
+            var clone = Create (Services, Module);
+            clone.SetHandlerIndex (HandlerIndex);
+            clone.HandlerSpeechData.CopyFrom (HandlerSpeechData);
+            clone.HandlerModuleData.CopyFrom (HandlerModuleData);
+            clone.HandlerMessageData.CopyFrom (HandlerMessageData);
+
+            return clone;
+        }
+        #endregion
+
+        #region Property
+        IProviderServices Services { get; set; }
         #endregion
 
         #region Static
         public static THandlerData Create (IProviderServices services, UHandlerModule handlerModule)
         {
             return new () {
+                Services = services,
+                HandlerIndex = 0,
                 Module = handlerModule,
                 HandlerSpeechData = THandlerSpeechData.Create (services, handlerModule),
                 HandlerModuleData = THandlerModuleData.Create (services, handlerModule),

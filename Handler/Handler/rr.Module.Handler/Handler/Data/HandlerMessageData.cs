@@ -53,6 +53,14 @@ namespace rr.Module.Handler
         public void AddMessageVariableName (string variableName) => MessageVariableName = variableName;
         public void AddMessageVariableValue (string variableValue) => MessageVariableValue = variableValue;
         public bool ContainsMessageValue (string messageValue) => MessageVariableValue.Equals (messageValue);
+
+        public void CopyFrom (THandlerMessageData alias)
+        {
+            if (alias is not null) {
+                AddMessageVariableName (alias.MessageVariableName);
+                AddMessageVariableValue (alias.MessageVariableValue);
+            }
+        }
         #endregion
 
         #region Static
