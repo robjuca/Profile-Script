@@ -18,7 +18,7 @@ namespace rr.Module.Handler
 
         public void ScriptReturnCode (TScriptReturnCodeArgs args)
         {
-            if (args is not null) {
+            if (args is not null & HandlerSpeechData is not null) {
                 if (HandlerSpeechData.Validate) {
                     var definitionData = TScriptDefinitionData.CreateDefault ();
 

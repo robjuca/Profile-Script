@@ -83,6 +83,8 @@ namespace rr.Module.Handler
                 AddSpeechTextVariableValue (alias.SpeechTextVariableValue);
                 AddSpeechTextEnableVariableName (alias.SpeechTextEnableVariableName);
                 AddSpeechTextEnableVariableValue (alias.SpeechTextEnableVariableValue);
+
+                EnableHandler (alias.IsEnable);
             }
         }
         #endregion

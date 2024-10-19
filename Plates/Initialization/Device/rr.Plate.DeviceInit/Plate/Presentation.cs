@@ -183,7 +183,7 @@ namespace rr.Plate.DeviceInit
             handlerData.HandlerModuleData.EnableHandler (enable: false);
             handlerData.HandlerMessageData.EnableHandler (enable: false);
 
-            handlerData.PumpHanhlerIndex ();
+            handlerData.PumpHandlerIndex ();
             HandlerModuleCatalogue.AddHandlerData (handlerData.Clone ());  // add to list
 
             // Text and Message - Flying
@@ -193,7 +193,7 @@ namespace rr.Plate.DeviceInit
             // all handlers enabled
             handlerData.EnableAll ();
 
-            handlerData.PumpHanhlerIndex ();
+            handlerData.PumpHandlerIndex ();
             HandlerModuleCatalogue.AddHandlerData (handlerData.Clone ());  // add to list
 
             // Text and Message - Begin
@@ -202,7 +202,7 @@ namespace rr.Plate.DeviceInit
             );
             handlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (UMessageValue.Begin));
 
-            handlerData.PumpHanhlerIndex ();
+            handlerData.PumpHandlerIndex ();
             HandlerModuleCatalogue.AddHandlerData (handlerData.Clone ());  // add to list
         }
 

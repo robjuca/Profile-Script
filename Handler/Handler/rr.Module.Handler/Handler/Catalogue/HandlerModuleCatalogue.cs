@@ -105,8 +105,8 @@ namespace rr.Module.Handler
         void ProcessAll ()
         {
             HandlerSpeech.Process (HandlerData.HandlerSpeechData);
-            HandlerMessage.Process (HandlerData.HandlerMessageData);
-            HandlerModule.Process (HandlerData.HandlerModuleData);
+            //HandlerMessage.Process (HandlerData.HandlerMessageData);
+            //HandlerModule.Process (HandlerData.HandlerModuleData);
         }
 
         bool SelectMessageValue (string messageValue)

@@ -58,6 +58,8 @@ namespace rr.Module.Handler
             if (alias is not null) {
                 AddModuleVariableName (alias.ModuleVariableName);
                 AddModuleVariableValue (alias.ModuleVariableValue);
+
+                EnableHandler (alias.IsEnable);
             }
         }
         #endregion

@@ -59,6 +59,8 @@ namespace rr.Module.Handler
             if (alias is not null) {
                 AddMessageVariableName (alias.MessageVariableName);
                 AddMessageVariableValue (alias.MessageVariableValue);
+
+                EnableHandler (alias.IsEnable);
             }
         }
         #endregion
