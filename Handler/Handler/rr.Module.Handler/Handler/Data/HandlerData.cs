@@ -4,7 +4,6 @@
 ----------------------------------------------------------------*/
 
 //----- Include
-using rr.Library.Extension;
 using rr.Provider.Resources;
 using rr.Provider.Services;
 //---------------------------//
@@ -18,6 +17,11 @@ namespace rr.Module.Handler
         public UHandlerModule Module { get; private set; }
         public bool HasModule => Module.Equals (UHandlerModule.NONE) is false;
         public int HandlerIndex { get; private set; }
+        public bool ValidateHandlerSpeech => HandlerSpeechData.Validate;
+        public bool ValidateHandlerModule => HandlerModuleData.Validate;
+        public bool ValidateHandlerMessage => HandlerMessageData.Validate;
+        public bool ValidateHandlerReceiver => ValidateHandlerModule & ValidateHandlerMessage;
+
         public IProviderServices Services { get; set; }
         #endregion
 

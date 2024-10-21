@@ -4,48 +4,61 @@
 ----------------------------------------------------------------*/
 
 //----- Include
-using rr.Library.Extension;
 using rr.Provider.Resources;
-using rr.Provider.Services;
+using rr.Provider.Resources.Properties;
 //---------------------------//
 
 namespace rr.Module.Handler
 {
     //----- THandlerReceiver
-    public class THandlerReceiver
+    public class THandlerReceiver (THandlerData handlerData) : TOperationHandlerBase (handlerData)
     {
-        #region Members
-        public void Process (THandlerData handlerData) => Select (handlerData);
-        #endregion
-
-        #region Support
-        void Select (THandlerData handlerData)
+        #region Overrides
+        public override void ScriptReturnCode (TScriptReturnCodeArgs args)
         {
-            if (handlerData is not null) {
-                if (handlerData.HandlerModuleData.Validate & handlerData.HandlerMessageData.Validate) {
-                    var definitionData = TScriptDefinitionData.CreateDefault ();
+            if (args is not null) {
+                if (ValidateHandlerReceiver) {
+                    var definitionData = DefinitionData;
 
-                    // Receiver Module
-                    definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_NAME));
-                    definitionData.AddVariableValue (handlerData.HandlerModuleData.ModuleVariableValue);
+                    if (args.IsSpeechDisable) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
+                        definitionData.AddVariableValue (Resources.RES_FALSE);
 
+                        Services.SetScriptDataValue (definitionData);
+                    }
 
-                    // Receiver Message
-                    definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
-                    definitionData.AddVariableValue (handlerData.HandlerMessageData.MessageVariableValue);
+                    if (args.IsSpeechDone) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
 
-                    handlerData.Services.SetScriptDataValue (definitionData);
+                        SetScriptDataValue (definitionData);
+                    }
                 }
+            }
+        }
+
+        public override void Process ()
+        {
+            if (ValidateHandlerReceiver) {
+                var definitionData = DefinitionData;
+
+                // Receiver Module
+                definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_NAME));
+                definitionData.AddVariableValue (HandlerModuleData.ModuleVariableValue);
+
+                SetScriptDataValue (definitionData);
+
+                // Receiver Message
+                definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+                definitionData.AddVariableValue (HandlerMessageData.MessageVariableValue);
+
+                SetScriptDataValue (definitionData);
             }
         }
         #endregion
 
-        #region Support
-        string ToString (UReceiverModule name) => TEnumExtension.AsString (name);
-        #endregion
-
         #region Static
-        public static THandlerReceiver Create () => new ();
+        public static THandlerReceiver Create (THandlerData data) => new (data);
         #endregion
     };
     //---------------------------//

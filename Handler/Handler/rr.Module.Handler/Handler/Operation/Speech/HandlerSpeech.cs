@@ -5,72 +5,59 @@
 
 //----- Include
 using rr.Provider.Resources.Properties;
-using rr.Provider.Services;
 //---------------------------//
 
 namespace rr.Module.Handler
 {
     //----- THandlerSpeech
-    public class THandlerSpeech
+    public class THandlerSpeech (THandlerData handlerData) : TOperationHandlerBase (handlerData)
     {
-        #region Members
-        public void Process (THandlerSpeechData handlerData) => Select (handlerData);
-
-        public void ScriptReturnCode (TScriptReturnCodeArgs args)
+        #region Overrides
+        public override void ScriptReturnCode (TScriptReturnCodeArgs args)
         {
-            if (args is not null & HandlerSpeechData is not null) {
-                if (HandlerSpeechData.Validate) {
-                    var definitionData = TScriptDefinitionData.CreateDefault ();
+            if (args is not null) {
+                if (ValidateHandlerSpeech) {
+                    var definitionData = DefinitionData;
 
                     if (args.IsSpeechDisable) {
                         definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
                         definitionData.AddVariableValue (Resources.RES_FALSE);
 
-                        HandlerSpeechData.Services.SetScriptDataValue (definitionData);
+                        Services.SetScriptDataValue (definitionData);
                     }
 
                     if (args.IsSpeechDone) {
                         definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
                         definitionData.AddVariableValue (Resources.RES_EMPTY);
 
-                        HandlerSpeechData.Services.SetScriptDataValue (definitionData);
+                        Services.SetScriptDataValue (definitionData);
                     }
                 }
             }
         }
-        #endregion
 
-        #region Property
-        THandlerSpeechData HandlerSpeechData { get; set; }
-        #endregion
-
-        #region Support
-        void Select (THandlerSpeechData data)
+        public override void Process ()
         {
-            if (data is not null) {
-                if (data.Validate) {
-                    HandlerSpeechData = THandlerSpeechData.Clone (data);
+            if (ValidateHandlerSpeech) {
+                var definitionData = DefinitionData;
 
-                    var definitionData = TScriptDefinitionData.CreateDefault ();
+                // text
+                definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
+                definitionData.AddVariableValue (HandlerSpeechData.SpeechTextVariableValue);
 
-                    // text
-                    definitionData.AddVariableName (data.SpeechTextVariableName);
-                    definitionData.AddVariableValue (data.SpeechTextVariableValue);
+                SetScriptDataValue (definitionData);
 
-                    data.Services.SetScriptDataValue (definitionData);
+                // text enable
+                definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
+                definitionData.AddVariableValue (HandlerSpeechData.SpeechTextEnableVariableValue);
 
-                    // text enable
-                    definitionData.AddVariableName (data.SpeechTextEnableVariableName);
-                    definitionData.AddVariableValue (data.SpeechTextEnableVariableValue);
-
-                    data.Services.SetScriptDataValue (definitionData);
-                }
+                SetScriptDataValue (definitionData);
             }
         }
         #endregion
 
         #region Static
-        public static THandlerSpeech Create () => new ();
+        public static THandlerSpeech Create (THandlerData data) => new (data);
         #endregion
     };
     //---------------------------//

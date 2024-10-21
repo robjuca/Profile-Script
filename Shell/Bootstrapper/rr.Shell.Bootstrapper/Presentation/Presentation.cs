@@ -84,7 +84,7 @@ namespace rr.Shell
 
             foreach (string name in variablesNames) {
                 scriptData.AddVariableName (name);
-                scriptData.AddVariableValue (Resources.RES_EMPTY);
+                scriptData.AddVariableValue (Resources.RES_FALSE);
 
                 dataList.Add (scriptData.Clone ());
             }

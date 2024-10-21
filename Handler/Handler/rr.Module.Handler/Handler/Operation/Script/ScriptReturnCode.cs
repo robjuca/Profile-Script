@@ -48,6 +48,11 @@ namespace rr.Module.Handler
                 args = TScriptReturnCodeArgs.Create (UReturnCodeId.NEXT_MODULE, eventArgs);
             }
 
+            // Step DONE (-400) - clear Receiver variables, clear Module Message variables, clear Module variables
+            if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_HANDLERS_CLEAR_CODE)) {
+                args = TScriptReturnCodeArgs.Create (UReturnCodeId.HANDLERS_CLEAR, eventArgs);
+            }
+
             if (args.IsEmpty is false) {
                 ScriptReturnCodeDispatcher?.Invoke (this, args);
             }

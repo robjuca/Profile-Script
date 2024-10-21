@@ -4,37 +4,54 @@
 ----------------------------------------------------------------*/
 
 //----- Include
-using rr.Provider.Services;
+using rr.Provider.Resources.Properties;
 //---------------------------//
 
 namespace rr.Module.Handler
 {
     //----- THandlerModule
-    public class THandlerModule
+    public class THandlerModule (THandlerData handlerData) : TOperationHandlerBase (handlerData)
     {
-        #region Members
-        public void Process (THandlerModuleData handlerData) => Select (handlerData);
-        #endregion
-
-        #region Support
-        void Select (THandlerModuleData handlerData)
+        #region Overrides
+        public override void ScriptReturnCode (TScriptReturnCodeArgs args)
         {
-            if (handlerData is not null) {
-                if (handlerData.Validate) {
-                    var definitionData = TScriptDefinitionData.CreateDefault ();
+            if (args is not null ) {
+                if (ValidateHandlerModule) {
+                    var definitionData = DefinitionData;
 
-                    // Module
-                    definitionData.AddVariableName (handlerData.ModuleVariableName);
-                    definitionData.AddVariableValue (handlerData.ModuleVariableValue);
+                    if (args.IsSpeechDisable) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
+                        definitionData.AddVariableValue (Resources.RES_FALSE);
 
-                    handlerData.Services.SetScriptDataValue (definitionData);
+                        HandlerSpeechData.Services.SetScriptDataValue (definitionData.Clone ());
+                    }
+
+                    if (args.IsSpeechDone) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+
+                        HandlerSpeechData.Services.SetScriptDataValue (definitionData.Clone ());
+                    }
                 }
+            }
+        }
+
+        public override void Process ()
+        {
+            if (ValidateHandlerModule) {
+                var definitionData = DefinitionData;
+
+                // Module
+                definitionData.AddVariableName (HandlerModuleData.ModuleVariableName);
+                definitionData.AddVariableValue (HandlerModuleData.ModuleVariableValue);
+
+                SetScriptDataValue (definitionData);
             }
         }
         #endregion
 
         #region Static
-        public static THandlerModule Create () => new ();
+        public static THandlerModule Create (THandlerData data) => new (data);
         #endregion
     };
     //---------------------------//

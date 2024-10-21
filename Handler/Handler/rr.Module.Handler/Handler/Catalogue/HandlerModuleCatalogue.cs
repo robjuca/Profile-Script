@@ -24,10 +24,10 @@ namespace rr.Module.Handler
             HandlerDataIndex = 0;
             HandlerDataList = [];
 
-            HandlerSpeech = THandlerSpeech.Create ();
-            HandlerModule = THandlerModule.Create ();
-            HandlerMessage = THandlerMessage.Create ();
-            HandlerReceiver = THandlerReceiver.Create ();
+            HandlerSpeech = THandlerSpeech.Create (HandlerData);
+            HandlerModule = THandlerModule.Create (HandlerData);
+            HandlerMessage = THandlerMessage.Create (HandlerData);
+            HandlerReceiver = THandlerReceiver.Create (HandlerData);
 
             ScriptReturnCode = TScriptReturnCode.Create ();
 
@@ -61,18 +61,19 @@ namespace rr.Module.Handler
         void OnScriptReturnCodeDispatcher (object sender, TScriptReturnCodeArgs eventArgs)
         {
             // from TScriptReturnCode
-
             HandlerSpeech.ScriptReturnCode (eventArgs);
-            //HandlerModule.ScriptReturnCode (eventArgs);
+            HandlerModule.ScriptReturnCode (eventArgs);
+            HandlerMessage.ScriptReturnCode (eventArgs);
+            HandlerReceiver.ScriptReturnCode (eventArgs);
 
             // speech done
             if (eventArgs.IsSpeechDone & Wait is false) {
                 //ProcessCondition ();
             }
 
-            // internal code
-            if (eventArgs.IsUCodeId) {
-            }
+            // HANDLERS CLEAR
+            //if (eventArgs.IsHandlersClear) {
+            //}
 
             // next step
             if (eventArgs.IsNextStep) {
@@ -106,10 +107,10 @@ namespace rr.Module.Handler
         #region Support
         void ProcessAll ()
         {
-            HandlerSpeech.Process (HandlerData.HandlerSpeechData);
-            HandlerModule.Process (HandlerData.HandlerModuleData);
-            HandlerMessage.Process (HandlerData.HandlerMessageData);
-            HandlerReceiver.Process (HandlerData);
+            HandlerSpeech.Process ();
+            HandlerModule.Process ();
+            HandlerMessage.Process ();
+            HandlerReceiver.Process ();
         }
 
         bool SelectMessageValue (string messageValue)

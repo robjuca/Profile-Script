@@ -4,37 +4,55 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 //---------------------------//
 
 namespace rr.Module.Handler
 {
     //----- THandlerMessage
-    public class THandlerMessage
+    public class THandlerMessage (THandlerData handlerData) : TOperationHandlerBase (handlerData)
     {
-        #region Members
-        public void Process (THandlerMessageData handlerData) => Select (handlerData);
-        #endregion
-
-        #region Support
-        void Select (THandlerMessageData handlerData)
+        #region Overrides
+        public override void ScriptReturnCode (TScriptReturnCodeArgs args)
         {
-            if (handlerData is not null) {
-                if (handlerData.Validate) {
+            if (args is not null) {
+                if (ValidateHandlerMessage) {
                     var definitionData = TScriptDefinitionData.CreateDefault ();
 
-                    // Message
-                    definitionData.AddVariableName (handlerData.MessageVariableName);
-                    definitionData.AddVariableValue (handlerData.MessageVariableValue);
+                    if (args.IsSpeechDisable) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
+                        definitionData.AddVariableValue (Resources.RES_FALSE);
 
-                    handlerData.Services.SetScriptDataValue (definitionData);
+                        Services.SetScriptDataValue (definitionData.Clone ());
+                    }
+
+                    if (args.IsSpeechDone) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+
+                        Services.SetScriptDataValue (definitionData.Clone ());
+                    }
                 }
+            }
+        }
+
+        public override void Process ()
+        {
+            if (ValidateHandlerMessage) {
+                var definitionData = DefinitionData;
+
+                // Message
+                definitionData.AddVariableName (HandlerMessageData.MessageVariableName);
+                definitionData.AddVariableValue (HandlerMessageData.MessageVariableValue);
+
+                SetScriptDataValue (definitionData);
             }
         }
         #endregion
 
         #region Static
-        public static THandlerMessage Create () => new ();
+        public static THandlerMessage Create (THandlerData data) => new (data);
         #endregion
     };
     //---------------------------//

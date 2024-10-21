@@ -123,6 +123,9 @@
   <data name="RES_FALSE" xml:space="preserve">
     <value>False</value>
   </data>
+  <data name="RES_HANDLERS_CLEAR_CODE" xml:space="preserve">
+    <value>-400</value>
+  </data>
   <data name="RES_NEXT_PLATE_CODE" xml:space="preserve">
     <value>-80</value>
   </data>

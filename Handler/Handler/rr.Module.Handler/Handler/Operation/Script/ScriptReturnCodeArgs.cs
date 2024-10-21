@@ -20,6 +20,7 @@ namespace rr.Module.Handler
         NEXT_STEP,
         NEXT_MODULE,
         INTERNAL_CODE,
+        HANDLERS_CLEAR,
     };
     //---------------------------//
     #endregion
@@ -33,6 +34,9 @@ namespace rr.Module.Handler
         public int ActionReturnCode { get; set; }
         public bool IsSpeechDisable => CodeType.Equals (UReturnCodeId.SPEECH_DISABLE);
         public bool IsSpeechDone => CodeType.Equals (UReturnCodeId.SPEECH_DONE);
+        public bool IsHandlersClear => CodeType.Equals (UReturnCodeId.HANDLERS_CLEAR);
+
+
         public bool IsNextStep => CodeType.Equals (UReturnCodeId.NEXT_STEP);
         public bool IsNextModule => CodeType.Equals (UReturnCodeId.NEXT_MODULE);
         public bool IsUCodeId => CodeType.Equals (UReturnCodeId.INTERNAL_CODE);

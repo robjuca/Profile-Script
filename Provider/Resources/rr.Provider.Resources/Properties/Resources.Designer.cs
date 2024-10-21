@@ -79,6 +79,15 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -400.
+        /// </summary>
+        public static string RES_HANDLERS_CLEAR_CODE {
+            get {
+                return ResourceManager.GetString("RES_HANDLERS_CLEAR_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -80.
         /// </summary>
         public static string RES_NEXT_PLATE_CODE {
