@@ -57,7 +57,7 @@ namespace rr.Shell
                 message.AddDestinationModule (AllModules);
 
                 if (ProfileLoad) {
-                    Initialize (); // Only when the profile is loaded.
+                    Initialize (); // Only when profile is loaded.
                 }
 
                 else {

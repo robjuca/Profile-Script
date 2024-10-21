@@ -24,9 +24,10 @@ namespace rr.Module.Handler
             HandlerDataIndex = 0;
             HandlerDataList = [];
 
+            HandlerSpeech = THandlerSpeech.Create ();
             HandlerModule = THandlerModule.Create ();
             HandlerMessage = THandlerMessage.Create ();
-            HandlerSpeech = THandlerSpeech.Create ();
+            HandlerReceiver = THandlerReceiver.Create ();
 
             ScriptReturnCode = TScriptReturnCode.Create ();
 
@@ -96,6 +97,7 @@ namespace rr.Module.Handler
         THandlerSpeech HandlerSpeech { get; set; }
         THandlerModule HandlerModule { get; set; }
         THandlerMessage HandlerMessage { get; set; }
+        THandlerReceiver HandlerReceiver { get; set; }
         TScriptReturnCode ScriptReturnCode { get; set; }
         bool Wait { get; set; }
         UHandlerModule ParentModule { get; set; }
@@ -105,8 +107,9 @@ namespace rr.Module.Handler
         void ProcessAll ()
         {
             HandlerSpeech.Process (HandlerData.HandlerSpeechData);
-            //HandlerMessage.Process (HandlerData.HandlerMessageData);
-            //HandlerModule.Process (HandlerData.HandlerModuleData);
+            HandlerModule.Process (HandlerData.HandlerModuleData);
+            HandlerMessage.Process (HandlerData.HandlerMessageData);
+            HandlerReceiver.Process (HandlerData);
         }
 
         bool SelectMessageValue (string messageValue)

@@ -18,6 +18,7 @@ namespace rr.Module.Handler
         public UHandlerModule Module { get; private set; }
         public bool HasModule => Module.Equals (UHandlerModule.NONE) is false;
         public int HandlerIndex { get; private set; }
+        public IProviderServices Services { get; set; }
         #endregion
 
         #region Handler Data
@@ -55,10 +56,6 @@ namespace rr.Module.Handler
 
             return clone;
         }
-        #endregion
-
-        #region Property
-        IProviderServices Services { get; set; }
         #endregion
 
         #region Static

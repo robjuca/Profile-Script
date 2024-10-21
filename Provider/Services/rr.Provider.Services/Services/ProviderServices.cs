@@ -102,8 +102,7 @@ namespace rr.Provider.Services
         public string GetScriptDataValue (TScriptDefinitionData definitionData, string defaultValue = default)
         {
             var data = GetOrCreateScriptDataValue (definitionData);
-
-            var obj = data.GetValueAs ((string) data.GetRawValue ());
+            var obj = data.GetRawValue ();
 
             return obj is null ? string.Empty : obj.ToString ();
         }
@@ -120,7 +119,8 @@ namespace rr.Provider.Services
             var definitionData = TScriptDefinitionData.Create ("GAMESTATE", useLocal: true);
 
             if (string.IsNullOrEmpty (state)) {
-                definitionData.AddVariableValue (GetScriptDataValue (definitionData));
+                var variableValue = GetScriptDataValue (definitionData);
+                definitionData.AddVariableValue (variableValue);
 
                 return definitionData.GameState;
             }
