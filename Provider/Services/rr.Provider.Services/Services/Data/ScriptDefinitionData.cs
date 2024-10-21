@@ -9,6 +9,8 @@ using rr.Library.Extension;
 
 using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Configuration;
+
+using System.Runtime.Serialization.Formatters;
 //---------------------------//
 
 namespace rr.Provider.Services
@@ -24,7 +26,7 @@ namespace rr.Provider.Services
         public IDataDefinition DataDefinition { get; private set; }
         public bool IsEmpty => string.IsNullOrEmpty (VariableName);
         public bool UseLocalOnly { get; private set; }
-        public SimulationGamestate GameState => string.IsNullOrEmpty (VariableValue) ? SimulationGamestate.Loading : TEnumExtension.ToEnum<SimulationGamestate> (VariableValue);
+        public SimulationGamestate GameState => ValidateVariableValue ? TEnumExtension.ToEnum<SimulationGamestate> (VariableValue) : SimulationGamestate.Loading;
         #endregion
 
         #region Members
@@ -45,6 +47,10 @@ namespace rr.Provider.Services
 
             return clone;
         }
+        #endregion
+
+        #region Property
+        bool ValidateVariableValue => !string.IsNullOrEmpty (VariableValue) & !VariableValue.Equals (Resources.Properties.Resources.RES_EMPTY);
         #endregion
 
         #region Static

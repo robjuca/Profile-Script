@@ -16,7 +16,6 @@ using rr.Provider.Services;
 using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Events;
 
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 //---------------------------//
 
@@ -140,21 +139,21 @@ namespace rr.Plate.DeviceInit
             // Module Handler
             data.AddVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
             data.AddVariableValue (Resources.RES_EMPTY);
-            Services.SetScriptDataValue (data);
+            Services.SetScriptDataValue (data.Clone ());
 
             // Message to Module
             data.AddVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
             data.AddVariableValue (Resources.RES_EMPTY);
-            Services.SetScriptDataValue (data);
+            Services.SetScriptDataValue (data.Clone ());
 
             // Speech Handler
             data.AddVariableName (ToString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
             data.AddVariableValue (Resources.RES_EMPTY);
-            Services.SetScriptDataValue (data);
+            Services.SetScriptDataValue (data.Clone ());
 
             data.AddVariableName (ToString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
             data.AddVariableValue (Resources.RES_FALSE);
-            Services.SetScriptDataValue (data);
+            Services.SetScriptDataValue (data.Clone ());
         }
 
         void CreateHandlerData ()
@@ -187,7 +186,7 @@ namespace rr.Plate.DeviceInit
             HandlerModuleCatalogue.AddHandlerData (handlerData.Clone ());  // add to list
 
             // Text and Message - Flying
-            handlerData.HandlerSpeechData.AddSpeechTextVariableValue ("");
+            handlerData.HandlerSpeechData.AddSpeechTextVariableValue (Resources.RES_EMPTY);
             handlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (SimulationGamestate.Flying));
 
             // all handlers enabled

@@ -14,7 +14,9 @@ using SPAD.neXt.Interfaces.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 //---------------------------//
 
@@ -92,16 +94,16 @@ namespace rr.Provider.Services
                 definitionData.AddDataDefinition (EventSystem.GetDataDefinition ("LOCAL:" + definitionData.VariableName));
             }
 
-            DefinitionDataList.Add (definitionData.Key, definitionData.Clone());
+            DefinitionDataList.Add (definitionData.Key, definitionData.Clone ());
 
             return definitionData.DataDefinition;
         }
 
-        public string GetScriptDataValue (TScriptDefinitionData definitionData)
+        public string GetScriptDataValue (TScriptDefinitionData definitionData, string defaultValue = default)
         {
             var data = GetOrCreateScriptDataValue (definitionData);
 
-            var obj = data.GetRawValue();
+            var obj = data.GetValueAs ((string) data.GetRawValue ());
 
             return obj is null ? string.Empty : obj.ToString ();
         }

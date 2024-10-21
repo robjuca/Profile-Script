@@ -61,7 +61,7 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;&quot;.
+        ///   Looks up a localized string similar to EMPTY.
         /// </summary>
         public static string RES_EMPTY {
             get {

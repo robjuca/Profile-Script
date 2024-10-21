@@ -5,7 +5,6 @@
 
 //----- Include
 using rr.Library.EventAggregator;
-using rr.Library.Extension;
 using rr.Provider.Message;
 using rr.Provider.Presentation;
 using rr.Provider.Resources;
@@ -85,7 +84,9 @@ namespace rr.Shell
 
             foreach (string name in variablesNames) {
                 scriptData.AddVariableName (name);
-                dataList.Add (scriptData);
+                scriptData.AddVariableValue (Resources.RES_EMPTY);
+
+                dataList.Add (scriptData.Clone ());
             }
 
             Services.CreateScriptDataValue (dataList);
