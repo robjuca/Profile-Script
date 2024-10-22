@@ -72,6 +72,11 @@ namespace rr.Module.Handler
                 HandlerModule.Process ();
                 HandlerMessage.Process ();
                 HandlerReceiver.Process ();
+
+                if (HasMoreData) {
+                    SelectHandlerData (pumpIndex: true);
+                    ProcessSpeech ();
+                }
             }
         }
         #endregion
@@ -79,6 +84,8 @@ namespace rr.Module.Handler
         #region Property
         List<THandlerData> HandlerDataList { get; set; }
         int HandlerDataIndex { get; set; }
+        public bool HasMoreData => (HandlerDataIndex + 1) < HandlerDataList.Count;
+
         THandlerData HandlerData => HandlerDataList [ HandlerDataIndex ];
         THandlerSpeech HandlerSpeech { get; set; }
         THandlerModule HandlerModule { get; set; }
@@ -89,9 +96,11 @@ namespace rr.Module.Handler
         #endregion
 
         #region Support
-        void SelectHandlerData ()
+        void SelectHandlerData (bool pumpIndex = false)
         {
-            HandlerSpeech.SelectHandlerData(HandlerData);
+            HandlerDataIndex = pumpIndex ? (HandlerDataIndex + 1) : HandlerDataIndex;
+
+            HandlerSpeech.SelectHandlerData (HandlerData);
             HandlerModule.SelectHandlerData (HandlerData);
             HandlerMessage.SelectHandlerData (HandlerData);
             HandlerReceiver.SelectHandlerData (HandlerData);

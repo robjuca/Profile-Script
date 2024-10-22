@@ -106,6 +106,15 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NONE.
+        /// </summary>
+        public static string RES_NONE {
+            get {
+                return ResourceManager.GetString("RES_NONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to rr.Beechcraft_Turbine_Duke.
         /// </summary>
         public static string RES_PROFILE_NAME {

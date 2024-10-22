@@ -132,6 +132,9 @@
   <data name="RES_NEXT_STEP_CODE" xml:space="preserve">
     <value>-100</value>
   </data>
+  <data name="RES_NONE" xml:space="preserve">
+    <value>NONE</value>
+  </data>
   <data name="RES_PROFILE_NAME" xml:space="preserve">
     <value>rr.Beechcraft_Turbine_Duke</value>
   </data>

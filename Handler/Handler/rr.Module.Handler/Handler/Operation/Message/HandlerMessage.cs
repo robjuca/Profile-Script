@@ -17,6 +17,15 @@ namespace rr.Module.Handler
         {
             if (args is not null) {
                 if (ValidateHandlerMessage) {
+                    var definitionData = DefinitionData;
+
+                    if (args.IsHandlersClear) {
+                        // Message
+                        definitionData.AddVariableName (HandlerMessageData.MessageVariableName);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+
+                        SetScriptDataValue (definitionData.Clone ());
+                    }
                 }
             }
         }

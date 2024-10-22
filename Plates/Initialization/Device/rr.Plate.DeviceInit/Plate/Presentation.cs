@@ -69,7 +69,7 @@ namespace rr.Plate.DeviceInit
                     if (message.RequestParam (out IApplication app)) {
                         app.SubscribeToSystemEvent (SPADSystemEvents.GameStateChanged, OnGameStateChanged);
 
-                        
+
                     }
                 }
 
@@ -189,12 +189,27 @@ namespace rr.Plate.DeviceInit
             #endregion
 
             // Text and Message - Flying
-            #region Begin
+            #region Flying
             handlerData.HandlerSpeechData.AddSpeechTextVariableValue (
-                    "check instructions: aircraft cold and dark mode\r\n park break on:\r\n honeycomb device : all switches: off\r\n all levers: idle:\r\n gear down: \r\n when ready: set beacon switch on and off : \r\n waiting..."
+                    "check instructions: aircraft cold and dark mode\r\n park break on:\r\n honeycomb device : all switches: off\r\n all levers: idle:\r\n gear down:"
                 );
 
             handlerData.HandlerMessageData.AddMessageVariableValue (TEnumExtension.AsString (SimulationGamestate.Flying));
+
+            // all handlers enabled
+            handlerData.EnableAll ();
+
+            handlerData.PumpHandlerIndex ();
+            HandlerModuleCatalogue.AddHandlerData (handlerData.Clone ());  // add to list 
+            #endregion
+
+            // Text and Message - Waiting...
+            #region Waiting...
+            handlerData.HandlerSpeechData.AddSpeechTextVariableValue (
+                    "when ready: set beacon switch on and off : \r\n waiting..."
+                );
+
+            handlerData.HandlerMessageData.AddMessageVariableValue ("Waiting");
 
             // all handlers enabled
             handlerData.EnableAll ();

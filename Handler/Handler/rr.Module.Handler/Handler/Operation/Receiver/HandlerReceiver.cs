@@ -23,13 +23,13 @@ namespace rr.Module.Handler
                     if (args.IsHandlersClear) {
                         // Receiver Module
                         definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_NAME));
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+                        definitionData.AddVariableValue (Resources.RES_NONE);
 
                         SetScriptDataValue (definitionData.Clone ());
 
                         // Receiver Message
                         definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+                        definitionData.AddVariableValue (Resources.RES_NONE);
 
                         SetScriptDataValue (definitionData.Clone ());
                     }
