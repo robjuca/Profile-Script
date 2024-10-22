@@ -32,6 +32,18 @@ namespace rr.Module.Handler
 
                         Services.SetScriptDataValue (definitionData);
                     }
+
+                    if (args.IsHandlersClear) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
+                        definitionData.AddVariableValue (Resources.RES_FALSE);
+
+                        Services.SetScriptDataValue (definitionData);
+
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+
+                        Services.SetScriptDataValue (definitionData);
+                    }
                 }
             }
         }

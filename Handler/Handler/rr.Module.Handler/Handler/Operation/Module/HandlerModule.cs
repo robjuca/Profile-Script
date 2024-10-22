@@ -23,14 +23,26 @@ namespace rr.Module.Handler
                         definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
                         definitionData.AddVariableValue (Resources.RES_FALSE);
 
-                        HandlerSpeechData.Services.SetScriptDataValue (definitionData.Clone ());
+                        SetScriptDataValue (definitionData);
                     }
 
                     if (args.IsSpeechDone) {
                         definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
                         definitionData.AddVariableValue (Resources.RES_EMPTY);
 
-                        HandlerSpeechData.Services.SetScriptDataValue (definitionData.Clone ());
+                        SetScriptDataValue (definitionData);
+                    }
+
+                    if (args.IsHandlersClear) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
+                        definitionData.AddVariableValue (Resources.RES_FALSE);
+
+                        SetScriptDataValue (definitionData);
+
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+
+                        SetScriptDataValue (definitionData);
                     }
                 }
             }

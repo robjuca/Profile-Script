@@ -18,20 +18,32 @@ namespace rr.Module.Handler
         {
             if (args is not null) {
                 if (ValidateHandlerMessage) {
-                    var definitionData = TScriptDefinitionData.CreateDefault ();
+                    var definitionData = DefinitionData;
 
                     if (args.IsSpeechDisable) {
                         definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
                         definitionData.AddVariableValue (Resources.RES_FALSE);
 
-                        Services.SetScriptDataValue (definitionData.Clone ());
+                        SetScriptDataValue (definitionData);
                     }
 
                     if (args.IsSpeechDone) {
                         definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
                         definitionData.AddVariableValue (Resources.RES_EMPTY);
 
-                        Services.SetScriptDataValue (definitionData.Clone ());
+                        SetScriptDataValue (definitionData);
+                    }
+
+                    if (args.IsHandlersClear) {
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
+                        definitionData.AddVariableValue (Resources.RES_FALSE);
+
+                        SetScriptDataValue (definitionData);
+
+                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+
+                        SetScriptDataValue (definitionData);
                     }
                 }
             }

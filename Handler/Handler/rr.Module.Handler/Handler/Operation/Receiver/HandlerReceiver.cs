@@ -20,18 +20,16 @@ namespace rr.Module.Handler
                 if (ValidateHandlerReceiver) {
                     var definitionData = DefinitionData;
 
-                    if (args.IsSpeechDisable) {
-                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
-                        definitionData.AddVariableValue (Resources.RES_FALSE);
-
-                        Services.SetScriptDataValue (definitionData);
-                    }
-
-                    if (args.IsSpeechDone) {
-                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
+                    if (args.IsHandlersClear) {
+                        // Receiver Module
+                        definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_NAME));
                         definitionData.AddVariableValue (Resources.RES_EMPTY);
 
                         SetScriptDataValue (definitionData);
+
+                        // Receiver Message
+                        definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
                     }
                 }
             }
