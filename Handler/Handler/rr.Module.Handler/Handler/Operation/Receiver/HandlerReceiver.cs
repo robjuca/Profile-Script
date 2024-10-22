@@ -11,7 +11,7 @@ using rr.Provider.Resources.Properties;
 namespace rr.Module.Handler
 {
     //----- THandlerReceiver
-    public class THandlerReceiver (THandlerData handlerData) : TOperationHandlerBase (handlerData)
+    public class THandlerReceiver () : TOperationHandlerBase ()
     {
         #region Overrides
         public override void ScriptReturnCode (TScriptReturnCodeArgs args)
@@ -25,11 +25,13 @@ namespace rr.Module.Handler
                         definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_NAME));
                         definitionData.AddVariableValue (Resources.RES_EMPTY);
 
-                        SetScriptDataValue (definitionData);
+                        SetScriptDataValue (definitionData.Clone ());
 
                         // Receiver Message
                         definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
                         definitionData.AddVariableValue (Resources.RES_EMPTY);
+
+                        SetScriptDataValue (definitionData.Clone ());
                     }
                 }
             }
@@ -44,19 +46,19 @@ namespace rr.Module.Handler
                 definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_NAME));
                 definitionData.AddVariableValue (HandlerModuleData.ModuleVariableValue);
 
-                SetScriptDataValue (definitionData);
+                SetScriptDataValue (definitionData.Clone ());
 
                 // Receiver Message
                 definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
                 definitionData.AddVariableValue (HandlerMessageData.MessageVariableValue);
 
-                SetScriptDataValue (definitionData);
+                SetScriptDataValue (definitionData.Clone ());
             }
         }
         #endregion
 
         #region Static
-        public static THandlerReceiver Create (THandlerData data) => new (data);
+        public static THandlerReceiver Create () => new ();
         #endregion
     };
     //---------------------------//

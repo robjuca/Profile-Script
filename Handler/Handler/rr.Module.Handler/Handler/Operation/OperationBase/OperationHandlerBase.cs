@@ -12,11 +12,11 @@ using rr.Provider.Services;
 namespace rr.Module.Handler
 {
     //----- TOperationHandlerBase
-    public abstract class TOperationHandlerBase (THandlerData handlerData)
+    public abstract class TOperationHandlerBase ()
     {
         #region Property
         protected IProviderServices Services => HandlerData.Services;
-        protected THandlerData HandlerData { get; private set; } = handlerData;
+        protected THandlerData HandlerData { get; private set; }
         protected THandlerModuleData HandlerModuleData => HandlerData.HandlerModuleData;
         protected THandlerMessageData HandlerMessageData => HandlerData.HandlerMessageData;
         protected THandlerSpeechData HandlerSpeechData => HandlerData.HandlerSpeechData;
@@ -29,18 +29,17 @@ namespace rr.Module.Handler
         protected TScriptDefinitionData DefinitionData => TScriptDefinitionData.CreateDefault ();
         #endregion
 
-        #region Virtual
-        public virtual void Process ()
-        {
-        }
+        #region Members
+        public void SelectHandlerData (THandlerData handlerData) => HandlerData = handlerData; 
+        #endregion
 
-        public virtual void ScriptReturnCode (TScriptReturnCodeArgs args)
-        {
-        }
+        #region Virtual
+        public virtual void Process ( ) { }
+        public virtual void ScriptReturnCode (TScriptReturnCodeArgs args) { }
         #endregion
 
         #region Support
-        protected void SetScriptDataValue (TScriptDefinitionData definitionData) => Services.SetScriptDataValue (definitionData.Clone ());
+        protected void SetScriptDataValue (TScriptDefinitionData definitionData) => Services.SetScriptDataValue (definitionData);
         protected string ToString (UReceiverModule name) => TEnumExtension.AsString (name);
         #endregion
 

@@ -10,40 +10,13 @@ using rr.Provider.Resources.Properties;
 namespace rr.Module.Handler
 {
     //----- THandlerModule
-    public class THandlerModule (THandlerData handlerData) : TOperationHandlerBase (handlerData)
+    public class THandlerModule () : TOperationHandlerBase ()
     {
         #region Overrides
         public override void ScriptReturnCode (TScriptReturnCodeArgs args)
         {
-            if (args is not null ) {
+            if (args is not null) {
                 if (ValidateHandlerModule) {
-                    var definitionData = DefinitionData;
-
-                    if (args.IsSpeechDisable) {
-                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
-                        definitionData.AddVariableValue (Resources.RES_FALSE);
-
-                        SetScriptDataValue (definitionData);
-                    }
-
-                    if (args.IsSpeechDone) {
-                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
-
-                        SetScriptDataValue (definitionData);
-                    }
-
-                    if (args.IsHandlersClear) {
-                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
-                        definitionData.AddVariableValue (Resources.RES_FALSE);
-
-                        SetScriptDataValue (definitionData);
-
-                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
-
-                        SetScriptDataValue (definitionData);
-                    }
                 }
             }
         }
@@ -57,13 +30,13 @@ namespace rr.Module.Handler
                 definitionData.AddVariableName (HandlerModuleData.ModuleVariableName);
                 definitionData.AddVariableValue (HandlerModuleData.ModuleVariableValue);
 
-                SetScriptDataValue (definitionData);
+                SetScriptDataValue (definitionData.Clone ());
             }
         }
         #endregion
 
         #region Static
-        public static THandlerModule Create (THandlerData data) => new (data);
+        public static THandlerModule Create () => new ();
         #endregion
     };
     //---------------------------//

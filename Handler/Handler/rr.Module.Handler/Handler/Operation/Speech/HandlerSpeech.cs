@@ -10,7 +10,7 @@ using rr.Provider.Resources.Properties;
 namespace rr.Module.Handler
 {
     //----- THandlerSpeech
-    public class THandlerSpeech (THandlerData handlerData) : TOperationHandlerBase (handlerData)
+    public class THandlerSpeech () : TOperationHandlerBase ()
     {
         #region Overrides
         public override void ScriptReturnCode (TScriptReturnCodeArgs args)
@@ -23,26 +23,14 @@ namespace rr.Module.Handler
                         definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
                         definitionData.AddVariableValue (Resources.RES_FALSE);
 
-                        Services.SetScriptDataValue (definitionData);
+                        Services.SetScriptDataValue (definitionData.Clone ());
                     }
 
                     if (args.IsSpeechDone) {
                         definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
                         definitionData.AddVariableValue (Resources.RES_EMPTY);
 
-                        Services.SetScriptDataValue (definitionData);
-                    }
-
-                    if (args.IsHandlersClear) {
-                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
-                        definitionData.AddVariableValue (Resources.RES_FALSE);
-
-                        Services.SetScriptDataValue (definitionData);
-
-                        definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
-
-                        Services.SetScriptDataValue (definitionData);
+                        Services.SetScriptDataValue (definitionData.Clone ());
                     }
                 }
             }
@@ -57,19 +45,19 @@ namespace rr.Module.Handler
                 definitionData.AddVariableName (HandlerSpeechData.SpeechTextVariableName);
                 definitionData.AddVariableValue (HandlerSpeechData.SpeechTextVariableValue);
 
-                SetScriptDataValue (definitionData);
+                SetScriptDataValue (definitionData.Clone ());
 
                 // text enable
                 definitionData.AddVariableName (HandlerSpeechData.SpeechTextEnableVariableName);
                 definitionData.AddVariableValue (HandlerSpeechData.SpeechTextEnableVariableValue);
 
-                SetScriptDataValue (definitionData);
+                SetScriptDataValue (definitionData.Clone ());
             }
         }
         #endregion
 
         #region Static
-        public static THandlerSpeech Create (THandlerData data) => new (data);
+        public static THandlerSpeech Create () => new ();
         #endregion
     };
     //---------------------------//

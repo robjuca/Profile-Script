@@ -24,10 +24,10 @@ namespace rr.Module.Handler
             HandlerDataIndex = 0;
             HandlerDataList = [];
 
-            HandlerSpeech = THandlerSpeech.Create (HandlerData);
-            HandlerModule = THandlerModule.Create (HandlerData);
-            HandlerMessage = THandlerMessage.Create (HandlerData);
-            HandlerReceiver = THandlerReceiver.Create (HandlerData);
+            HandlerSpeech = THandlerSpeech.Create ();
+            HandlerModule = THandlerModule.Create ();
+            HandlerMessage = THandlerMessage.Create ();
+            HandlerReceiver = THandlerReceiver.Create ();
 
             ScriptReturnCode = TScriptReturnCode.Create ();
 
@@ -39,7 +39,8 @@ namespace rr.Module.Handler
         public void Execute (string messageValue)
         {
             if (SelectMessageValue (messageValue)) {
-                ProcessAll ();
+                SelectHandlerData ();
+                ProcessSpeech ();
             }
         }
 
@@ -67,25 +68,10 @@ namespace rr.Module.Handler
             HandlerReceiver.ScriptReturnCode (eventArgs);
 
             // speech done
-            if (eventArgs.IsSpeechDone & Wait is false) {
-                //ProcessCondition ();
-            }
-
-            // HANDLERS CLEAR
-            //if (eventArgs.IsHandlersClear) {
-            //}
-
-            // next step
-            if (eventArgs.IsNextStep) {
-                //NextAction ();
-                //ProcessSpeech ();
-            }
-
-            // next module
-            if (eventArgs.IsNextModule) {
-                //if (HandlerData.HasNextModule) {
-                //    NextModule?.Invoke (this, HandlerData);
-                //}
+            if (eventArgs.IsSpeechDone) {
+                HandlerModule.Process ();
+                HandlerMessage.Process ();
+                HandlerReceiver.Process ();
             }
         }
         #endregion
@@ -93,25 +79,25 @@ namespace rr.Module.Handler
         #region Property
         List<THandlerData> HandlerDataList { get; set; }
         int HandlerDataIndex { get; set; }
-        bool Code40 { get; set; }
         THandlerData HandlerData => HandlerDataList [ HandlerDataIndex ];
         THandlerSpeech HandlerSpeech { get; set; }
         THandlerModule HandlerModule { get; set; }
         THandlerMessage HandlerMessage { get; set; }
         THandlerReceiver HandlerReceiver { get; set; }
         TScriptReturnCode ScriptReturnCode { get; set; }
-        bool Wait { get; set; }
         UHandlerModule ParentModule { get; set; }
         #endregion
 
         #region Support
-        void ProcessAll ()
+        void SelectHandlerData ()
         {
-            HandlerSpeech.Process ();
-            HandlerModule.Process ();
-            HandlerMessage.Process ();
-            HandlerReceiver.Process ();
+            HandlerSpeech.SelectHandlerData(HandlerData);
+            HandlerModule.SelectHandlerData (HandlerData);
+            HandlerMessage.SelectHandlerData (HandlerData);
+            HandlerReceiver.SelectHandlerData (HandlerData);
         }
+
+        void ProcessSpeech () => HandlerSpeech.Process ();
 
         bool SelectMessageValue (string messageValue)
         {
@@ -119,7 +105,7 @@ namespace rr.Module.Handler
 
             foreach (var data in HandlerDataList) {
                 if (data.HandlerMessageData.ContainsMessageValue (messageValue)) {
-                    return true; 
+                    return true;
                 }
 
                 HandlerDataIndex++;
@@ -127,9 +113,6 @@ namespace rr.Module.Handler
 
             return false;
         }
-        //void NextAction () => ActionIndex++;
-        //void ProcessSpeech () => HandlerSpeech.Process (HandlerData);
-        //void ProcessCondition () => HandlerModule.Process (HandlerData);
         #endregion
 
         #region Static
