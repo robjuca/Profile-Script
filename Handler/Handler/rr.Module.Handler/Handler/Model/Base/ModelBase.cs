@@ -11,8 +11,8 @@ using rr.Provider.Services;
 
 namespace rr.Module.Handler
 {
-    //----- THandlerDataBase
-    public abstract class THandlerDataBase (IProviderServices services, UHandlerModule handlerModule, bool enableHandler = true)
+    //----- TModelBase
+    public abstract class TModelBase (IProviderServices services, UHandlerModule handlerModule, bool enableHandler = true)
     {
         #region Property
         public bool IsEnable { get; private set; } = enableHandler;

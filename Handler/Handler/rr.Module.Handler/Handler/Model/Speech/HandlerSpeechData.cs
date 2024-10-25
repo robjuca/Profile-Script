@@ -11,7 +11,7 @@ using rr.Provider.Services;
 namespace rr.Module.Handler
 {
     //----- THandlerSpeechData
-    public class THandlerSpeechData : THandlerDataBase
+    public class THandlerSpeechData : TModelBase
     {
         #region Property
         // Text

@@ -11,7 +11,7 @@ using rr.Provider.Services;
 namespace rr.Module.Handler
 {
     //----- THandlerMessageData
-    public class THandlerMessageData : THandlerDataBase
+    public class THandlerMessageData : TModelBase
     {
         #region Property
         // Variable Message Name
