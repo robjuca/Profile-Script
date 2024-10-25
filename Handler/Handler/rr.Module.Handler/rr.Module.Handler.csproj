@@ -66,24 +66,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handler\Data\HandlerDataBase.cs" />
-    <Compile Include="Handler\Operation\Message\HandlerMessage.cs" />
-    <Compile Include="Handler\Operation\Module\HandlerModule.cs" />
-    <Compile Include="Handler\Data\HandlerMessageData.cs" />
-    <Compile Include="Handler\Data\HandlerModuleData.cs" />
-    <Compile Include="Handler\Data\HandlerSpeechData.cs" />
+    <Compile Include="Handler\Model\HandlerDataBase.cs" />
+    <Compile Include="Handler\Model\Message\HandlerMessage.cs" />
+    <Compile Include="Handler\Model\Message\HandlerMessageData.cs" />
+    <Compile Include="Handler\Model\Module\HandlerModule.cs" />
+    <Compile Include="Handler\Model\Module\HandlerModuleData.cs" />
+    <Compile Include="Handler\Model\Receiver\HandlerReceiver.cs" />
+    <Compile Include="Handler\Model\Speech\HandlerSpeech.cs" />
+    <Compile Include="Handler\Model\Speech\HandlerSpeechData.cs" />
     <Compile Include="Handler\Operation\OperationBase\OperationHandlerBase.cs" />
-    <Compile Include="Handler\Operation\Receiver\HandlerReceiver.cs" />
     <Compile Include="Handler\Operation\Script\ScriptReturnCodeArgs.cs" />
-    <Compile Include="Handler\Data\HandlerData.cs" />
+    <Compile Include="Handler\Model\HandlerData.cs" />
     <Compile Include="Handler\Operation\Script\ScriptReturnCode.cs" />
     <Compile Include="Handler\Catalogue\HandlerModuleCatalogue.cs" />
-    <Compile Include="Handler\Operation\Speech\HandlerSpeech.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetPath)"  D:\SPAD.neXt\Addons /Y</PostBuildEvent>
