@@ -15,14 +15,25 @@ namespace rr.Module.Handler
     public abstract class TModelBase (IProviderServices services, UHandlerModule handlerModule, bool enableHandler = true)
     {
         #region Property
-        public bool IsEnable { get; private set; } = enableHandler;
-        public UHandlerModule HandlerModule { get; private set; } = handlerModule;
-        public IProviderServices Services { get; private set; } = services;
-        public bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
+        protected bool IsEnable { get; private set; } = enableHandler;
+        protected UHandlerModule HandlerModule { get; private set; } = handlerModule;
+        protected IProviderServices Services { get; private set; } = services;
+        protected bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
         #endregion
 
         #region Members
-        public void EnableHandler (bool enable = true) => IsEnable = enable; 
+        protected void EnableHandler (bool enable = true) => IsEnable = enable;
+
+        protected TScriptDefinitionData DefinitionData => TScriptDefinitionData.CreateDefault ();
+        #endregion
+
+        #region Virtual
+        public virtual void Process () { }
+        public virtual void ScriptReturnCode (TReturnCodeArgs args) { }
+        #endregion
+
+        #region Support
+        protected void SetScriptDataValue (TScriptDefinitionData definitionData) => Services.SetScriptDataValue (definitionData); 
         #endregion
     };
     //---------------------------//

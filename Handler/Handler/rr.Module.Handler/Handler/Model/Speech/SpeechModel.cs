@@ -5,6 +5,7 @@
 
 //----- Include
 using rr.Provider.Resources;
+using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 //---------------------------//
 
@@ -85,6 +86,50 @@ namespace rr.Module.Handler
                 AddSpeechTextEnableVariableValue (alias.SpeechTextEnableVariableValue);
 
                 EnableHandler (alias.IsEnable);
+            }
+        }
+        #endregion
+
+        #region Overrides
+        public override void ScriptReturnCode (TReturnCodeArgs args)
+        {
+            if (args is not null) {
+                if (Validate) {
+                    var definitionData = DefinitionData;
+
+                    if (args.IsSpeechDisable) {
+                        definitionData.AddVariableName (SpeechTextEnableVariableName);
+                        definitionData.AddVariableValue (Resources.RES_FALSE);
+
+                        Services.SetScriptDataValue (definitionData.Clone ());
+                    }
+
+                    if (args.IsSpeechDone) {
+                        definitionData.AddVariableName (SpeechTextVariableName);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+
+                        Services.SetScriptDataValue (definitionData.Clone ());
+                    }
+                }
+            }
+        }
+
+        public override void Process ()
+        {
+            if (Validate) {
+                var definitionData = DefinitionData;
+
+                // text
+                definitionData.AddVariableName (SpeechTextVariableName);
+                definitionData.AddVariableValue (SpeechTextVariableValue);
+
+                SetScriptDataValue (definitionData.Clone ());
+
+                // text enable
+                definitionData.AddVariableName (SpeechTextEnableVariableName);
+                definitionData.AddVariableValue (SpeechTextEnableVariableValue);
+
+                SetScriptDataValue (definitionData.Clone ());
             }
         }
         #endregion
