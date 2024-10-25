@@ -10,8 +10,8 @@ using rr.Provider.Services;
 
 namespace rr.Module.Handler
 {
-    //----- THandlerSpeechData
-    public class THandlerSpeechData : TModelBase
+    //----- TSpeechModel
+    public class TSpeechModel : TModelBase
     {
         #region Property
         // Text
@@ -61,7 +61,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Constructor
-        THandlerSpeechData (IProviderServices services, UHandlerModule handlerModule)
+        TSpeechModel (IProviderServices services, UHandlerModule handlerModule)
           : base (services, handlerModule)
         {
         }
@@ -76,7 +76,7 @@ namespace rr.Module.Handler
         public void AddSpeechTextEnableVariableName (string textEnableVariableName) => SpeechTextEnableVariableName = textEnableVariableName;
         public void AddSpeechTextEnableVariableValue (string textEnableVariableValue) => SpeechTextEnableVariableValue = textEnableVariableValue;
 
-        public void CopyFrom (THandlerSpeechData alias)
+        public void CopyFrom (TSpeechModel alias)
         {
             if (alias is not null) {
                 AddSpeechTextVariableName (alias.SpeechTextVariableName);
@@ -90,11 +90,11 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        static public THandlerSpeechData Create (
+        static public TSpeechModel Create (
            IProviderServices services,
            UHandlerModule handlerModule) => new (services, handlerModule);
 
-        static public THandlerSpeechData Clone (THandlerSpeechData alias)
+        static public TSpeechModel Clone (TSpeechModel alias)
         {
             var handler = Create (alias.Services, alias.HandlerModule);
             handler.CopyFrom (alias);

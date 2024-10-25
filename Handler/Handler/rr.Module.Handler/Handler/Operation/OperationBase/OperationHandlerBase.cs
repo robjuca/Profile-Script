@@ -19,7 +19,7 @@ namespace rr.Module.Handler
         protected THandlerData HandlerData { get; private set; }
         protected THandlerModuleData HandlerModuleData => HandlerData.HandlerModuleData;
         protected THandlerMessageData HandlerMessageData => HandlerData.HandlerMessageData;
-        protected THandlerSpeechData HandlerSpeechData => HandlerData.HandlerSpeechData;
+        protected TSpeechModel HandlerSpeechData => HandlerData.HandlerSpeechData;
 
         protected bool ValidateHandlerSpeech => HandlerData.ValidateHandlerSpeech;
         protected bool ValidateHandlerModule => HandlerData.ValidateHandlerModule;

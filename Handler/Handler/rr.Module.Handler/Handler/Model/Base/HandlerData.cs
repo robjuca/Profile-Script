@@ -26,7 +26,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Handler Data
-        public THandlerSpeechData HandlerSpeechData { get; private set; }
+        public TSpeechModel HandlerSpeechData { get; private set; }
         public THandlerModuleData HandlerModuleData { get; private set; }
         public THandlerMessageData HandlerMessageData { get; private set; }
         #endregion
@@ -69,7 +69,7 @@ namespace rr.Module.Handler
                 Services = services,
                 HandlerIndex = 0,
                 Module = handlerModule,
-                HandlerSpeechData = THandlerSpeechData.Create (services, handlerModule),
+                HandlerSpeechData = TSpeechModel.Create (services, handlerModule),
                 HandlerModuleData = THandlerModuleData.Create (services, handlerModule),
                 HandlerMessageData = THandlerMessageData.Create (services, handlerModule)
             };
