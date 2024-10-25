@@ -105,7 +105,7 @@ namespace rr.Module.Handler
 
         #region Support
         protected void SetScriptDataValue (TScriptDefinitionData definitionData) => Services.SetScriptDataValue (definitionData);
-        protected string ToString (UReceiverModule name) => TEnumExtension.AsString (name);
+        protected string ReceiverToString (UReceiverModule name) => TEnumExtension.AsString (name);
         #endregion
     };
     //---------------------------//

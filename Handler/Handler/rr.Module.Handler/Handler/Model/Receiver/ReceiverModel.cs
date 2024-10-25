@@ -12,7 +12,7 @@ using rr.Provider.Services;
 namespace rr.Module.Handler
 {
     //----- TReceiverModel
-    public class TReceiverModel : TModelBase 
+    public class TReceiverModel : TModelBase
     {
 
         #region Constructor
@@ -32,13 +32,13 @@ namespace rr.Module.Handler
 
                     if (args.IsHandlersClear) {
                         // Receiver Module
-                        definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_NAME));
+                        definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
                         definitionData.AddVariableValue (Resources.RES_NONE);
 
                         SetScriptDataValue (definitionData.Clone ());
 
                         // Receiver Message
-                        definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+                        definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
                         definitionData.AddVariableValue (Resources.RES_NONE);
 
                         SetScriptDataValue (definitionData.Clone ());
@@ -53,13 +53,13 @@ namespace rr.Module.Handler
                 var definitionData = DefinitionData;
 
                 // Receiver Module
-                definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_NAME));
+                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
                 definitionData.AddVariableValue (VariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
 
                 // Receiver Message
-                definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
                 definitionData.AddVariableValue (VariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());

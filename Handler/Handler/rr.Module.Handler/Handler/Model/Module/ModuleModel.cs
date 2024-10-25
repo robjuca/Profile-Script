@@ -5,6 +5,7 @@
 
 //----- Include
 using rr.Provider.Resources;
+using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 //---------------------------//
 
@@ -13,8 +14,6 @@ namespace rr.Module.Handler
     //----- TModuleModel
     public class TModuleModel : TModelBase
     {
-        
-
         #region Constructor
         TModuleModel (IProviderServices services, UHandlerModule handlerModule)
           : base (services, handlerModule)
@@ -23,32 +22,37 @@ namespace rr.Module.Handler
         #endregion
 
         #region Overrides
-        //public override void ScriptReturnCode (TReturnCodeArgs args)
-        //{
-        //    if (args is not null) {
-        //        if (ValidateHandlerModule) {
-        //        }
-        //    }
-        //}
+        public override void ScriptReturnCode (TReturnCodeArgs args)
+        {
+            if (args is not null) {
+                if (Validate) {
+                    // do nothing
+                }
+            }
+        }
 
-        //public override void Process ()
-        //{
-        //    if (ValidateHandlerModule) {
-        //        var definitionData = DefinitionData;
+        public override void Process ()
+        {
+            if (Validate) {
+                var definitionData = DefinitionData;
 
-        //        // Module
-        //        definitionData.AddVariableName (HandlerModuleData.ModuleVariableName);
-        //        definitionData.AddVariableValue (HandlerModuleData.ModuleVariableValue);
+                // Variable Name and Value
+                definitionData.AddVariableName (VariableName);
+                definitionData.AddVariableValue (VariableValue);
 
-        //        SetScriptDataValue (definitionData.Clone ());
-        //    }
+                SetScriptDataValue (definitionData.Clone ());
+
+                // Enable Variable Name and Value
+                definitionData.AddVariableName (EnableVariableName);
+                definitionData.AddVariableValue (EnableVariableValue);
+
+                SetScriptDataValue (definitionData.Clone ());
+            }
         }
         #endregion
 
         #region Static
-        static public TModuleModel Create (
-            IProviderServices services,
-            UHandlerModule handlerModule) => new (services, handlerModule);
+        static public TModuleModel Create (IProviderServices services, UHandlerModule handlerModule) => new (services, handlerModule);
         #endregion
     };
     //---------------------------//

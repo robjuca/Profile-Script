@@ -16,7 +16,7 @@ namespace rr.Module.Handler
     {
         #region Property
         protected IProviderServices Services => HandlerData.Services;
-        protected THandlerData HandlerData { get; private set; }
+        protected TModelData HandlerData { get; private set; }
         protected TModuleModel HandlerModuleData => HandlerData.HandlerModuleData;
         protected TMessageModel HandlerMessageData => HandlerData.HandlerMessageData;
         protected TSpeechModel HandlerSpeechData => HandlerData.HandlerSpeechData;
@@ -30,7 +30,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Members
-        public void SelectHandlerData (THandlerData handlerData) => HandlerData = handlerData; 
+        public void SelectHandlerData (TModelData handlerData) => HandlerData = handlerData; 
         #endregion
 
         #region Virtual

@@ -15,7 +15,7 @@ namespace rr.Module.Handler
     public class THandlerModuleCatalogue
     {
         #region Event
-        //public static event EventHandler<THandlerData> NextModule;
+        //public static event EventHandler<TModelData> NextModule;
         #endregion
 
         #region Constructor
@@ -44,7 +44,7 @@ namespace rr.Module.Handler
             }
         }
 
-        public void AddHandlerData (THandlerData data)
+        public void AddHandlerData (TModelData data)
         {
             if (data is not null) {
                 HandlerDataList.Add (data);
@@ -82,11 +82,11 @@ namespace rr.Module.Handler
         #endregion
 
         #region Property
-        List<THandlerData> HandlerDataList { get; set; }
+        List<TModelData> HandlerDataList { get; set; }
         int HandlerDataIndex { get; set; }
         public bool HasMoreData => (HandlerDataIndex + 1) < HandlerDataList.Count;
 
-        THandlerData HandlerData => HandlerDataList [ HandlerDataIndex ];
+        TModelData HandlerData => HandlerDataList [ HandlerDataIndex ];
         THandlerSpeech HandlerSpeech { get; set; }
         THandlerModule HandlerModule { get; set; }
         THandlerMessage HandlerMessage { get; set; }
