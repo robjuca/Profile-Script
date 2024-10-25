@@ -35,7 +35,7 @@ namespace rr.Module.Handler
 
         #region Virtual
         public virtual void Process ( ) { }
-        public virtual void ScriptReturnCode (TScriptReturnCodeArgs args) { }
+        public virtual void ScriptReturnCode (TReturnCodeArgs args) { }
         #endregion
 
         #region Support

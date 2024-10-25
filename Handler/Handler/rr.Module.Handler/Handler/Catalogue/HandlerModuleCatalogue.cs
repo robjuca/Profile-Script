@@ -29,7 +29,7 @@ namespace rr.Module.Handler
             HandlerMessage = THandlerMessage.Create ();
             HandlerReceiver = THandlerReceiver.Create ();
 
-            ScriptReturnCode = TScriptReturnCode.Create ();
+            ScriptReturnCode = TReturnCodeModel.Create ();
 
             ScriptReturnCode.ScriptReturnCodeDispatcher += OnScriptReturnCodeDispatcher;
         }
@@ -59,9 +59,9 @@ namespace rr.Module.Handler
         #endregion
 
         #region Event
-        void OnScriptReturnCodeDispatcher (object sender, TScriptReturnCodeArgs eventArgs)
+        void OnScriptReturnCodeDispatcher (object sender, TReturnCodeArgs eventArgs)
         {
-            // from TScriptReturnCode
+            // from TReturnCodeModel
             HandlerSpeech.ScriptReturnCode (eventArgs);
             HandlerModule.ScriptReturnCode (eventArgs);
             HandlerMessage.ScriptReturnCode (eventArgs);
@@ -91,7 +91,7 @@ namespace rr.Module.Handler
         THandlerModule HandlerModule { get; set; }
         THandlerMessage HandlerMessage { get; set; }
         THandlerReceiver HandlerReceiver { get; set; }
-        TScriptReturnCode ScriptReturnCode { get; set; }
+        TReturnCodeModel ScriptReturnCode { get; set; }
         UHandlerModule ParentModule { get; set; }
         #endregion
 

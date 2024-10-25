@@ -13,7 +13,7 @@ namespace rr.Module.Handler
     public class THandlerModule () : TOperationHandlerBase ()
     {
         #region Overrides
-        public override void ScriptReturnCode (TScriptReturnCodeArgs args)
+        public override void ScriptReturnCode (TReturnCodeArgs args)
         {
             if (args is not null) {
                 if (ValidateHandlerModule) {

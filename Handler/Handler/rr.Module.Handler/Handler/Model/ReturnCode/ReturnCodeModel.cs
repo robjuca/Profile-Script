@@ -12,11 +12,11 @@ using System;
 
 namespace rr.Module.Handler
 {
-    //----- TScriptReturnCode
-    public class TScriptReturnCode
+    //----- TReturnCodeModel
+    public class TReturnCodeModel
     {
         #region Event
-        public event EventHandler<TScriptReturnCodeArgs> ScriptReturnCodeDispatcher;
+        public event EventHandler<TReturnCodeArgs> ScriptReturnCodeDispatcher;
         #endregion
 
         #region Members
@@ -26,31 +26,31 @@ namespace rr.Module.Handler
         #region Support
         void Select (TScriptActionDispatcherEventArgs eventArgs)
         {
-            TScriptReturnCodeArgs args = TScriptReturnCodeArgs.CreateDefault ();
+            TReturnCodeArgs args = TReturnCodeArgs.CreateDefault ();
 
             // Clear RES_SPEECH_COMMIT (-50) 
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_SPEECH_DISABLE_CODE)) {
-                args = TScriptReturnCodeArgs.Create (UReturnCodeId.SPEECH_DISABLE, eventArgs);
+                args = TReturnCodeArgs.Create (UReturnCodeId.SPEECH_DISABLE, eventArgs);
             }
 
             // Speech done (-40) 
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_SPEECH_DONE_CODE)) {
-                args = TScriptReturnCodeArgs.Create (UReturnCodeId.SPEECH_DONE, eventArgs);
+                args = TReturnCodeArgs.Create (UReturnCodeId.SPEECH_DONE, eventArgs);
             }
 
             // Clear RES_MODULE_ID (-100) - Next Step
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_NEXT_STEP_CODE)) {
-                args = TScriptReturnCodeArgs.Create (UReturnCodeId.NEXT_STEP, eventArgs);
+                args = TReturnCodeArgs.Create (UReturnCodeId.NEXT_STEP, eventArgs);
             }
 
             // Step DONE (-80) - must go to next plate
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_NEXT_PLATE_CODE)) {
-                args = TScriptReturnCodeArgs.Create (UReturnCodeId.NEXT_MODULE, eventArgs);
+                args = TReturnCodeArgs.Create (UReturnCodeId.NEXT_MODULE, eventArgs);
             }
 
             // Step DONE (-400) - clear Receiver variables, clear Module Message variables, clear Module variables
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_HANDLERS_CLEAR_CODE)) {
-                args = TScriptReturnCodeArgs.Create (UReturnCodeId.HANDLERS_CLEAR, eventArgs);
+                args = TReturnCodeArgs.Create (UReturnCodeId.HANDLERS_CLEAR, eventArgs);
             }
 
             if (args.IsEmpty is false) {
@@ -60,7 +60,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        public static TScriptReturnCode Create () => new ();
+        public static TReturnCodeModel Create () => new ();
         #endregion
     };
     //---------------------------//
