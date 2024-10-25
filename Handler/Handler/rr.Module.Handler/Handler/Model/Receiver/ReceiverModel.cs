@@ -6,18 +6,28 @@
 //----- Include
 using rr.Provider.Resources;
 using rr.Provider.Resources.Properties;
+using rr.Provider.Services;
 //---------------------------//
 
 namespace rr.Module.Handler
 {
-    //----- THandlerReceiver
-    public class THandlerReceiver () : TOperationHandlerBase ()
+    //----- TReceiverModel
+    public class TReceiverModel : TModelBase 
     {
+
+        #region Constructor
+        TReceiverModel (IProviderServices services, UHandlerModule handlerModule)
+          : base (services, handlerModule)
+        {
+        }
+        #endregion
+
+
         #region Overrides
         public override void ScriptReturnCode (TReturnCodeArgs args)
         {
             if (args is not null) {
-                if (ValidateHandlerReceiver) {
+                if (Validate) {
                     var definitionData = DefinitionData;
 
                     if (args.IsHandlersClear) {
@@ -39,18 +49,18 @@ namespace rr.Module.Handler
 
         public override void Process ()
         {
-            if (ValidateHandlerReceiver) {
+            if (Validate) {
                 var definitionData = DefinitionData;
 
                 // Receiver Module
                 definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_NAME));
-                definitionData.AddVariableValue (HandlerModuleData.ModuleVariableValue);
+                definitionData.AddVariableValue (VariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
 
                 // Receiver Message
                 definitionData.AddVariableName (ToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
-                definitionData.AddVariableValue (HandlerMessageData.MessageVariableValue);
+                definitionData.AddVariableValue (VariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
             }
@@ -58,7 +68,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        public static THandlerReceiver Create () => new ();
+        static public TReceiverModel Create (IProviderServices services, UHandlerModule handlerModule) => new (services, handlerModule);
         #endregion
     };
     //---------------------------//

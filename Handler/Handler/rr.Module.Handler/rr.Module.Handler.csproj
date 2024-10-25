@@ -68,14 +68,11 @@
   <ItemGroup>
     <Compile Include="Handler\Model\Base\HandlerData.cs" />
     <Compile Include="Handler\Model\Base\ModelBase.cs" />
-    <Compile Include="Handler\Model\Message\HandlerMessage.cs" />
-    <Compile Include="Handler\Model\Message\HandlerMessageData.cs" />
-    <Compile Include="Handler\Model\Module\HandlerModule.cs" />
-    <Compile Include="Handler\Model\Module\HandlerModuleData.cs" />
-    <Compile Include="Handler\Model\Receiver\HandlerReceiver.cs" />
+    <Compile Include="Handler\Model\Message\MessageModel.cs" />
+    <Compile Include="Handler\Model\Module\ModuleModel.cs" />
+    <Compile Include="Handler\Model\Receiver\ReceiverModel.cs" />
     <Compile Include="Handler\Model\ReturnCode\ReturnCodeModel.cs" />
     <Compile Include="Handler\Model\ReturnCode\ReturnCodeArgs.cs" />
-    <Compile Include="Handler\Model\Speech\HandlerSpeech.cs" />
     <Compile Include="Handler\Model\Speech\SpeechModel.cs" />
     <Compile Include="Handler\Operation\OperationBase\OperationHandlerBase.cs" />
     <Compile Include="Handler\Catalogue\HandlerModuleCatalogue.cs" />

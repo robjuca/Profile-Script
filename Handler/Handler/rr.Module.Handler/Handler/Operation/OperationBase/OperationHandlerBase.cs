@@ -17,8 +17,8 @@ namespace rr.Module.Handler
         #region Property
         protected IProviderServices Services => HandlerData.Services;
         protected THandlerData HandlerData { get; private set; }
-        protected THandlerModuleData HandlerModuleData => HandlerData.HandlerModuleData;
-        protected THandlerMessageData HandlerMessageData => HandlerData.HandlerMessageData;
+        protected TModuleModel HandlerModuleData => HandlerData.HandlerModuleData;
+        protected TMessageModel HandlerMessageData => HandlerData.HandlerMessageData;
         protected TSpeechModel HandlerSpeechData => HandlerData.HandlerSpeechData;
 
         protected bool ValidateHandlerSpeech => HandlerData.ValidateHandlerSpeech;

@@ -5,6 +5,7 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Library.Extension;
 using rr.Provider.Resources;
 using rr.Provider.Services;
 //---------------------------//
@@ -21,6 +22,76 @@ namespace rr.Module.Handler
         protected bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
         #endregion
 
+        #region Property
+        // Text
+        protected string VariableName { get; private set; }
+        protected string VariableValue { get; private set; }
+
+        // Text Enable
+        protected string EnableVariableName { get; private set; }
+        protected string EnableVariableValue { get; private set; }
+
+        // Validate
+        protected bool Validate => IsEnable & HasModule & ValidateNameValue & ValidateEnableNameValue;
+
+        // Validate Text
+        protected bool ValidateNameValue
+        {
+            get
+            {
+                bool res = false;
+
+                if (string.IsNullOrEmpty (VariableName) is false
+                    &
+                    string.IsNullOrEmpty (VariableValue) is false) {
+                    res = true;
+                }
+
+                return res;
+            }
+        }
+
+        // Validate Text Enable
+        protected bool ValidateEnableNameValue
+        {
+            get
+            {
+                bool res = false;
+
+                if (string.IsNullOrEmpty (EnableVariableName) is false
+                    &
+                    string.IsNullOrEmpty (EnableVariableValue) is false) {
+                    res = true;
+                }
+
+                return res;
+            }
+        }
+        #endregion
+
+        #region Members
+        // Text
+        protected void AddVariableName (string variableName) => VariableName = variableName;
+        protected void AddVariableValue (string variableValue) => VariableValue = variableValue;
+        protected bool ContainsNameValue (string nameValue) => VariableValue.Equals (nameValue);
+
+        // Text Enable
+        protected void AddEnableVariableName (string enableVariableName) => EnableVariableName = enableVariableName;
+        protected void AddEnableVariableValue (string enableVariableValue) => EnableVariableValue = enableVariableValue;
+
+        protected void CopyFrom (TModelBase alias)
+        {
+            if (alias is not null) {
+                AddVariableName (alias.VariableName);
+                AddVariableValue (alias.VariableValue);
+                AddEnableVariableName (alias.EnableVariableName);
+                AddEnableVariableValue (alias.EnableVariableValue);
+
+                EnableHandler (alias.IsEnable);
+            }
+        }
+        #endregion
+
         #region Members
         protected void EnableHandler (bool enable = true) => IsEnable = enable;
 
@@ -33,7 +104,8 @@ namespace rr.Module.Handler
         #endregion
 
         #region Support
-        protected void SetScriptDataValue (TScriptDefinitionData definitionData) => Services.SetScriptDataValue (definitionData); 
+        protected void SetScriptDataValue (TScriptDefinitionData definitionData) => Services.SetScriptDataValue (definitionData);
+        protected string ToString (UReceiverModule name) => TEnumExtension.AsString (name);
         #endregion
     };
     //---------------------------//

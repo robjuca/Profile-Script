@@ -4,24 +4,33 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Provider.Resources;
 using rr.Provider.Resources.Properties;
+using rr.Provider.Services;
 //---------------------------//
 
 namespace rr.Module.Handler
 {
-    //----- THandlerMessage
-    public class THandlerMessage () : TOperationHandlerBase ()
+    //----- TMessageModel
+    public class TMessageModel : TModelBase
     {
+        #region Constructor
+        TMessageModel (IProviderServices services, UHandlerModule handlerModule)
+           : base (services, handlerModule)
+        {
+        }
+        #endregion
+
         #region Overrides
         public override void ScriptReturnCode (TReturnCodeArgs args)
         {
             if (args is not null) {
-                if (ValidateHandlerMessage) {
+                if (Validate) {
                     var definitionData = DefinitionData;
 
                     if (args.IsHandlersClear) {
                         // Message
-                        definitionData.AddVariableName (HandlerMessageData.MessageVariableName);
+                        definitionData.AddVariableName (VariableName);
                         definitionData.AddVariableValue (Resources.RES_EMPTY);
 
                         SetScriptDataValue (definitionData.Clone ());
@@ -32,12 +41,12 @@ namespace rr.Module.Handler
 
         public override void Process ()
         {
-            if (ValidateHandlerMessage) {
+            if (Validate) {
                 var definitionData = DefinitionData;
 
                 // Message
-                definitionData.AddVariableName (HandlerMessageData.MessageVariableName);
-                definitionData.AddVariableValue (HandlerMessageData.MessageVariableValue);
+                definitionData.AddVariableName (VariableName);
+                definitionData.AddVariableValue (VariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
             }
@@ -45,7 +54,9 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        public static THandlerMessage Create () => new ();
+        static public TMessageModel Create (
+            IProviderServices services,
+            UHandlerModule handlerModule) => new (services, handlerModule);
         #endregion
     };
     //---------------------------//

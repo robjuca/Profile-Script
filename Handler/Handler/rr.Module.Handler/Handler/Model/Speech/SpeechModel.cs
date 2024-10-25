@@ -14,79 +14,10 @@ namespace rr.Module.Handler
     //----- TSpeechModel
     public class TSpeechModel : TModelBase
     {
-        #region Property
-        // Text
-        public string SpeechTextVariableName { get; private set; }
-        public string SpeechTextVariableValue { get; private set; }
-
-        // Text Enable
-        public string SpeechTextEnableVariableName { get; private set; }
-        public string SpeechTextEnableVariableValue { get; private set; }
-
-        // Validate
-        public bool Validate => IsEnable & HasModule & ValidateText & ValidateTextEnable;
-
-        // Validate Text
-        public bool ValidateText
-        {
-            get
-            {
-                bool res = false;
-
-                if (string.IsNullOrEmpty (SpeechTextVariableName) is false
-                    &
-                    string.IsNullOrEmpty (SpeechTextVariableValue) is false) {
-                    res = true;
-                }
-
-                return res;
-            }
-        }
-
-        // Validate Text Enable
-        public bool ValidateTextEnable
-        {
-            get
-            {
-                bool res = false;
-
-                if (string.IsNullOrEmpty (SpeechTextEnableVariableName) is false
-                    &
-                    string.IsNullOrEmpty (SpeechTextEnableVariableValue) is false) {
-                    res = true;
-                }
-
-                return res;
-            }
-        }
-        #endregion
-
         #region Constructor
         TSpeechModel (IProviderServices services, UHandlerModule handlerModule)
           : base (services, handlerModule)
         {
-        }
-        #endregion
-
-        #region Members
-        // Text
-        public void AddSpeechTextVariableName (string textVariableName) => SpeechTextVariableName = textVariableName;
-        public void AddSpeechTextVariableValue (string textVariableValue) => SpeechTextVariableValue = textVariableValue;
-
-        // Text Enable
-        public void AddSpeechTextEnableVariableName (string textEnableVariableName) => SpeechTextEnableVariableName = textEnableVariableName;
-        public void AddSpeechTextEnableVariableValue (string textEnableVariableValue) => SpeechTextEnableVariableValue = textEnableVariableValue;
-
-        public void CopyFrom (TSpeechModel alias)
-        {
-            if (alias is not null) {
-                AddSpeechTextVariableName (alias.SpeechTextVariableName);
-                AddSpeechTextVariableValue (alias.SpeechTextVariableValue);
-                AddSpeechTextEnableVariableName (alias.SpeechTextEnableVariableName);
-                AddSpeechTextEnableVariableValue (alias.SpeechTextEnableVariableValue);
-
-                EnableHandler (alias.IsEnable);
-            }
         }
         #endregion
 
@@ -98,17 +29,17 @@ namespace rr.Module.Handler
                     var definitionData = DefinitionData;
 
                     if (args.IsSpeechDisable) {
-                        definitionData.AddVariableName (SpeechTextEnableVariableName);
+                        definitionData.AddVariableName (EnableVariableName);
                         definitionData.AddVariableValue (Resources.RES_FALSE);
 
-                        Services.SetScriptDataValue (definitionData.Clone ());
+                        SetScriptDataValue (definitionData.Clone ());
                     }
 
                     if (args.IsSpeechDone) {
-                        definitionData.AddVariableName (SpeechTextVariableName);
+                        definitionData.AddVariableName (VariableName);
                         definitionData.AddVariableValue (Resources.RES_EMPTY);
 
-                        Services.SetScriptDataValue (definitionData.Clone ());
+                        SetScriptDataValue (definitionData.Clone ());
                     }
                 }
             }
@@ -120,14 +51,14 @@ namespace rr.Module.Handler
                 var definitionData = DefinitionData;
 
                 // text
-                definitionData.AddVariableName (SpeechTextVariableName);
-                definitionData.AddVariableValue (SpeechTextVariableValue);
+                definitionData.AddVariableName (VariableName);
+                definitionData.AddVariableValue (VariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
 
                 // text enable
-                definitionData.AddVariableName (SpeechTextEnableVariableName);
-                definitionData.AddVariableValue (SpeechTextEnableVariableValue);
+                definitionData.AddVariableName (EnableVariableName);
+                definitionData.AddVariableValue (EnableVariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
             }
@@ -135,9 +66,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        static public TSpeechModel Create (
-           IProviderServices services,
-           UHandlerModule handlerModule) => new (services, handlerModule);
+        static public TSpeechModel Create (IProviderServices services, UHandlerModule handlerModule) => new (services, handlerModule);
 
         static public TSpeechModel Clone (TSpeechModel alias)
         {

@@ -27,7 +27,7 @@ namespace rr.Module.Handler
             HandlerSpeech = THandlerSpeech.Create ();
             HandlerModule = THandlerModule.Create ();
             HandlerMessage = THandlerMessage.Create ();
-            HandlerReceiver = THandlerReceiver.Create ();
+            HandlerReceiver = TReceiverModel.Create ();
 
             ScriptReturnCode = TReturnCodeModel.Create ();
 
@@ -90,7 +90,7 @@ namespace rr.Module.Handler
         THandlerSpeech HandlerSpeech { get; set; }
         THandlerModule HandlerModule { get; set; }
         THandlerMessage HandlerMessage { get; set; }
-        THandlerReceiver HandlerReceiver { get; set; }
+        TReceiverModel HandlerReceiver { get; set; }
         TReturnCodeModel ScriptReturnCode { get; set; }
         UHandlerModule ParentModule { get; set; }
         #endregion
@@ -113,7 +113,7 @@ namespace rr.Module.Handler
             HandlerDataIndex = 0;
 
             foreach (var data in HandlerDataList) {
-                if (data.HandlerMessageData.ContainsMessageValue (messageValue)) {
+                if (data.HandlerMessageData.ContainsNameValue (messageValue)) {
                     return true;
                 }
 
