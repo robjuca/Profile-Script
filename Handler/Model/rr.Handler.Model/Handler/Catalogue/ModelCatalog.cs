@@ -9,7 +9,7 @@ using rr.Provider.Resources;
 using System.Collections.Generic;
 //---------------------------//
 
-namespace rr.Module.Handler
+namespace rr.Handler.Model
 {
     //----- TModelCatalog
     public class TModelCatalog
@@ -113,7 +113,7 @@ namespace rr.Module.Handler
             ModelDataListIndex = 0;
 
             //foreach (var data in ModelDataList) {
-            //    if (data.HandlerMessageData.ContainsNameValue (messageValue)) {
+            //    if (data.MessageModel.ContainsNameValue (messageValue)) {
             //        return true;
             //    }
 

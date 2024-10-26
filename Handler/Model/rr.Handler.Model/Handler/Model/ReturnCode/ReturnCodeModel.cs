@@ -10,7 +10,7 @@ using rr.Provider.Resources.Properties;
 using System;
 //---------------------------//
 
-namespace rr.Module.Handler
+namespace rr.Handler.Model
 {
     //----- TReturnCodeModel
     public class TReturnCodeModel

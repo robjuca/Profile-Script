@@ -37,6 +37,10 @@
     <ApplicationIcon>Properties\Device.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="rr.Handler.Model, Version=1.0.2024.9, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\rr.Handler.Model.dll</HintPath>
+    </Reference>
     <Reference Include="rr.Library.EventAggregator, Version=1.0.2024.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Bin\rr.Library.EventAggregator.dll</HintPath>
@@ -56,10 +60,6 @@
     <Reference Include="rr.Library.Types, Version=1.0.2024.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Bin\rr.Library.Types.dll</HintPath>
-    </Reference>
-    <Reference Include="rr.Module.Handler, Version=1.0.2024.9, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Bin\rr.Module.Handler.dll</HintPath>
     </Reference>
     <Reference Include="rr.Provider.Message, Version=1.0.2024.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

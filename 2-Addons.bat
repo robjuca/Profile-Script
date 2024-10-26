@@ -65,9 +65,9 @@ echo.
 
 
 
-rem  Handler
-echo 5- MODULE HANDLER
-	"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "D:\Visual Studio 2022\Projects\Profile Script\Handler\Handler\Module Handler.sln" /t:rebuild /verbosity:minimal /nologo 
+rem  Handler Model
+echo 5-  HANDLER MODEL
+	"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe" "D:\Visual Studio 2022\Projects\Profile Script\Handler\Model\Handler Model.sln" /t:rebuild /verbosity:minimal /nologo 
 	
 	 
 echo.

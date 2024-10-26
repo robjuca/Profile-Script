@@ -9,14 +9,14 @@ using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 //---------------------------//
 
-namespace rr.Module.Handler
+namespace rr.Handler.Model
 {
-    //----- TMessageModel
-    public class TMessageModel : TModelBase
+    //----- TModuleModel
+    public class TModuleModel : TModelBase
     {
         #region Constructor
-        TMessageModel (IProviderServices services, UHandlerModule handlerModule)
-           : base (services, handlerModule)
+        TModuleModel (IProviderServices services, UHandlerModule handlerModule)
+          : base (services, handlerModule)
         {
         }
         #endregion
@@ -26,27 +26,25 @@ namespace rr.Module.Handler
         {
             if (args is not null) {
                 if (ValidateBase) {
-                    var definitionData = DefinitionData;
-
-                    if (args.IsHandlersClear) {
-                        // Message
-                        definitionData.AddVariableName (VariableName);
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
-
-                        SetScriptDataValue (definitionData.Clone ());
-                    }
+                    // do nothing
                 }
             }
         }
 
         public override void Process ()
         {
-            if (ValidateBase) {
+            if (ValidateBase & ValidateEnableNameValue) {
                 var definitionData = DefinitionData;
 
-                // Message
+                // Variable Name and Value
                 definitionData.AddVariableName (VariableName);
                 definitionData.AddVariableValue (VariableValue);
+
+                SetScriptDataValue (definitionData.Clone ());
+
+                // Enable Variable Name and Value
+                definitionData.AddVariableName (EnableVariableName);
+                definitionData.AddVariableValue (EnableVariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
             }
@@ -54,9 +52,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        static public TMessageModel Create (
-            IProviderServices services,
-            UHandlerModule handlerModule) => new (services, handlerModule);
+        static public TModuleModel Create (IProviderServices services, UHandlerModule handlerModule) => new (services, handlerModule);
         #endregion
     };
     //---------------------------//

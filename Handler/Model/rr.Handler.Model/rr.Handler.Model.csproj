@@ -7,8 +7,8 @@
     <ProjectGuid>{E80E4A23-0A2D-459A-904B-84BF35C90E55}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>rr.Module.Handler</RootNamespace>
-    <AssemblyName>rr.Module.Handler</AssemblyName>
+    <RootNamespace>rr.Handler.Model</RootNamespace>
+    <AssemblyName>rr.Handler.Model</AssemblyName>
     <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -74,7 +74,6 @@
     <Compile Include="Handler\Model\ReturnCode\ReturnCodeModel.cs" />
     <Compile Include="Handler\Model\ReturnCode\ReturnCodeArgs.cs" />
     <Compile Include="Handler\Model\Speech\SpeechModel.cs" />
-    <Compile Include="Handler\Operation\OperationBase\OperationHandlerBase.cs" />
     <Compile Include="Handler\Catalogue\ModelCatalog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

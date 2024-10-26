@@ -10,7 +10,7 @@ using rr.Provider.Resources;
 using rr.Provider.Services;
 //---------------------------//
 
-namespace rr.Module.Handler
+namespace rr.Handler.Model
 {
     //----- TModelBase
     public abstract class TModelBase (IProviderServices services, UHandlerModule handlerModule, bool enableHandler = true)
@@ -71,15 +71,15 @@ namespace rr.Module.Handler
 
         #region Members
         // Text
-        protected void AddVariableName (string variableName) => VariableName = variableName;
-        protected void AddVariableValue (string variableValue) => VariableValue = variableValue;
+        public void AddVariableName (string variableName) => VariableName = variableName;
+        public void AddVariableValue (string variableValue) => VariableValue = variableValue;
         protected bool ContainsNameValue (string nameValue) => VariableValue.Equals (nameValue);
 
         // Text Enable
-        protected void AddEnableVariableName (string enableVariableName) => EnableVariableName = enableVariableName;
-        protected void AddEnableVariableValue (string enableVariableValue) => EnableVariableValue = enableVariableValue;
+        public void AddEnableVariableName (string enableVariableName) => EnableVariableName = enableVariableName;
+        public void AddEnableVariableValue (string enableVariableValue) => EnableVariableValue = enableVariableValue;
 
-        protected void CopyFrom (TModelBase alias)
+        public void CopyFrom (TModelBase alias)
         {
             if (alias is not null) {
                 AddVariableName (alias.VariableName);
@@ -93,7 +93,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Members
-        protected void EnableHandler (bool enable = true) => IsEnable = enable;
+        public void EnableHandler (bool enable = true) => IsEnable = enable;
 
         protected TScriptDefinitionData DefinitionData => TScriptDefinitionData.CreateDefault ();
         #endregion

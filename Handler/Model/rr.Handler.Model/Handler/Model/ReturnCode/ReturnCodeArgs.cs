@@ -9,7 +9,7 @@ using rr.Provider.Resources;
 using System;
 //---------------------------//
 
-namespace rr.Module.Handler
+namespace rr.Handler.Model
 {
     #region Enum
     public enum UReturnCodeId

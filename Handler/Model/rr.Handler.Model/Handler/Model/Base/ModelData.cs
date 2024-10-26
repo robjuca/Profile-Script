@@ -8,7 +8,7 @@ using rr.Provider.Resources;
 using rr.Provider.Services;
 //---------------------------//
 
-namespace rr.Module.Handler
+namespace rr.Handler.Model
 {
     //----- TModelData
     public class TModelData : System.IEquatable<TModelData>, System.IComparable<TModelData>
@@ -17,18 +17,14 @@ namespace rr.Module.Handler
         public UHandlerModule Module { get; private set; }
         public bool HasModule => Module.Equals (UHandlerModule.NONE) is false;
         public int HandlerIndex { get; private set; }
-        //public bool ValidateHandlerSpeech => HandlerSpeechData.Validate;
-        //public bool ValidateHandlerModule => HandlerModuleData.Validate;
-        //public bool ValidateHandlerMessage => HandlerMessageData.Validate;
-        //public bool ValidateHandlerReceiver => ValidateHandlerModule & ValidateHand/*lerMessage;
-
         public IProviderServices Services { get; private set; }
         #endregion
 
         #region Models
-        //public TSpeechModel HandlerSpeechData { get; private set; }
-        //public TModuleModel HandlerModuleData { get; private set; }
-        //public TMessageModel HandlerMessageData { get; private set; }
+        public TSpeechModel SpeechModel { get; private set; }
+        public TModuleModel ModuleModel { get; private set; }
+        public TMessageModel MessageModel { get; private set; }
+        public TReceiverModel ReceiverModel { get; private set; }
         #endregion
 
         #region Interface
@@ -39,11 +35,11 @@ namespace rr.Module.Handler
         #endregion
 
         #region Members
-        public void EnableAll ()
+        public void EnableAllModels ()
         {
-            //HandlerSpeechData.EnableHandler ();
-            //HandlerModuleData.EnableHandler ();
-            //HandlerMessageData.EnableHandler ();
+            SpeechModel.EnableHandler ();
+            ModuleModel.EnableHandler ();
+            MessageModel.EnableHandler ();
         }
 
         public void PumpHandlerIndex () => HandlerIndex++;
@@ -54,9 +50,10 @@ namespace rr.Module.Handler
         {
             var clone = Create (Services, Module);
             clone.SetHandlerIndex (HandlerIndex);
-            //clone.HandlerSpeechData.CopyFrom (HandlerSpeechData);
-            //clone.HandlerModuleData.CopyFrom (HandlerModuleData);
-            //clone.HandlerMessageData.CopyFrom (HandlerMessageData);
+            clone.SpeechModel.CopyFrom (SpeechModel);
+            clone.ModuleModel.CopyFrom (ModuleModel);
+            clone.MessageModel.CopyFrom (MessageModel);
+            clone.ReceiverModel.CopyFrom (ReceiverModel);
 
             return clone;
         }
@@ -69,9 +66,10 @@ namespace rr.Module.Handler
                 Services = services,
                 HandlerIndex = 0,
                 Module = handlerModule,
-                //HandlerSpeechData = TSpeechModel.Create (services, handlerModule),
-                //HandlerModuleData = TModuleModel.Create (services, handlerModule),
-                //HandlerMessageData = TMessageModel.Create (services, handlerModule)
+                SpeechModel = TSpeechModel.Create (services, handlerModule),
+                ModuleModel = TModuleModel.Create (services, handlerModule),
+                MessageModel = TMessageModel.Create (services, handlerModule),
+                ReceiverModel = TReceiverModel.Create (services, handlerModule),
             };
         }
         #endregion

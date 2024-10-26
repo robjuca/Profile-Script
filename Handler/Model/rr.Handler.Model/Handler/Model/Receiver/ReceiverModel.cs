@@ -9,17 +9,19 @@ using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 //---------------------------//
 
-namespace rr.Module.Handler
+namespace rr.Handler.Model
 {
-    //----- TSpeechModel
-    public class TSpeechModel : TModelBase
+    //----- TReceiverModel
+    public class TReceiverModel : TModelBase
     {
+
         #region Constructor
-        TSpeechModel (IProviderServices services, UHandlerModule handlerModule)
+        TReceiverModel (IProviderServices services, UHandlerModule handlerModule)
           : base (services, handlerModule)
         {
         }
         #endregion
+
 
         #region Overrides
         public override void ScriptReturnCode (TReturnCodeArgs args)
@@ -28,16 +30,16 @@ namespace rr.Module.Handler
                 if (ValidateBase) {
                     var definitionData = DefinitionData;
 
-                    if (args.IsSpeechDisable) {
-                        definitionData.AddVariableName (EnableVariableName);
-                        definitionData.AddVariableValue (Resources.RES_FALSE);
+                    if (args.IsHandlersClear) {
+                        // Receiver Module
+                        definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
+                        definitionData.AddVariableValue (Resources.RES_NONE);
 
                         SetScriptDataValue (definitionData.Clone ());
-                    }
 
-                    if (args.IsSpeechDone) {
-                        definitionData.AddVariableName (VariableName);
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+                        // Receiver Message
+                        definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+                        definitionData.AddVariableValue (Resources.RES_NONE);
 
                         SetScriptDataValue (definitionData.Clone ());
                     }
@@ -47,18 +49,18 @@ namespace rr.Module.Handler
 
         public override void Process ()
         {
-            if (ValidateBase & ValidateEnableNameValue) {
+            if (ValidateBase) {
                 var definitionData = DefinitionData;
 
-                // text
-                definitionData.AddVariableName (VariableName);
+                // Receiver Module
+                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
                 definitionData.AddVariableValue (VariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
 
-                // text enable
-                definitionData.AddVariableName (EnableVariableName);
-                definitionData.AddVariableValue (EnableVariableValue);
+                // Receiver Message
+                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+                definitionData.AddVariableValue (VariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
             }
@@ -66,15 +68,7 @@ namespace rr.Module.Handler
         #endregion
 
         #region Static
-        static public TSpeechModel Create (IProviderServices services, UHandlerModule handlerModule) => new (services, handlerModule);
-
-        static public TSpeechModel Clone (TSpeechModel alias)
-        {
-            var handler = Create (alias.Services, alias.HandlerModule);
-            handler.CopyFrom (alias);
-
-            return handler;
-        }
+        static public TReceiverModel Create (IProviderServices services, UHandlerModule handlerModule) => new (services, handlerModule);
         #endregion
     };
     //---------------------------//

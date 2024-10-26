@@ -8,11 +8,11 @@ using System.Reflection;
 using System.Resources;
 //---------------------------//
 
-[assembly: AssemblyTitle ("Action.Steps")]
+[assembly: AssemblyTitle ("Handler.Model")]
 [assembly: AssemblyDescription ("This .NET assembly is a script interface used by Spad.Next to control HoneyComb devices  (Alpha, Bravo).")]
 [assembly: AssemblyConfiguration ("Build")]
 [assembly: AssemblyCompany ("R&R Soft")]
-[assembly: AssemblyProduct ("Action.Steps")]
+[assembly: AssemblyProduct ("Handler.Model")]
 [assembly: AssemblyCopyright ("Roberto Jucá (robjuca@pobox.com) Copyright © R&R Soft 2001")]
 [assembly: AssemblyTrademark ("R&R Soft® is a registered trademark of R&R Soft.")]
 [assembly: AssemblyVersion ("1.0.2024.09")]
