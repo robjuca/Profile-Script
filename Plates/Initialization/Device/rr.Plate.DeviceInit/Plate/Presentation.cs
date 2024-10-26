@@ -68,8 +68,6 @@ namespace rr.Plate.DeviceInit
                 if (message.IsAction (UMessageAction.INITIALIZE)) {
                     if (message.RequestParam (out IApplication app)) {
                         app.SubscribeToSystemEvent (SPADSystemEvents.GameStateChanged, OnGameStateChanged);
-
-
                     }
                 }
 
@@ -140,21 +138,21 @@ namespace rr.Plate.DeviceInit
 
             // Module Handler
             data.AddVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
-            data.AddVariableValue (Resources.RES_EMPTY);
+            data.AddVariableValue (Resources.RES_EMPTY_VALUE_NAME_DEVICE_INIT);
             Services.SetScriptDataValue (data.Clone ());
 
             // Message to Module
             data.AddVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
-            data.AddVariableValue (Resources.RES_EMPTY);
+            data.AddVariableValue (Resources.RES_EMPTY_VALUE_MESSAGE_DEVICE_INIT);
             Services.SetScriptDataValue (data.Clone ());
 
             // Speech Handler
             data.AddVariableName (ToString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
-            data.AddVariableValue (Resources.RES_EMPTY);
+            data.AddVariableValue (Resources.RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT);
             Services.SetScriptDataValue (data.Clone ());
 
             data.AddVariableName (ToString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
-            data.AddVariableValue (Resources.RES_FALSE);
+            data.AddVariableValue (Resources.RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT);
             Services.SetScriptDataValue (data.Clone ());
         }
 

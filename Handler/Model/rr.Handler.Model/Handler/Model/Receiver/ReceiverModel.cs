@@ -14,7 +14,6 @@ namespace rr.Handler.Model
     //----- TReceiverModel
     public class TReceiverModel : TModelBase
     {
-
         #region Constructor
         TReceiverModel (IProviderServices services, UHandlerModule handlerModule)
           : base (services, handlerModule)
@@ -22,10 +21,10 @@ namespace rr.Handler.Model
         }
         #endregion
 
-
         #region Overrides
         public override void ScriptReturnCode (TReturnCodeArgs args)
         {
+                  
             if (args is not null) {
                 if (ValidateBase) {
                     var definitionData = DefinitionData;

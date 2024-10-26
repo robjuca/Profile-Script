@@ -120,8 +120,20 @@
   <data name="RES_EMPTY" xml:space="preserve">
     <value>EMPTY</value>
   </data>
+  <data name="RES_EMPTY_VALUE_MESSAGE_DEVICE_INIT" xml:space="preserve">
+    <value>RES_EMPTY_VALUE_MESSAGE_DEVICE_INIT</value>
+  </data>
+  <data name="RES_EMPTY_VALUE_NAME_DEVICE_INIT" xml:space="preserve">
+    <value>RES_EMPTY_VALUE_NAME_DEVICE_INIT</value>
+  </data>
+  <data name="RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT" xml:space="preserve">
+    <value>RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT</value>
+  </data>
   <data name="RES_FALSE" xml:space="preserve">
     <value>False</value>
+  </data>
+  <data name="RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT" xml:space="preserve">
+    <value>RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT</value>
   </data>
   <data name="RES_HANDLERS_CLEAR_CODE" xml:space="preserve">
     <value>-400</value>
