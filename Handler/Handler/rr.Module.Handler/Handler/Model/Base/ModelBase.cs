@@ -23,16 +23,16 @@ namespace rr.Module.Handler
         #endregion
 
         #region Property
-        // Text
+        // Variable Name/Value
         protected string VariableName { get; private set; }
         protected string VariableValue { get; private set; }
 
-        // Text Enable
+        // Enable Variable Name/Value
         protected string EnableVariableName { get; private set; }
         protected string EnableVariableValue { get; private set; }
 
         // Validate
-        protected bool Validate => IsEnable & HasModule & ValidateNameValue & ValidateEnableNameValue;
+        protected bool ValidateBase => IsEnable & HasModule & ValidateNameValue;
 
         // Validate Text
         protected bool ValidateNameValue

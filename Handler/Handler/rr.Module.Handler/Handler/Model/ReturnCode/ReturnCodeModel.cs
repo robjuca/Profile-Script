@@ -16,7 +16,7 @@ namespace rr.Module.Handler
     public class TReturnCodeModel
     {
         #region Event
-        public event EventHandler<TReturnCodeArgs> ScriptReturnCodeDispatcher;
+        public event EventHandler<TReturnCodeArgs> ReturnCode;
         #endregion
 
         #region Members
@@ -54,7 +54,7 @@ namespace rr.Module.Handler
             }
 
             if (args.IsEmpty is false) {
-                ScriptReturnCodeDispatcher?.Invoke (this, args);
+                ReturnCode?.Invoke (this, args);
             }
         }
         #endregion

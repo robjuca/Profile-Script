@@ -48,7 +48,7 @@ namespace rr.Module.Handler
 
         public void PumpHandlerIndex () => HandlerIndex++;
         public void SetHandlerIndex (int index) => HandlerIndex = index;
-        public void ClearPumpHandler () => HandlerIndex = 0;
+        public void ClearHandlerIndex () => HandlerIndex = 0;
 
         public TModelData Clone ()
         {

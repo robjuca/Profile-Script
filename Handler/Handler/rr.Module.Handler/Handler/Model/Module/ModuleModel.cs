@@ -25,7 +25,7 @@ namespace rr.Module.Handler
         public override void ScriptReturnCode (TReturnCodeArgs args)
         {
             if (args is not null) {
-                if (Validate) {
+                if (ValidateBase) {
                     // do nothing
                 }
             }
@@ -33,7 +33,7 @@ namespace rr.Module.Handler
 
         public override void Process ()
         {
-            if (Validate) {
+            if (ValidateBase & ValidateEnableNameValue) {
                 var definitionData = DefinitionData;
 
                 // Variable Name and Value

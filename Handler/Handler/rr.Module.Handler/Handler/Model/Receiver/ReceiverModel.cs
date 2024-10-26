@@ -27,7 +27,7 @@ namespace rr.Module.Handler
         public override void ScriptReturnCode (TReturnCodeArgs args)
         {
             if (args is not null) {
-                if (Validate) {
+                if (ValidateBase) {
                     var definitionData = DefinitionData;
 
                     if (args.IsHandlersClear) {
@@ -49,7 +49,7 @@ namespace rr.Module.Handler
 
         public override void Process ()
         {
-            if (Validate) {
+            if (ValidateBase) {
                 var definitionData = DefinitionData;
 
                 // Receiver Module
