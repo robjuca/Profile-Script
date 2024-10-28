@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rr.Plate.DeviceInit", "rr.Plate.DeviceInit\rr.Plate.DeviceInit.csproj", "{A00547A0-0350-4224-9D4E-687447B4867D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rr.Plate.DeviceInitTests", "rr.Plate.DeviceInitTests\rr.Plate.DeviceInitTests.csproj", "{0F1761A2-4A4F-4D1B-AF60-840881AE9739}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{A00547A0-0350-4224-9D4E-687447B4867D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A00547A0-0350-4224-9D4E-687447B4867D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A00547A0-0350-4224-9D4E-687447B4867D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F1761A2-4A4F-4D1B-AF60-840881AE9739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F1761A2-4A4F-4D1B-AF60-840881AE9739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F1761A2-4A4F-4D1B-AF60-840881AE9739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F1761A2-4A4F-4D1B-AF60-840881AE9739}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
