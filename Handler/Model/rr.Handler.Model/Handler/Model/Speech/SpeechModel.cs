@@ -30,14 +30,14 @@ namespace rr.Handler.Model
 
                     if (args.IsSpeechDisable) {
                         definitionData.AddVariableName (EnableVariableName);
-                        definitionData.AddVariableValue (Resources.RES_FALSE);
+                        definitionData.AddVariableValue (Resources.RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT);
 
                         SetScriptDataValue (definitionData.Clone ());
                     }
 
                     if (args.IsSpeechDone) {
                         definitionData.AddVariableName (VariableName);
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT);
 
                         SetScriptDataValue (definitionData.Clone ());
                     }

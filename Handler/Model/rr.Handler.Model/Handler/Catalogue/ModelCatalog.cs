@@ -24,13 +24,7 @@ namespace rr.Handler.Model
             ModelDataListIndex = 0;
             ModelDataList = [];
 
-            //HandlerSpeech = THandlerSpeech.Create ();
-            //HandlerModule = THandlerModule.Create ();
-            //HandlerMessage = THandlerMessage.Create ();
-            //ModelReceiver = TReceiverModel.Create ();
-
             ReturnCodeModel = TReturnCodeModel.Create ();
-
             ReturnCodeModel.ReturnCode += OnReturnCode;
         }
         #endregion
@@ -40,7 +34,7 @@ namespace rr.Handler.Model
         {
             if (SelectMessageValue (messageValue)) {
                 SelectHandlerData ();
-                //ProcessSpeech ();
+                ProcessSpeech ();
             }
         }
 
@@ -56,26 +50,32 @@ namespace rr.Handler.Model
         {
             ReturnCodeModel.ProcessScriptReturnCode (eventArgs); // from Dispatcher
         }
+
+        public void Cleanup()
+        {
+            ModelDataList.Clear ();
+            ModelDataListIndex = 0;
+        }
         #endregion
 
         #region Event
         void OnReturnCode (object sender, TReturnCodeArgs eventArgs)
         {
             // from TReturnCodeModel
-            //HandlerSpeech.ReturnCodeModel (eventArgs);
-            //HandlerModule.ReturnCodeModel (eventArgs);
-            //HandlerMessage.ReturnCodeModel (eventArgs);
-            //ModelReceiver.ReturnCodeModel (eventArgs);
+            CurrentModelData.SpeechModel.ScriptReturnCode (eventArgs);
+            CurrentModelData.ModuleModel.ScriptReturnCode (eventArgs);
+            CurrentModelData.MessageModel.ScriptReturnCode (eventArgs);
+            CurrentModelData.ReceiverModel.ScriptReturnCode (eventArgs);
 
             // speech done
             if (eventArgs.IsSpeechDone) {
-                //HandlerModule.Process ();
-                //HandlerMessage.Process ();
-                //ModelReceiver.Process ();
+                CurrentModelData.ModuleModel.Process ();
+                CurrentModelData.MessageModel.Process ();
+                CurrentModelData.ReceiverModel.Process ();
 
                 if (HasMoreData) {
                     SelectHandlerData (pumpIndex: true);
-                    //ProcessSpeech ();
+                    ProcessSpeech ();
                 }
             }
         }
@@ -85,40 +85,26 @@ namespace rr.Handler.Model
         List<TModelData> ModelDataList { get; set; }
         int ModelDataListIndex { get; set; }
         public bool HasMoreData => (ModelDataListIndex + 1) < ModelDataList.Count;
-
         TModelData CurrentModelData => ModelDataList [ ModelDataListIndex ];
-        //THandlerSpeech HandlerSpeech { get; set; }
-        //THandlerModule HandlerModule { get; set; }
-        //THandlerMessage HandlerMessage { get; set; }
-        TReceiverModel ModelReceiver { get; set; }
         TReturnCodeModel ReturnCodeModel { get; set; }
         UHandlerModule ParentModule { get; set; }
         #endregion
 
         #region Support
-        void SelectHandlerData (bool pumpIndex = false)
-        {
-            ModelDataListIndex = pumpIndex ? (ModelDataListIndex + 1) : ModelDataListIndex;
-
-            //HandlerSpeech.SelectHandlerData (CurrentModelData);
-            //HandlerModule.SelectHandlerData (CurrentModelData);
-            //HandlerMessage.SelectHandlerData (CurrentModelData);
-            //ModelReceiver.SelectHandlerData (CurrentModelData);
-        }
-
-        //void ProcessSpeech () => HandlerSpeech.Process ();
+        void SelectHandlerData (bool pumpIndex = false) => ModelDataListIndex = pumpIndex ? (ModelDataListIndex + 1) : ModelDataListIndex;
+        void ProcessSpeech () => CurrentModelData.SpeechModel.Process ();
 
         bool SelectMessageValue (string messageValue)
         {
             ModelDataListIndex = 0;
 
-            //foreach (var data in ModelDataList) {
-            //    if (data.MessageModel.ContainsNameValue (messageValue)) {
-            //        return true;
-            //    }
+            foreach (var data in ModelDataList) {
+                if (data.MessageModel.ContainsNameValue (messageValue)) {
+                    return true;
+                }
 
-            //    ModelDataListIndex++;
-            //}
+                ModelDataListIndex++;
+            }
 
             return false;
         }

@@ -17,18 +17,22 @@ namespace rr.Provider.Resources
     {
         #region Property
         public UHandlerModule Module { get; private set; }
-        public int ActionReturnCode { get; set; }
+        public int ActionReturnCode { get; private set; }
         public ISPADEventArgs SNEventArgs { get; private set; }
         #endregion
 
         #region Constructor
         TScriptActionDispatcherEventArgs (ISPADEventArgs eventArgs)
         {
-            if (eventArgs is not null && eventArgs.NewValue is int newVal) {
-                ActionReturnCode = newVal;
-                SNEventArgs = eventArgs;
+            ActionReturnCode = 0;
 
-                SelecUHandlerModule ();
+            if (eventArgs is not null) {
+                if (eventArgs.NewValue is int newVal) {
+                    ActionReturnCode = newVal;
+                    SNEventArgs = eventArgs;
+
+                    SelecUHandlerModule ();
+                }
             }
         }
 

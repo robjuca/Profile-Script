@@ -69,6 +69,9 @@ namespace rr.Process.Dispatcher
             #region Interface
             public void Execute (IApplication app, ISPADEventArgs eventArgs)
             {
+
+                var time = DateTime.Now;
+
                 ActionDispatcher?.Invoke (this, TScriptActionDispatcherEventArgs.Create (eventArgs));
             }
             #endregion

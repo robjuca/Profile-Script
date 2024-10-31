@@ -87,7 +87,7 @@ namespace rr.Plate.DeviceInit
                 // PROFILE_UNLOADED
                 if (message.IsAction (UMessageAction.PROFILE_UNLOADED)) {
                     ProfileLoad = false;
-                    //HandlerModulePresentation.Cleanup ();
+                    ModelCatalogue.Cleanup ();
                 }
 
                 if (IsActiveModule) {
@@ -103,7 +103,7 @@ namespace rr.Plate.DeviceInit
         #endregion
 
         #region Event
-        void OnGameStateChanged (object sender, ISPADEventArgs e)
+        public void OnGameStateChanged (object sender, ISPADEventArgs e)
         {
             if (e.NewValue is int newVal) {
                 if (ProfileLoad) {
@@ -217,7 +217,7 @@ namespace rr.Plate.DeviceInit
             #endregion
         }
 
-        public void SelectGameState (string state = default)
+        public void SelectGameState (string state = "3")
         {
             switch (Services.RequestGameState (state)) {
                 case SimulationGamestate.Briefing: {

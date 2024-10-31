@@ -73,7 +73,7 @@ namespace rr.Handler.Model
         // Text
         public void AddVariableName (string variableName) => VariableName = variableName;
         public void AddVariableValue (string variableValue) => VariableValue = variableValue;
-        protected bool ContainsNameValue (string nameValue) => VariableValue.Equals (nameValue);
+        public bool ContainsNameValue (string nameValue) => VariableValue.Equals (nameValue);
 
         // Text Enable
         public void AddEnableVariableName (string enableVariableName) => EnableVariableName = enableVariableName;
