@@ -21,6 +21,23 @@ using System.ComponentModel.Composition;
 
 namespace rr.Process.Dispatcher
 {
+    #region Spad.next action
+    //----- TActionScriptDispatch
+    public class TActionScriptDispatch : IScriptAction
+    {
+        #region Interface
+        public void Execute (IApplication app, ISPADEventArgs eventArgs)
+        {
+            ActionScriptDispatcher?.Invoke (this, TScriptActionDispatcherEventArgs.Create (eventArgs));
+        }
+        #endregion
+
+        #region Event
+        public static event EventHandler<TScriptActionDispatcherEventArgs> ActionScriptDispatcher;
+        #endregion
+    };
+    #endregion
+
     [Export (typeof (IDefault))]
     //----- TActionDispatcher
     public class TActionDispatcher : TModulePresentation
@@ -30,7 +47,7 @@ namespace rr.Process.Dispatcher
         public TActionDispatcher (IEventAggregator eventAggregator, IProviderServices services)
             : base (eventAggregator, services, UHandlerModule.PROCESS_DISPATCHER)
         {
-            TActionScriptDispatch.ActionDispatcher += OnActionDispatcher;
+            TActionScriptDispatch.ActionScriptDispatcher += OnActionScriptDispatcher;
         }
         #endregion
 
@@ -50,7 +67,7 @@ namespace rr.Process.Dispatcher
         #endregion
 
         #region Event
-        public void OnActionDispatcher (object sender, TScriptActionDispatcherEventArgs eventArgs)
+        void OnActionScriptDispatcher (object sender, TScriptActionDispatcherEventArgs eventArgs)
         {
             var message = TMessageInternal.CreateDefault (Module, UMessageAction.SCRIPT_ACTION);
             message.SelectParam (TParamInfo.Create (eventArgs));
@@ -61,25 +78,6 @@ namespace rr.Process.Dispatcher
                 Publish (message.Clone ());
             }
         }
-        #endregion
-
-        #region Spad.next action
-        public class TActionScriptDispatch : IScriptAction
-        {
-            #region Interface
-            public void Execute (IApplication app, ISPADEventArgs eventArgs)
-            {
-
-                var time = DateTime.Now;
-
-                ActionDispatcher?.Invoke (this, TScriptActionDispatcherEventArgs.Create (eventArgs));
-            }
-            #endregion
-
-            #region Event
-            public static event EventHandler<TScriptActionDispatcherEventArgs> ActionDispatcher;
-            #endregion
-        };
         #endregion
     };
     //---------------------------//

@@ -30,12 +30,27 @@ namespace rr.Handler.Model
 
             // Clear RES_SPEECH_COMMIT (-50) 
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_SPEECH_DISABLE_CODE)) {
-                args = TReturnCodeArgs.Create (UReturnCodeId.SPEECH_DISABLE, eventArgs);
+                if (m_40Wainting is false) {
+                    m_40Wainting = true;
+                    m_50Waiting = false;
+                    args = TReturnCodeArgs.Create (UReturnCodeId.SPEECH_DISABLE, eventArgs);
+                    
+                }
+
             }
 
             // Speech done (-40) 
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_SPEECH_DONE_CODE)) {
-                args = TReturnCodeArgs.Create (UReturnCodeId.SPEECH_DONE, eventArgs);
+
+                if (m_50Waiting is false) {
+                    m_50Waiting = true;
+                    m_40Wainting = false;
+                    args = TReturnCodeArgs.Create (UReturnCodeId.SPEECH_DONE, eventArgs);
+                }
+
+
+               
+
             }
 
             // Clear RES_MODULE_ID (-100) - Next Step
@@ -53,11 +68,14 @@ namespace rr.Handler.Model
                 args = TReturnCodeArgs.Create (UReturnCodeId.HANDLERS_CLEAR, eventArgs);
             }
 
-            if (args.IsEmpty is false) {
+            if (args.Validate) {
                 ReturnCode?.Invoke (this, args);
             }
         }
         #endregion
+
+        bool m_40Wainting;
+        bool m_50Waiting;
 
         #region Static
         public static TReturnCodeModel Create () => new ();

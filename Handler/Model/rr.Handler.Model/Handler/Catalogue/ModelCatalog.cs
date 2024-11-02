@@ -6,6 +6,7 @@
 //----- Include
 using rr.Provider.Resources;
 
+using System;
 using System.Collections.Generic;
 //---------------------------//
 
@@ -51,7 +52,7 @@ namespace rr.Handler.Model
             ReturnCodeModel.ProcessScriptReturnCode (eventArgs); // from Dispatcher
         }
 
-        public void Cleanup()
+        public void Cleanup ()
         {
             ModelDataList.Clear ();
             ModelDataListIndex = 0;
@@ -61,6 +62,8 @@ namespace rr.Handler.Model
         #region Event
         void OnReturnCode (object sender, TReturnCodeArgs eventArgs)
         {
+            var time = DateTime.Now;
+
             // from TReturnCodeModel
             CurrentModelData.SpeechModel.ScriptReturnCode (eventArgs);
             CurrentModelData.ModuleModel.ScriptReturnCode (eventArgs);
