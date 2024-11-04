@@ -178,6 +178,15 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 800.
+        /// </summary>
+        public static string RES_SWITCH_ON_CODE {
+            get {
+                return ResourceManager.GetString("RES_SWITCH_ON_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to True.
         /// </summary>
         public static string RES_TRUE {

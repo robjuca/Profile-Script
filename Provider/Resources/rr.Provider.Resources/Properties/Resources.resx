@@ -156,6 +156,9 @@
   <data name="RES_SPEECH_DONE_CODE" xml:space="preserve">
     <value>-40</value>
   </data>
+  <data name="RES_SWITCH_ON_CODE" xml:space="preserve">
+    <value>800</value>
+  </data>
   <data name="RES_TRUE" xml:space="preserve">
     <value>True</value>
   </data>

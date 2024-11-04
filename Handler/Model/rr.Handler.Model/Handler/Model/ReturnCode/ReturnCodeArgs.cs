@@ -21,6 +21,7 @@ namespace rr.Handler.Model
         NEXT_MODULE,
         INTERNAL_CODE,
         HANDLERS_CLEAR,
+        SWITCH_ON,
     };
     //---------------------------//
     #endregion
@@ -35,6 +36,7 @@ namespace rr.Handler.Model
         public bool IsSpeechDisable => CodeType.Equals (UReturnCodeId.SPEECH_DISABLE);
         public bool IsSpeechDone => CodeType.Equals (UReturnCodeId.SPEECH_DONE);
         public bool IsHandlersClear => CodeType.Equals (UReturnCodeId.HANDLERS_CLEAR);
+        public bool IsSwitchOn => CodeType.Equals (UReturnCodeId.SWITCH_ON);
 
         public bool IsNextStep => CodeType.Equals (UReturnCodeId.NEXT_STEP);
         public bool IsNextModule => CodeType.Equals (UReturnCodeId.NEXT_MODULE);

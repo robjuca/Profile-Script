@@ -75,8 +75,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Bin\rr.Shell.Bootstraper.dll</HintPath>
     </Reference>
-    <Reference Include="SPAD.Interfaces, Version=0.9.18.3, Culture=neutral, PublicKeyToken=679cfde616f3dcc1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="SPAD.Interfaces">
       <HintPath>C:\Program Files\SPAD.neXt\SPAD.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="System" />

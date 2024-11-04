@@ -217,7 +217,7 @@ namespace rr.Plate.DeviceInit
             #endregion
         }
 
-        public void SelectGameState (string state = "3")
+        public void SelectGameState (string state = "0")
         {
             switch (Services.RequestGameState (state)) {
                 case SimulationGamestate.Briefing: {
