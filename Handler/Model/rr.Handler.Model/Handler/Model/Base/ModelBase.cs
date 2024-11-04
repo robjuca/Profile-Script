@@ -13,10 +13,11 @@ using rr.Provider.Services;
 namespace rr.Handler.Model
 {
     //----- TModelBase
-    public abstract class TModelBase (IProviderServices services, UHandlerModule handlerModule, bool enableHandler = true)
+    public abstract class TModelBase (IProviderServices services, UHandlerModule handlerModule, bool enableModel = true)
     {
         #region Property
-        protected bool IsEnable { get; private set; } = enableHandler;
+        protected bool IsModelEnabled { get; private set; } = enableModel;
+        public bool Waiting { get; private set; }
         protected UHandlerModule HandlerModule { get; private set; } = handlerModule;
         protected IProviderServices Services { get; private set; } = services;
         protected bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
@@ -32,7 +33,7 @@ namespace rr.Handler.Model
         protected string EnableVariableValue { get; private set; }
 
         // Validate
-        protected bool ValidateBase => IsEnable & HasModule & ValidateNameValue;
+        protected bool ValidateBase => IsModelEnabled & HasModule & ValidateNameValue;
 
         // Validate Text
         protected bool ValidateNameValue
@@ -87,13 +88,17 @@ namespace rr.Handler.Model
                 AddEnableVariableName (alias.EnableVariableName);
                 AddEnableVariableValue (alias.EnableVariableValue);
 
-                EnableHandler (alias.IsEnable);
+                EnableModel (alias.IsModelEnabled);
+                CopyWaiting (alias.Waiting);
             }
         }
         #endregion
 
         #region Members
-        public void EnableHandler (bool enable = true) => IsEnable = enable;
+        public void EnableModel (bool enable = true) => IsModelEnabled = enable;
+        public void ClearWaiting () => Waiting = false;
+        public void EnableWaiting () => Waiting = true;
+        public void CopyWaiting (bool waiting) => Waiting = waiting;
 
         protected TScriptDefinitionData DefinitionData => TScriptDefinitionData.CreateDefault ();
         #endregion

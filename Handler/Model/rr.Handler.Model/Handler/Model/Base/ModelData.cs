@@ -37,14 +37,22 @@ namespace rr.Handler.Model
         #region Members
         public void EnableAllModels ()
         {
-            SpeechModel.EnableHandler ();
-            ModuleModel.EnableHandler ();
-            MessageModel.EnableHandler ();
+            SpeechModel.EnableModel ();
+            ModuleModel.EnableModel ();
+            MessageModel.EnableModel ();
+        }
+
+        public void ClearWaitingModels ()
+        {
+            SpeechModel.ClearWaiting ();
+            ModuleModel.ClearWaiting ();
+            MessageModel.ClearWaiting ();
         }
 
         public void PumpHandlerIndex () => HandlerIndex++;
         public void SetHandlerIndex (int index) => HandlerIndex = index;
         public void ClearHandlerIndex () => HandlerIndex = 0;
+        public bool IsModelWaiting => SpeechModel.Waiting | ModuleModel.Waiting | MessageModel.Waiting;
 
         public TModelData Clone ()
         {

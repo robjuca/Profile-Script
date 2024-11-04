@@ -87,10 +87,10 @@ namespace rr.Handler.Model
         #region Property
         List<TModelData> ModelDataList { get; set; }
         int ModelDataListIndex { get; set; }
-        public bool HasMoreData => (ModelDataListIndex + 1) < ModelDataList.Count;
         TModelData CurrentModelData => ModelDataList [ ModelDataListIndex ];
         TReturnCodeModel ReturnCodeModel { get; set; }
         UHandlerModule ParentModule { get; set; }
+        bool HasMoreData => CurrentModelData.IsModelWaiting is false | (ModelDataListIndex + 1) < ModelDataList.Count;
         #endregion
 
         #region Support

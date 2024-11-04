@@ -158,62 +158,64 @@ namespace rr.Plate.DeviceInit
 
         void CreateHandlerData ()
         {
-            var handlerData = TModelData.Create (Services, Module);
+            var modelData = TModelData.Create (Services, Module);
 
             #region common
             // Module
-            handlerData.ModuleModel.AddVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
-            handlerData.ModuleModel.AddVariableValue (TEnumExtension.AsString (Module));
+            modelData.ModuleModel.AddVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
+            modelData.ModuleModel.AddVariableValue (TEnumExtension.AsString (Module));
 
             // Message
-            handlerData.MessageModel.AddVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
+            modelData.MessageModel.AddVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
 
             // Speech
-            handlerData.SpeechModel.AddVariableName (ToString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
-            handlerData.SpeechModel.AddEnableVariableName (ToString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
-            handlerData.SpeechModel.AddEnableVariableValue (Resources.RES_TRUE);
+            modelData.SpeechModel.AddVariableName (ToString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
+            modelData.SpeechModel.AddEnableVariableName (ToString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
+            modelData.SpeechModel.AddEnableVariableValue (Resources.RES_TRUE);
             #endregion
 
             // Text and Message - Briefing
             #region Briefing
-            handlerData.SpeechModel.AddVariableValue ("game state not ready, waiting for aircraft on ground");
-            handlerData.MessageModel.AddVariableValue (TEnumExtension.AsString (SimulationGamestate.Briefing));
+            modelData.SpeechModel.EnableWaiting ();
+            modelData.SpeechModel.AddVariableValue ("game state not ready, waiting for aircraft on ground");
+            modelData.MessageModel.AddVariableValue (TEnumExtension.AsString (SimulationGamestate.Briefing));
 
             // only speech is enabled
-            handlerData.ModuleModel.EnableHandler (enable: false);
-            handlerData.MessageModel.EnableHandler (enable: false);
+            modelData.ModuleModel.EnableModel (enable: false);
+            modelData.MessageModel.EnableModel (enable: false);
 
-            ModelCatalogue.AddModelData (handlerData.Clone ());  // add to list 
+            ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
             #endregion
 
             // Text and Message - Flying
             #region Flying
-            handlerData.SpeechModel.AddVariableValue (
+            modelData.SpeechModel.AddVariableValue (
                     "check instructions: aircraft cold and dark mode\r\n park break on:\r\n honeycomb device : all switches: off\r\n all levers: idle:\r\n gear down:"
                 );
 
-            handlerData.MessageModel.AddVariableValue (TEnumExtension.AsString (SimulationGamestate.Flying));
+            modelData.MessageModel.AddVariableValue (TEnumExtension.AsString (SimulationGamestate.Flying));
 
             // all handlers enabled
-            handlerData.EnableAllModels ();
+            modelData.EnableAllModels ();
+            modelData.ClearWaitingModels ();
 
-            handlerData.PumpHandlerIndex ();
-            ModelCatalogue.AddModelData (handlerData.Clone ());  // add to list 
+            modelData.PumpHandlerIndex ();
+            ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
             #endregion
 
             // Text and Message - Waiting...
             #region Waiting...
-            handlerData.SpeechModel.AddVariableValue (
+            modelData.SpeechModel.AddVariableValue (
                     "when ready: set beacon switch on and off : \r\n waiting..."
                 );
 
-            handlerData.MessageModel.AddVariableValue ("Waiting");
+            modelData.MessageModel.AddVariableValue ("Waiting");
 
             // all handlers enabled
-            handlerData.EnableAllModels ();
+            modelData.EnableAllModels ();
 
-            handlerData.PumpHandlerIndex ();
-            ModelCatalogue.AddModelData (handlerData.Clone ());  // add to list 
+            modelData.PumpHandlerIndex ();
+            ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
             #endregion
         }
 
