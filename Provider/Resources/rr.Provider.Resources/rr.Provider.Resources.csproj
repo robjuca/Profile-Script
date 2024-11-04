@@ -37,9 +37,13 @@
     <Reference Include="rr.Library.Extensions">
       <HintPath>..\..\..\..\Library\rrSoft 2024\Bin\rr.Library.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="SPAD.Interfaces, Version=0.9.17.3, Culture=neutral, PublicKeyToken=679cfde616f3dcc1, processorArchitecture=MSIL">
+    <Reference Include="rr.Process.Dispatcher, Version=1.0.2024.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Bin\rr.Process.Dispatcher.dll</HintPath>
+    </Reference>
+    <Reference Include="SPAD.Interfaces">
       <HintPath>C:\Program Files\SPAD.neXt\SPAD.Interfaces.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

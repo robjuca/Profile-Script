@@ -77,6 +77,7 @@
     </Reference>
     <Reference Include="SPAD.Interfaces">
       <HintPath>C:\Program Files\SPAD.neXt\SPAD.Interfaces.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
