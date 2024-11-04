@@ -176,13 +176,13 @@ namespace rr.Plate.DeviceInit
 
             // Text and Message - Briefing
             #region Briefing
-            modelData.SpeechModel.EnableWaiting ();
+            modelData.SpeechModel.EnableWaitingFlag ();
             modelData.SpeechModel.AddVariableValue ("game state not ready, waiting for aircraft on ground");
             modelData.MessageModel.AddVariableValue (TEnumExtension.AsString (SimulationGamestate.Briefing));
 
             // only speech is enabled
-            modelData.ModuleModel.EnableModel (enable: false);
-            modelData.MessageModel.EnableModel (enable: false);
+            modelData.ModuleModel.DisableModel ();
+            modelData.MessageModel.DisableModel ();
 
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
             #endregion
@@ -195,7 +195,7 @@ namespace rr.Plate.DeviceInit
 
             modelData.MessageModel.AddVariableValue (TEnumExtension.AsString (SimulationGamestate.Flying));
 
-            // all handlers enabled
+            // all models enabled
             modelData.EnableAllModels ();
             modelData.ClearWaitingModels ();
 
@@ -211,15 +211,27 @@ namespace rr.Plate.DeviceInit
 
             modelData.MessageModel.AddVariableValue ("Waiting");
 
-            // all handlers enabled
+            // all models enabled
             modelData.EnableAllModels ();
+
+            modelData.PumpHandlerIndex ();
+            ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
+            #endregion
+
+            // Text and Message - Done...
+            #region Done...
+            modelData.SpeechModel.AddVariableValue (
+                    "done"
+                );
+
+            modelData.MessageModel.AddVariableValue ("Done");
 
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
             #endregion
         }
 
-        public void SelectGameState (string state = "0")
+        public void SelectGameState (string state = default)
         {
             switch (Services.RequestGameState (state)) {
                 case SimulationGamestate.Briefing: {

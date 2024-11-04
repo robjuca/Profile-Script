@@ -138,11 +138,8 @@
   <data name="RES_HANDLERS_CLEAR_CODE" xml:space="preserve">
     <value>-400</value>
   </data>
-  <data name="RES_NEXT_PLATE_CODE" xml:space="preserve">
+  <data name="RES_NEXT_MODEL_CODE" xml:space="preserve">
     <value>-80</value>
-  </data>
-  <data name="RES_NEXT_STEP_CODE" xml:space="preserve">
-    <value>-100</value>
   </data>
   <data name="RES_NONE" xml:space="preserve">
     <value>NONE</value>
@@ -155,9 +152,6 @@
   </data>
   <data name="RES_SPEECH_DONE_CODE" xml:space="preserve">
     <value>-40</value>
-  </data>
-  <data name="RES_SWITCH_ON_CODE" xml:space="preserve">
-    <value>800</value>
   </data>
   <data name="RES_TRUE" xml:space="preserve">
     <value>True</value>

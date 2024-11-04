@@ -5,7 +5,6 @@
 
 //----- Include
 using rr.Provider.Resources;
-using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 //---------------------------//
 

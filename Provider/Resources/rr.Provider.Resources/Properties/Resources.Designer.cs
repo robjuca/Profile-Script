@@ -126,18 +126,9 @@ namespace rr.Provider.Resources.Properties {
         /// <summary>
         ///   Looks up a localized string similar to -80.
         /// </summary>
-        public static string RES_NEXT_PLATE_CODE {
+        public static string RES_NEXT_MODEL_CODE {
             get {
-                return ResourceManager.GetString("RES_NEXT_PLATE_CODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to -100.
-        /// </summary>
-        public static string RES_NEXT_STEP_CODE {
-            get {
-                return ResourceManager.GetString("RES_NEXT_STEP_CODE", resourceCulture);
+                return ResourceManager.GetString("RES_NEXT_MODEL_CODE", resourceCulture);
             }
         }
         
@@ -174,15 +165,6 @@ namespace rr.Provider.Resources.Properties {
         public static string RES_SPEECH_DONE_CODE {
             get {
                 return ResourceManager.GetString("RES_SPEECH_DONE_CODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 800.
-        /// </summary>
-        public static string RES_SWITCH_ON_CODE {
-            get {
-                return ResourceManager.GetString("RES_SWITCH_ON_CODE", resourceCulture);
             }
         }
         

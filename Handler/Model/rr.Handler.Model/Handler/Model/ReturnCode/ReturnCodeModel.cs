@@ -38,24 +38,14 @@ namespace rr.Handler.Model
                 args = TReturnCodeArgs.Create (UReturnCodeId.SPEECH_DONE, eventArgs);
             }
 
-            // Clear RES_MODULE_ID (-100) - Next Step
-            if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_NEXT_STEP_CODE)) {
-                args = TReturnCodeArgs.Create (UReturnCodeId.NEXT_STEP, eventArgs);
+            // Model DONE (-80) - must go to next model
+            if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_NEXT_MODEL_CODE)) {
+                args = TReturnCodeArgs.Create (UReturnCodeId.NEXT_MODEL, eventArgs);
             }
 
-            // Step DONE (-80) - must go to next plate
-            if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_NEXT_PLATE_CODE)) {
-                args = TReturnCodeArgs.Create (UReturnCodeId.NEXT_MODULE, eventArgs);
-            }
-
-            // Step DONE (-400) - clear Receiver variables, clear Module Message variables, clear Module variables
+            //  DONE (-400) - clear Receiver variables, clear Module Message variables, clear Module variables
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_HANDLERS_CLEAR_CODE)) {
                 args = TReturnCodeArgs.Create (UReturnCodeId.HANDLERS_CLEAR, eventArgs);
-            }
-
-            // Switch On (800) - Switch On
-            if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_SWITCH_ON_CODE)) {
-                args = TReturnCodeArgs.Create (UReturnCodeId.SWITCH_ON, eventArgs);
             }
 
             if (args.Validate) {

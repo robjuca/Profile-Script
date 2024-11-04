@@ -24,7 +24,6 @@ namespace rr.Handler.Model
         #region Overrides
         public override void ScriptReturnCode (TReturnCodeArgs args)
         {
-                  
             if (args is not null) {
                 if (ValidateBase) {
                     var definitionData = DefinitionData;

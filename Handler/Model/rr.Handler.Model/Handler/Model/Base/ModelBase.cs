@@ -17,7 +17,7 @@ namespace rr.Handler.Model
     {
         #region Property
         protected bool IsModelEnabled { get; private set; } = enableModel;
-        public bool Waiting { get; private set; }
+        public bool WaitingFlag { get; private set; }
         protected UHandlerModule HandlerModule { get; private set; } = handlerModule;
         protected IProviderServices Services { get; private set; } = services;
         protected bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
@@ -88,17 +88,19 @@ namespace rr.Handler.Model
                 AddEnableVariableName (alias.EnableVariableName);
                 AddEnableVariableValue (alias.EnableVariableValue);
 
-                EnableModel (alias.IsModelEnabled);
-                CopyWaiting (alias.Waiting);
+                CopyEnableModel (alias.IsModelEnabled);
+                CopyWaitingFlag (alias.WaitingFlag);
             }
         }
         #endregion
 
         #region Members
-        public void EnableModel (bool enable = true) => IsModelEnabled = enable;
-        public void ClearWaiting () => Waiting = false;
-        public void EnableWaiting () => Waiting = true;
-        public void CopyWaiting (bool waiting) => Waiting = waiting;
+        public void EnableModel () => IsModelEnabled = true;
+        public void DisableModel () => IsModelEnabled = false;
+        public void CopyEnableModel (bool enable) => IsModelEnabled = enable;
+        public void ClearWaitingFlag () => WaitingFlag = false;
+        public void EnableWaitingFlag () => WaitingFlag = true;
+        public void CopyWaitingFlag (bool waiting) => WaitingFlag = waiting;
 
         protected TScriptDefinitionData DefinitionData => TScriptDefinitionData.CreateDefault ();
         #endregion

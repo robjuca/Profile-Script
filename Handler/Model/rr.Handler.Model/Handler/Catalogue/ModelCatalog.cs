@@ -34,7 +34,7 @@ namespace rr.Handler.Model
         public void Execute (string messageValue)
         {
             if (SelectMessageValue (messageValue)) {
-                SelectHandlerData ();
+                SelectModelDataIndex ();
                 ProcessSpeech ();
             }
         }
@@ -77,7 +77,7 @@ namespace rr.Handler.Model
                 CurrentModelData.ReceiverModel.Process ();
 
                 if (HasMoreData) {
-                    SelectHandlerData (pumpIndex: true);
+                    SelectModelDataIndex (pumpIndex: true);
                     ProcessSpeech ();
                 }
             }
@@ -90,11 +90,11 @@ namespace rr.Handler.Model
         TModelData CurrentModelData => ModelDataList [ ModelDataListIndex ];
         TReturnCodeModel ReturnCodeModel { get; set; }
         UHandlerModule ParentModule { get; set; }
-        bool HasMoreData => CurrentModelData.IsModelWaiting is false | (ModelDataListIndex + 1) < ModelDataList.Count;
+        bool HasMoreData => !CurrentModelData.IsModelWaiting && (ModelDataListIndex + 1) < ModelDataList.Count;
         #endregion
 
         #region Support
-        void SelectHandlerData (bool pumpIndex = false) => ModelDataListIndex = pumpIndex ? (ModelDataListIndex + 1) : ModelDataListIndex;
+        void SelectModelDataIndex (bool pumpIndex = false) => ModelDataListIndex = pumpIndex ? (ModelDataListIndex + 1) : ModelDataListIndex;
         void ProcessSpeech () => CurrentModelData.SpeechModel.Process ();
 
         bool SelectMessageValue (string messageValue)

@@ -17,6 +17,7 @@ namespace rr.Handler.Model
         public UHandlerModule Module { get; private set; }
         public bool HasModule => Module.Equals (UHandlerModule.NONE) is false;
         public int HandlerIndex { get; private set; }
+        public bool IsModelWaiting => SpeechModel.WaitingFlag | ModuleModel.WaitingFlag | MessageModel.WaitingFlag;
         public IProviderServices Services { get; private set; }
         #endregion
 
@@ -44,15 +45,14 @@ namespace rr.Handler.Model
 
         public void ClearWaitingModels ()
         {
-            SpeechModel.ClearWaiting ();
-            ModuleModel.ClearWaiting ();
-            MessageModel.ClearWaiting ();
+            SpeechModel.ClearWaitingFlag ();
+            ModuleModel.ClearWaitingFlag ();
+            MessageModel.ClearWaitingFlag ();
         }
 
         public void PumpHandlerIndex () => HandlerIndex++;
         public void SetHandlerIndex (int index) => HandlerIndex = index;
         public void ClearHandlerIndex () => HandlerIndex = 0;
-        public bool IsModelWaiting => SpeechModel.Waiting | ModuleModel.Waiting | MessageModel.Waiting;
 
         public TModelData Clone ()
         {
