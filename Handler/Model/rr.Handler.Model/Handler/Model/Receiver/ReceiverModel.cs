@@ -31,13 +31,13 @@ namespace rr.Handler.Model
                     if (args.IsHandlersClear) {
                         // Receiver Module
                         definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
-                        definitionData.AddVariableValue (Resources.RES_NONE);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
 
                         SetScriptDataValue (definitionData.Clone ());
 
                         // Receiver Message
                         definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
-                        definitionData.AddVariableValue (Resources.RES_NONE);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY);
 
                         SetScriptDataValue (definitionData.Clone ());
                     }

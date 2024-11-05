@@ -22,7 +22,7 @@ namespace rr.Handler.Model
         #endregion
 
         #region Overrides
-        public override void ScriptReturnCode (TReturnCodeArgs args)
+        public override void ScriptReturnCode (TReturnCodeArgs args)  
         {
             if (args is not null) {
                 if (ValidateBase) {

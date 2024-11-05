@@ -6,7 +6,6 @@
 //----- Include
 using rr.Provider.Resources;
 
-using System;
 using System.Collections.Generic;
 //---------------------------//
 
@@ -62,8 +61,6 @@ namespace rr.Handler.Model
         #region Event
         void OnReturnCode (object sender, TReturnCodeArgs eventArgs)
         {
-            var time = DateTime.Now;
-
             // from TReturnCodeModel
             CurrentModelData.SpeechModel.ScriptReturnCode (eventArgs);
             CurrentModelData.ModuleModel.ScriptReturnCode (eventArgs);

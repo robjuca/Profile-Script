@@ -71,12 +71,12 @@ namespace rr.Handler.Model
         #endregion
 
         #region Members
-        // Text
+        // Variable Name/Value
         public void AddVariableName (string variableName) => VariableName = variableName;
         public void AddVariableValue (string variableValue) => VariableValue = variableValue;
         public bool ContainsNameValue (string nameValue) => VariableValue.Equals (nameValue);
 
-        // Text Enable
+        // Variable Name/Value Enable
         public void AddEnableVariableName (string enableVariableName) => EnableVariableName = enableVariableName;
         public void AddEnableVariableValue (string enableVariableValue) => EnableVariableValue = enableVariableValue;
 

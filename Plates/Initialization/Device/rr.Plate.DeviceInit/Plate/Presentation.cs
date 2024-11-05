@@ -224,7 +224,7 @@ namespace rr.Plate.DeviceInit
                     "done"
                 );
 
-            modelData.MessageModel.AddVariableValue ("Done");
+            //modelData.MessageModel.AddVariableValue ("Done");
 
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
