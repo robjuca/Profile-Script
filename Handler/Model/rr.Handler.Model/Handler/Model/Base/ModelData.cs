@@ -6,6 +6,8 @@
 //----- Include
 using rr.Provider.Resources;
 using rr.Provider.Services;
+
+using System;
 //---------------------------//
 
 namespace rr.Handler.Model
@@ -48,6 +50,22 @@ namespace rr.Handler.Model
             SpeechModel.ClearWaitingFlag ();
             ModuleModel.ClearWaitingFlag ();
             MessageModel.ClearWaitingFlag ();
+        }
+
+        public void ScriptReturnCode (TReturnCodeArgs eventArgs)
+        {
+            SpeechModel.ScriptReturnCode (eventArgs);
+            ModuleModel.ScriptReturnCode (eventArgs);
+            MessageModel.ScriptReturnCode (eventArgs);
+            ReceiverModel.ScriptReturnCode (eventArgs);
+
+        }
+
+        public void Process ()
+        {
+            ModuleModel.Process ();
+            MessageModel.Process ();
+            ReceiverModel.Process ();
         }
 
         public void PumpHandlerIndex () => HandlerIndex++;

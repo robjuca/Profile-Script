@@ -62,16 +62,11 @@ namespace rr.Handler.Model
         void OnReturnCode (object sender, TReturnCodeArgs eventArgs)
         {
             // from TReturnCodeModel
-            CurrentModelData.SpeechModel.ScriptReturnCode (eventArgs);
-            CurrentModelData.ModuleModel.ScriptReturnCode (eventArgs);
-            CurrentModelData.MessageModel.ScriptReturnCode (eventArgs);
-            CurrentModelData.ReceiverModel.ScriptReturnCode (eventArgs);
+            CurrentModelData.ScriptReturnCode (eventArgs);
 
             // speech done
             if (eventArgs.IsSpeechDone) {
-                CurrentModelData.ModuleModel.Process ();
-                CurrentModelData.MessageModel.Process ();
-                CurrentModelData.ReceiverModel.Process ();
+                CurrentModelData.Process ();
 
                 if (HasMoreData) {
                     SelectModelDataIndex (pumpIndex: true);
