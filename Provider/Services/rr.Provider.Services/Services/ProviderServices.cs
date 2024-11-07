@@ -14,9 +14,7 @@ using SPAD.neXt.Interfaces.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 //---------------------------//
 
@@ -111,7 +109,15 @@ namespace rr.Provider.Services
         {
             var data = GetOrCreateScriptDataValue (definitionData);
 
-            data?.SetRawValue (definitionData.VariableValue);
+            if (data is not null) {
+                var obj = data.GetRawValue ();
+
+                if (obj is not null) {
+                    if (obj.ToString ().Equals (definitionData.VariableValue) is false) {
+                        data.SetRawValue (definitionData.VariableValue);
+                    }
+                }
+            }
         }
 
         public SimulationGamestate RequestGameState (string state = default)

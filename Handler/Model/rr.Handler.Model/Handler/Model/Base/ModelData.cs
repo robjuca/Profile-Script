@@ -6,8 +6,6 @@
 //----- Include
 using rr.Provider.Resources;
 using rr.Provider.Services;
-
-using System;
 //---------------------------//
 
 namespace rr.Handler.Model
@@ -66,6 +64,11 @@ namespace rr.Handler.Model
             ModuleModel.Process ();
             MessageModel.Process ();
             ReceiverModel.Process ();
+        }
+
+        public void ProcessSpeech ()
+        {
+            SpeechModel.Process ();
         }
 
         public void PumpHandlerIndex () => HandlerIndex++;

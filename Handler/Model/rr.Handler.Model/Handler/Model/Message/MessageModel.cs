@@ -22,7 +22,7 @@ namespace rr.Handler.Model
         #endregion
 
         #region Overrides
-        public override void ScriptReturnCode (TReturnCodeArgs args)  
+        public override void ScriptReturnCode (TReturnCodeArgs args)
         {
             if (args is not null) {
                 if (ValidateBase) {
@@ -44,9 +44,17 @@ namespace rr.Handler.Model
             if (ValidateBase) {
                 var definitionData = DefinitionData;
 
-                // Message
-                definitionData.AddVariableName (VariableName);
+                // UPDATE Receiver Message Value
+                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
                 definitionData.AddVariableValue (VariableValue);
+
+                SetScriptDataValue (definitionData.Clone ());
+
+                // Message Name Value
+                string nameValue = WaitingFlag ? LastVariableNameValue : Resources.RES_EMPTY;
+
+                definitionData.AddVariableName (VariableName);
+                definitionData.AddVariableValue (nameValue);
 
                 SetScriptDataValue (definitionData.Clone ());
             }

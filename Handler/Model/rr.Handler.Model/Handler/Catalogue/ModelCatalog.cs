@@ -87,7 +87,7 @@ namespace rr.Handler.Model
 
         #region Support
         void SelectModelDataIndex (bool pumpIndex = false) => ModelDataListIndex = pumpIndex ? (ModelDataListIndex + 1) : ModelDataListIndex;
-        void ProcessSpeech () => CurrentModelData.SpeechModel.Process ();
+        void ProcessSpeech () => CurrentModelData.ProcessSpeech ();
 
         bool SelectMessageValue (string messageValue)
         {

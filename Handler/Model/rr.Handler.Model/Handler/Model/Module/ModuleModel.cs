@@ -21,29 +21,29 @@ namespace rr.Handler.Model
         #endregion
 
         #region Overrides
-        public override void ScriptReturnCode (TReturnCodeArgs args)
-        {
-            if (args is not null) {
-                if (ValidateBase) {
-                    // do nothing
-                }
-            }
-        }
+        //public override void ScriptReturnCode (TReturnCodeArgs args)
+        //{
+        //    if (args is not null) {
+        //        if (ValidateBase) {
+        //            // do nothing
+        //        }
+        //    }
+        //}
 
         public override void Process ()
         {
-            if (ValidateBase & ValidateEnableNameValue) {
+            if (ValidateBase) {
                 var definitionData = DefinitionData;
 
                 // Variable Name and Value
-                definitionData.AddVariableName (VariableName);
+                //definitionData.AddVariableName (VariableName);
+                //definitionData.AddVariableValue (VariableValue);
+
+                //SetScriptDataValue (definitionData.Clone ());
+
+                // UPDATE Receiver Module Name Value
+                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
                 definitionData.AddVariableValue (VariableValue);
-
-                SetScriptDataValue (definitionData.Clone ());
-
-                // Enable Variable Name and Value
-                definitionData.AddVariableName (EnableVariableName);
-                definitionData.AddVariableValue (EnableVariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
             }

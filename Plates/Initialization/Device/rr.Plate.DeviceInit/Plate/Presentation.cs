@@ -183,6 +183,7 @@ namespace rr.Plate.DeviceInit
             // only speech is enabled
             modelData.ModuleModel.DisableModel ();
             modelData.MessageModel.DisableModel ();
+            modelData.ReceiverModel.DisableModel ();
 
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
             #endregion
@@ -211,20 +212,19 @@ namespace rr.Plate.DeviceInit
 
             modelData.MessageModel.AddVariableValue ("Waiting");
 
-            // all models enabled
-            modelData.EnableAllModels ();
-
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
             #endregion
 
             // Text and Message - Done...
             #region Done...
+            modelData.SpeechModel.EnableWaitingFlag ();
             modelData.SpeechModel.AddVariableValue (
                     "done"
                 );
 
-            //modelData.MessageModel.AddVariableValue ("Done");
+            modelData.MessageModel.EnableWaitingFlag ();
+            modelData.MessageModel.AddVariableValue ("Done");
 
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 

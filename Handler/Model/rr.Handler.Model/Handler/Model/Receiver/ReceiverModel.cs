@@ -22,46 +22,49 @@ namespace rr.Handler.Model
         #endregion
 
         #region Overrides
-        public override void ScriptReturnCode (TReturnCodeArgs args)
-        {
-            if (args is not null) {
-                if (ValidateBase) {
-                    var definitionData = DefinitionData;
+        //public override void ScriptReturnCode (TReturnCodeArgs args)
+        //{
+        //    if (args is not null) {
+        //        if (ValidateBase) {
+        //            var definitionData = DefinitionData;
 
-                    if (args.IsHandlersClear) {
-                        // Receiver Module
-                        definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+        //            if (args.IsHandlersClear) {
+        //                // Receiver Module
+        //                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
+        //                definitionData.AddVariableValue (Resources.RES_EMPTY);
 
-                        SetScriptDataValue (definitionData.Clone ());
+        //                SetScriptDataValue (definitionData.Clone ());
 
-                        // Receiver Message
-                        definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+        //                // Receiver Message
+        //                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+        //                definitionData.AddVariableValue (Resources.RES_EMPTY);
 
-                        SetScriptDataValue (definitionData.Clone ());
-                    }
-                }
-            }
-        }
+        //                SetScriptDataValue (definitionData.Clone ());
+        //            }
+        //        }
+        //    }
+        //}
 
         public override void Process ()
         {
-            if (ValidateBase) {
-                var definitionData = DefinitionData;
+            // All done by ModuleModel and MessageModel in Process method
+
+
+            //if (ValidateBase) {
+                //var definitionData = DefinitionData;
 
                 // Receiver Module
-                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
-                definitionData.AddVariableValue (VariableValue);
+                //definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
+                //definitionData.AddVariableValue (VariableValue);
 
-                SetScriptDataValue (definitionData.Clone ());
+                //SetScriptDataValue (definitionData.Clone ());
 
                 // Receiver Message
-                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
-                definitionData.AddVariableValue (VariableValue);
+                //definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+                //definitionData.AddVariableValue (VariableValue);
 
-                SetScriptDataValue (definitionData.Clone ());
-            }
+                //SetScriptDataValue (definitionData.Clone ());
+            //}
         }
         #endregion
 
