@@ -11,3 +11,6 @@ DISPATCHER MESSAGE
 
 MODULE MODEL
 ![Module Model](https://github.com/user-attachments/assets/a7e65a8f-a749-4d3c-b647-27f69fc6edee)
+
+MODEL MESSGE
+Assets/Icons/Model Message.jpg
