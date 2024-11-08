@@ -6,8 +6,6 @@
 //----- Include
 using rr.Provider.Resources;
 using rr.Provider.Services;
-
-using System;
 //---------------------------//
 
 namespace rr.Handler.Model
@@ -16,6 +14,7 @@ namespace rr.Handler.Model
     public class TModelData : System.IEquatable<TModelData>, System.IComparable<TModelData>
     {
         #region Property
+        public string ModelMessage => MessageModel.MessageName;
         public UHandlerModule Module { get; private set; }
         public bool HasModule => Module.Equals (UHandlerModule.NONE) is false;
         public int HandlerIndex { get; private set; }
@@ -66,6 +65,8 @@ namespace rr.Handler.Model
         {
             ModuleModel.Process ();
             MessageModel.Process ();
+
+            ReceiverModel.AddVariableValue (MessageModel.VariableValue);
             ReceiverModel.Process ();
         }
 

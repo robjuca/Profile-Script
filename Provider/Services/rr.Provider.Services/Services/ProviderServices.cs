@@ -120,6 +120,19 @@ namespace rr.Provider.Services
             }
         }
 
+        public bool ContainsDataValue (string key, string dataValue)
+        {
+            if (DefinitionDataList.TryGetValue (key, out var data)) {
+                var obj = data.DataDefinition.GetRawValue();
+
+                if (obj is not null) {
+                    return obj.ToString ().Equals (dataValue);
+                }
+            }
+
+            return false;
+        }
+
         public SimulationGamestate RequestGameState (string state = default)
         {
             var definitionData = TScriptDefinitionData.Create ("GAMESTATE", useLocal: true);

@@ -21,13 +21,13 @@ namespace rr.Handler.Model
         protected UHandlerModule HandlerModule { get; private set; } = handlerModule;
         protected IProviderServices Services { get; private set; } = services;
         protected bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
-        protected string ModuleName => TEnumExtension.AsString (HandlerModule);
+        protected string ModuleName => HasModule ? TEnumExtension.AsString (HandlerModule) : string.Empty;
         #endregion
 
         #region Property
         // Variable Name/Value
-        protected string VariableName { get; private set; }
-        protected string VariableValue { get; private set; }
+        public string VariableName { get; private set; }
+        public string VariableValue { get; private set; }
 
         // Enable Variable Name/Value
         protected string EnableVariableName { get; private set; }

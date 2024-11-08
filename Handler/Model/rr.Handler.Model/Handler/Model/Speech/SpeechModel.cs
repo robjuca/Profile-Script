@@ -48,21 +48,19 @@ namespace rr.Handler.Model
         public override void Process ()
         {
             if (ValidateBase & ValidateEnableNameValue) {
-                if (WaitingFlag is false) {
-                    var definitionData = DefinitionData;
+                var definitionData = DefinitionData;
 
-                    // text
-                    definitionData.AddVariableName (VariableName);
-                    definitionData.AddVariableValue (VariableValue);
+                // text
+                definitionData.AddVariableName (VariableName);
+                definitionData.AddVariableValue (VariableValue);
 
-                    SetScriptDataValue (definitionData.Clone ());
+                SetScriptDataValue (definitionData.Clone ());
 
-                    // text enable
-                    definitionData.AddVariableName (EnableVariableName);
-                    definitionData.AddVariableValue (EnableVariableValue);
+                // text enable
+                definitionData.AddVariableName (EnableVariableName);
+                definitionData.AddVariableValue (EnableVariableValue);
 
-                    SetScriptDataValue (definitionData.Clone ());
-                }
+                SetScriptDataValue (definitionData.Clone ());
             }
         }
         #endregion

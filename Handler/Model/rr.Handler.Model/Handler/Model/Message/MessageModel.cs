@@ -14,6 +14,10 @@ namespace rr.Handler.Model
     //----- TMessageModel
     public class TMessageModel : TModelBase
     {
+        #region Property
+        public string MessageName => ValidateBase ? VariableValue : string.Empty;
+        #endregion
+
         #region Constructor
         TMessageModel (IProviderServices services, UHandlerModule handlerModule)
            : base (services, handlerModule)

@@ -26,6 +26,7 @@ namespace rr.Provider.Services
         IDataDefinition GetOrCreateScriptDataValue (TScriptDefinitionData definitionData);
         string GetScriptDataValue (TScriptDefinitionData definitionData, string defaultValue = default);
         void SetScriptDataValue (TScriptDefinitionData definitionData);
+        bool ContainsDataValue (string key, string dataValue);
 
         SimulationGamestate RequestGameState (string state = default);
     }
