@@ -22,6 +22,7 @@ namespace rr.Provider.Presentation
         protected TModuleInfo Sender => TModuleInfo.Create (TypeInfo);
         protected TModuleInfo JustMe => Sender;
         protected UHandlerModule Module { get; private set; }
+        protected string ModuleName => TEnumExtension.AsString (Module);  
         protected bool IsActiveModule => ActiveModule.Equals (Module);
         protected IProviderServices Services { get; private set; }
         protected System.Array AllModules => Services.AllHandlerModule;

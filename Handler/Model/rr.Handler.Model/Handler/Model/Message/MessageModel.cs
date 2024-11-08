@@ -45,16 +45,16 @@ namespace rr.Handler.Model
                 var definitionData = DefinitionData;
 
                 // UPDATE Receiver Message Value
-                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
-                definitionData.AddVariableValue (VariableValue);
+                //definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+                //definitionData.AddVariableValue (VariableValue);
 
-                SetScriptDataValue (definitionData.Clone ());
+                //SetScriptDataValue (definitionData.Clone ());
 
                 // Message Name Value
-                string nameValue = WaitingFlag ? LastVariableNameValue : Resources.RES_EMPTY;
+                //string nameValue = WaitingFlag ? LastVariableNameValue : Resources.RES_EMPTY;
 
                 definitionData.AddVariableName (VariableName);
-                definitionData.AddVariableValue (nameValue);
+                definitionData.AddVariableValue (VariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
             }

@@ -6,6 +6,8 @@
 //----- Include
 using rr.Provider.Resources;
 using rr.Provider.Services;
+
+using System;
 //---------------------------//
 
 namespace rr.Handler.Model
@@ -41,6 +43,7 @@ namespace rr.Handler.Model
             SpeechModel.EnableModel ();
             ModuleModel.EnableModel ();
             MessageModel.EnableModel ();
+            ReceiverModel.EnableModel ();
         }
 
         public void ClearWaitingModels ()
@@ -48,6 +51,7 @@ namespace rr.Handler.Model
             SpeechModel.ClearWaitingFlag ();
             ModuleModel.ClearWaitingFlag ();
             MessageModel.ClearWaitingFlag ();
+            ReceiverModel.ClearWaitingFlag ();
         }
 
         public void ScriptReturnCode (TReturnCodeArgs eventArgs)
@@ -56,7 +60,6 @@ namespace rr.Handler.Model
             ModuleModel.ScriptReturnCode (eventArgs);
             MessageModel.ScriptReturnCode (eventArgs);
             ReceiverModel.ScriptReturnCode (eventArgs);
-
         }
 
         public void Process ()

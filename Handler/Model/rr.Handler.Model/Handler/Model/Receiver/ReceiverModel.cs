@@ -47,24 +47,21 @@ namespace rr.Handler.Model
 
         public override void Process ()
         {
-            // All done by ModuleModel and MessageModel in Process method
-
-
-            //if (ValidateBase) {
-                //var definitionData = DefinitionData;
+            if (ValidateBase) {
+                var definitionData = DefinitionData;
 
                 // Receiver Module
-                //definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
-                //definitionData.AddVariableValue (VariableValue);
+                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
+                definitionData.AddVariableValue (VariableName);
 
-                //SetScriptDataValue (definitionData.Clone ());
+                SetScriptDataValue (definitionData.Clone ());
 
                 // Receiver Message
-                //definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
-                //definitionData.AddVariableValue (VariableValue);
+                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+                definitionData.AddVariableValue (VariableValue);
 
-                //SetScriptDataValue (definitionData.Clone ());
-            //}
+                SetScriptDataValue (definitionData.Clone ());
+            }
         }
         #endregion
 

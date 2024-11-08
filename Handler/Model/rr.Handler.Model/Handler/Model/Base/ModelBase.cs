@@ -16,15 +16,12 @@ namespace rr.Handler.Model
     public abstract class TModelBase (IProviderServices services, UHandlerModule handlerModule, bool enableModel = true)
     {
         #region Property
-        public string LastVariableNameValue { get; private set; }
-        #endregion
-
-        #region Property
         protected bool IsModelEnabled { get; private set; } = enableModel;
         public bool WaitingFlag { get; private set; }
         protected UHandlerModule HandlerModule { get; private set; } = handlerModule;
         protected IProviderServices Services { get; private set; } = services;
         protected bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
+        protected string ModuleName => TEnumExtension.AsString (HandlerModule);
         #endregion
 
         #region Property
@@ -77,12 +74,7 @@ namespace rr.Handler.Model
         #region Members
         // Variable Name/Value
         public void AddVariableName (string variableName) => VariableName = variableName;
-        public void AddVariableValue (string variableValue)
-        {
-            LastVariableNameValue = VariableValue;
-            VariableValue = variableValue;
-        }
-
+        public void AddVariableValue (string variableValue) => VariableValue = variableValue;
         public bool ContainsNameValue (string nameValue) => VariableValue.Equals (nameValue);
 
         // Variable Name/Value Enable
@@ -99,8 +91,6 @@ namespace rr.Handler.Model
 
                 CopyEnableModel (alias.IsModelEnabled);
                 CopyWaitingFlag (alias.WaitingFlag);
-
-                LastVariableNameValue = alias.LastVariableNameValue;
             }
         }
         #endregion

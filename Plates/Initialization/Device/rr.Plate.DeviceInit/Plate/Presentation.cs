@@ -163,7 +163,7 @@ namespace rr.Plate.DeviceInit
             #region common
             // Module
             modelData.ModuleModel.AddVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
-            modelData.ModuleModel.AddVariableValue (TEnumExtension.AsString (Module));
+            modelData.ModuleModel.AddVariableValue (ModuleName);
 
             // Message
             modelData.MessageModel.AddVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
@@ -186,6 +186,10 @@ namespace rr.Plate.DeviceInit
             modelData.ReceiverModel.DisableModel ();
 
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
+
+            // all models enabled (restore default)
+            modelData.EnableAllModels ();
+            modelData.ClearWaitingModels ();
             #endregion
 
             // Text and Message - Flying
@@ -195,10 +199,6 @@ namespace rr.Plate.DeviceInit
                 );
 
             modelData.MessageModel.AddVariableValue (TEnumExtension.AsString (SimulationGamestate.Flying));
-
-            // all models enabled
-            modelData.EnableAllModels ();
-            modelData.ClearWaitingModels ();
 
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
@@ -218,12 +218,10 @@ namespace rr.Plate.DeviceInit
 
             // Text and Message - Done...
             #region Done...
-            modelData.SpeechModel.EnableWaitingFlag ();
             modelData.SpeechModel.AddVariableValue (
                     "done"
                 );
 
-            modelData.MessageModel.EnableWaitingFlag ();
             modelData.MessageModel.AddVariableValue ("Done");
 
             modelData.PumpHandlerIndex ();

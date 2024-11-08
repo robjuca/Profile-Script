@@ -36,16 +36,16 @@ namespace rr.Handler.Model
                 var definitionData = DefinitionData;
 
                 // Variable Name and Value
-                //definitionData.AddVariableName (VariableName);
-                //definitionData.AddVariableValue (VariableValue);
-
-                //SetScriptDataValue (definitionData.Clone ());
-
-                // UPDATE Receiver Module Name Value
-                definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
+                definitionData.AddVariableName (VariableName);
                 definitionData.AddVariableValue (VariableValue);
 
                 SetScriptDataValue (definitionData.Clone ());
+
+                // UPDATE Receiver Module Name Value
+                //definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
+                //definitionData.AddVariableValue (VariableValue);
+
+                //SetScriptDataValue (definitionData.Clone ());
             }
         }
         #endregion
