@@ -36,6 +36,12 @@ namespace rr.Plate.DeviceInit
         SPEECH_ENABLE_DEVICE_INIT,          // to play text condition enable (true or false)
     };
     //---------------------------// 
+
+    public enum UUserActionCode
+    {
+        WAIT_DONE   = 210,
+    };
+    //---------------------------//
     #endregion
 
     //----- TDeviceInitPresentation
@@ -94,7 +100,14 @@ namespace rr.Plate.DeviceInit
                     // SCRIPT_ACTION (from Process_Dispatcher)
                     if (message.IsAction (UMessageAction.SCRIPT_ACTION)) {
                         if (message.RequestParam (out TScriptActionDispatcherEventArgs eventArgs)) {
-                            ModelCatalogue.ProcessScriptReturnCode (eventArgs);
+                            // User Action (210) Wait message 
+                            if (eventArgs.ActionReturnCode.ToString ().Equals (UUserActionCode.WAIT_DONE)) {
+                                ModelCatalogue.Next ();
+                            }
+
+                            else {
+                                ModelCatalogue.ProcessScriptReturnCode (eventArgs);
+                            }
                         }
                     }
                 }
@@ -181,9 +194,9 @@ namespace rr.Plate.DeviceInit
             modelData.MessageModel.AddVariableValue (TEnumExtension.AsString (SimulationGamestate.Briefing));
 
             // only speech is enabled
-            modelData.ModuleModel.DisableModel ();
-            modelData.MessageModel.DisableModel ();
-            modelData.ReceiverModel.DisableModel ();
+            modelData.ModuleModel.DisableEnableFlag ();
+            modelData.MessageModel.DisableEnableFlag ();
+            modelData.ReceiverModel.DisableEnableFlag ();
 
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
 
@@ -206,11 +219,13 @@ namespace rr.Plate.DeviceInit
 
             // Text and Message - Waiting...
             #region Waiting...
+            modelData.SpeechModel.EnableWaitingFlag ();
             modelData.SpeechModel.AddVariableValue (
                     "when ready: set beacon switch on and off : \r\n waiting..."
                 );
 
             modelData.MessageModel.AddVariableValue ("Waiting");
+            modelData.ReceiverModel.AddUserActionCode (TEnumExtension.GetEnumValueAsString (UUserActionCode.WAIT_DONE));
 
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
@@ -218,11 +233,13 @@ namespace rr.Plate.DeviceInit
 
             // Text and Message - Done...
             #region Done...
+            modelData.SpeechModel.ClearWaitingFlag ();
             modelData.SpeechModel.AddVariableValue (
                     "done"
                 );
 
             modelData.MessageModel.AddVariableValue ("Done");
+            modelData.ReceiverModel.RemoveUserActionCode ();
 
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 

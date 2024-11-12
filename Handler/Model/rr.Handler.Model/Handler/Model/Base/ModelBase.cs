@@ -7,6 +7,7 @@
 //----- Include
 using rr.Library.Extension;
 using rr.Provider.Resources;
+using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 //---------------------------//
 
@@ -16,8 +17,10 @@ namespace rr.Handler.Model
     public abstract class TModelBase (IProviderServices services, UHandlerModule handlerModule, bool enableModel = true)
     {
         #region Property
-        protected bool IsModelEnabled { get; private set; } = enableModel;
+        protected bool ModelEnabledFlag { get; private set; } = enableModel;
         public bool WaitingFlag { get; private set; }
+        public bool NextMessageFlag { get; private set; }
+        public string UserActionCode { get; private set; }
         protected UHandlerModule HandlerModule { get; private set; } = handlerModule;
         protected IProviderServices Services { get; private set; } = services;
         protected bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
@@ -34,7 +37,8 @@ namespace rr.Handler.Model
         protected string EnableVariableValue { get; private set; }
 
         // Validate
-        protected bool ValidateBase => IsModelEnabled & HasModule & ValidateNameValue;
+        protected bool ValidateBase => ModelEnabledFlag & HasModule & ValidateNameValue;
+        protected bool HasUserActionCode => !string.IsNullOrEmpty (UserActionCode) | !string.IsNullOrWhiteSpace (UserActionCode);
 
         // Validate Text
         protected bool ValidateNameValue
@@ -81,6 +85,10 @@ namespace rr.Handler.Model
         public void AddEnableVariableName (string enableVariableName) => EnableVariableName = enableVariableName;
         public void AddEnableVariableValue (string enableVariableValue) => EnableVariableValue = enableVariableValue;
 
+        // User Action Code
+        public void AddUserActionCode (string userCode) => UserActionCode = userCode;
+        public void RemoveUserActionCode () => UserActionCode = Resources.RES_ZERO_STRING;
+
         public void CopyFrom (TModelBase alias)
         {
             if (alias is not null) {
@@ -89,19 +97,25 @@ namespace rr.Handler.Model
                 AddEnableVariableName (alias.EnableVariableName);
                 AddEnableVariableValue (alias.EnableVariableValue);
 
-                CopyEnableModel (alias.IsModelEnabled);
+                CopyEnableModelFlag (alias.ModelEnabledFlag);
                 CopyWaitingFlag (alias.WaitingFlag);
+                CopyNextMessageFlag (alias.NextMessageFlag);
+
+                AddUserActionCode (alias.UserActionCode);
             }
         }
         #endregion
 
         #region Members
-        public void EnableModel () => IsModelEnabled = true;
-        public void DisableModel () => IsModelEnabled = false;
-        public void CopyEnableModel (bool enable) => IsModelEnabled = enable;
+        public void EnableModelFlag () => ModelEnabledFlag = true;
+        public void DisableEnableFlag () => ModelEnabledFlag = false;
+        public void CopyEnableModelFlag (bool enable) => ModelEnabledFlag = enable;
         public void ClearWaitingFlag () => WaitingFlag = false;
         public void EnableWaitingFlag () => WaitingFlag = true;
         public void CopyWaitingFlag (bool waiting) => WaitingFlag = waiting;
+        public void EnableNextMessageFlag () => NextMessageFlag = true;
+        public void ClearNextMessageFlag () => NextMessageFlag = false;
+        public void CopyNextMessageFlag (bool flag) => NextMessageFlag = flag;
 
         protected TScriptDefinitionData DefinitionData => TScriptDefinitionData.CreateDefault ();
         #endregion

@@ -46,7 +46,15 @@ namespace rr.Handler.Model
         public override void Process ()
         {
             if (ValidateBase) {
-                var definitionData = DefinitionData;
+                // only new values
+                if (Services.ContainsDataValue (VariableName, VariableValue) is false) {
+                    var definitionData = DefinitionData;
+
+                    definitionData.AddVariableName (VariableName);
+                    definitionData.AddVariableValue (VariableValue);
+
+                    SetScriptDataValue (definitionData.Clone ());
+                }
 
                 // UPDATE Receiver Message Value
                 //definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
@@ -57,10 +65,7 @@ namespace rr.Handler.Model
                 // Message Name Value
                 //string nameValue = WaitingFlag ? LastVariableNameValue : Resources.RES_EMPTY;
 
-                definitionData.AddVariableName (VariableName);
-                definitionData.AddVariableValue (VariableValue);
-
-                SetScriptDataValue (definitionData.Clone ());
+               
             }
         }
         #endregion

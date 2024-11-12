@@ -156,4 +156,10 @@
   <data name="RES_TRUE" xml:space="preserve">
     <value>True</value>
   </data>
+  <data name="RES_USER_ACTION_CODE" xml:space="preserve">
+    <value>RR_USER_ACTION_CODE</value>
+  </data>
+  <data name="RES_ZERO_STRING" xml:space="preserve">
+    <value>0</value>
+  </data>
 </root>

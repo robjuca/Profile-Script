@@ -176,5 +176,23 @@ namespace rr.Provider.Resources.Properties {
                 return ResourceManager.GetString("RES_TRUE", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RR_USER_ACTION_CODE.
+        /// </summary>
+        public static string RES_USER_ACTION_CODE {
+            get {
+                return ResourceManager.GetString("RES_USER_ACTION_CODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        public static string RES_ZERO_STRING {
+            get {
+                return ResourceManager.GetString("RES_ZERO_STRING", resourceCulture);
+            }
+        }
     }
 }

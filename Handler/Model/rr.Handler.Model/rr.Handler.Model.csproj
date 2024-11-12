@@ -75,6 +75,7 @@
     <Compile Include="Handler\Model\ReturnCode\ReturnCodeArgs.cs" />
     <Compile Include="Handler\Model\Speech\SpeechModel.cs" />
     <Compile Include="Handler\Catalogue\ModelCatalog.cs" />
+    <Compile Include="Handler\Model\UserAction\UserActionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

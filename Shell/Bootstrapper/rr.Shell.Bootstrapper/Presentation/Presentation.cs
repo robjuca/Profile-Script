@@ -17,6 +17,7 @@ using SPAD.neXt.Interfaces.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Xml.Linq;
 //---------------------------//
 
 namespace rr.Shell
@@ -89,7 +90,13 @@ namespace rr.Shell
                 dataList.Add (scriptData.Clone ());
             }
 
-            Services.CreateScriptDataValue (dataList);
+            Services.CreateScriptDataValue (dataList); // create variables
+
+            // User Action Variable
+            scriptData.AddVariableName (Resources.RES_USER_ACTION_CODE);
+            scriptData.AddVariableValue (Resources.RES_ZERO_STRING);
+
+            Services.SetScriptDataValue (scriptData);
         }
         #endregion
     };

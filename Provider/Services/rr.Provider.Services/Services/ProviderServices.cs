@@ -31,6 +31,7 @@ namespace rr.Provider.Services
         #endregion
 
         #region Members
+        #region Modules
         public void DiscoverModules (IList<Assembly> modules)
         {
             if (modules is not null) {
@@ -71,6 +72,9 @@ namespace rr.Provider.Services
             }
         }
 
+        #endregion
+
+        #region Variable Data Value
         public void CreateScriptDataValue (IList<TScriptDefinitionData> scriptDataList)
         {
             if (scriptDataList is not null) {
@@ -132,6 +136,8 @@ namespace rr.Provider.Services
 
             return false;
         }
+
+        #endregion
 
         public SimulationGamestate RequestGameState (string state = default)
         {

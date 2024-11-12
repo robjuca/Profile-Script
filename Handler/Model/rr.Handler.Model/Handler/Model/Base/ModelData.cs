@@ -15,6 +15,7 @@ namespace rr.Handler.Model
     {
         #region Property
         public string ModelMessage => MessageModel.MessageName;
+        public string UserActionCode => ReceiverModel.UserActionCode;
         public UHandlerModule Module { get; private set; }
         public bool HasModule => Module.Equals (UHandlerModule.NONE) is false;
         public int HandlerIndex { get; private set; }
@@ -27,6 +28,7 @@ namespace rr.Handler.Model
         public TModuleModel ModuleModel { get; private set; }
         public TMessageModel MessageModel { get; private set; }
         public TReceiverModel ReceiverModel { get; private set; }
+        public TUserActionModel UserActionModel { get; private set; }
         #endregion
 
         #region Interface
@@ -39,10 +41,11 @@ namespace rr.Handler.Model
         #region Members
         public void EnableAllModels ()
         {
-            SpeechModel.EnableModel ();
-            ModuleModel.EnableModel ();
-            MessageModel.EnableModel ();
-            ReceiverModel.EnableModel ();
+            SpeechModel.EnableModelFlag ();
+            ModuleModel.EnableModelFlag ();
+            MessageModel.EnableModelFlag ();
+            ReceiverModel.EnableModelFlag ();
+            UserActionModel.EnableModelFlag ();
         }
 
         public void ClearWaitingModels ()
@@ -51,6 +54,7 @@ namespace rr.Handler.Model
             ModuleModel.ClearWaitingFlag ();
             MessageModel.ClearWaitingFlag ();
             ReceiverModel.ClearWaitingFlag ();
+            UserActionModel.ClearWaitingFlag ();
         }
 
         public void ScriptReturnCode (TReturnCodeArgs eventArgs)
@@ -59,15 +63,15 @@ namespace rr.Handler.Model
             ModuleModel.ScriptReturnCode (eventArgs);
             MessageModel.ScriptReturnCode (eventArgs);
             ReceiverModel.ScriptReturnCode (eventArgs);
+            UserActionModel.ScriptReturnCode (eventArgs);
         }
 
         public void Process ()
         {
             ModuleModel.Process ();
             MessageModel.Process ();
-
-            ReceiverModel.AddVariableValue (MessageModel.VariableValue);
             ReceiverModel.Process ();
+            UserActionModel.Process ();
         }
 
         public void ProcessSpeech ()
@@ -78,6 +82,8 @@ namespace rr.Handler.Model
         public void PumpHandlerIndex () => HandlerIndex++;
         public void SetHandlerIndex (int index) => HandlerIndex = index;
         public void ClearHandlerIndex () => HandlerIndex = 0;
+        public void AddUserActionCode (string userCode) => ReceiverModel.AddUserActionCode (userCode);
+        public void RemoveUserActionCode () => ReceiverModel.RemoveUserActionCode ();
 
         public TModelData Clone ()
         {
@@ -87,9 +93,12 @@ namespace rr.Handler.Model
             clone.ModuleModel.CopyFrom (ModuleModel);
             clone.MessageModel.CopyFrom (MessageModel);
             clone.ReceiverModel.CopyFrom (ReceiverModel);
+            clone.UserActionModel.CopyFrom (ReceiverModel);
 
             return clone;
         }
+
+        public void UpdateReceiverMessage (TModelData data) => ReceiverModel.AddVariableValue (MessageModel.NextMessageFlag ? data.MessageModel.VariableValue : MessageModel.VariableValue);
         #endregion
 
         #region Static
@@ -103,6 +112,7 @@ namespace rr.Handler.Model
                 ModuleModel = TModuleModel.Create (services, handlerModule),
                 MessageModel = TMessageModel.Create (services, handlerModule),
                 ReceiverModel = TReceiverModel.Create (services, handlerModule),
+                UserActionModel = TUserActionModel.Create (services, handlerModule),
             };
         }
         #endregion

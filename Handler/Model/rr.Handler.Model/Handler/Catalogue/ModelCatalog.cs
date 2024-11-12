@@ -56,6 +56,14 @@ namespace rr.Handler.Model
             ModelDataList.Clear ();
             ModelDataListIndex = 0;
         }
+
+        public void Next()
+        {
+            if (HasMoreData) {
+                SelectModelDataIndex (pumpIndex: true);
+                ProcessSpeech ();
+            }
+        }
         #endregion
 
         #region Event
@@ -66,12 +74,12 @@ namespace rr.Handler.Model
 
             // speech done
             if (eventArgs.IsSpeechDone) {
-                CurrentModelData.Process ();
+                // update Receiver Message
+                CurrentModelData.UpdateReceiverMessage (NextModelData);
 
-                if (HasMoreData) {
-                    SelectModelDataIndex (pumpIndex: true);
-                    ProcessSpeech ();
-                }
+                // process all modells
+                CurrentModelData.Process ();
+                Next ();
             }
         }
         #endregion
@@ -80,6 +88,7 @@ namespace rr.Handler.Model
         List<TModelData> ModelDataList { get; set; }
         int ModelDataListIndex { get; set; }
         TModelData CurrentModelData => ModelDataList [ ModelDataListIndex ];
+        TModelData NextModelData => ModelDataList [ ModelDataListIndex + 1 ];
         TReturnCodeModel ReturnCodeModel { get; set; }
         UHandlerModule ParentModule { get; set; }
         bool HasMoreData => !CurrentModelData.IsModelWaiting && (ModelDataListIndex + 1) < ModelDataList.Count;
