@@ -33,8 +33,6 @@ namespace rr.Handler.Model
         public bool IsSpeechDisable => CodeType.Equals (UReturnCodeId.SPEECH_DISABLE);
         public bool IsSpeechDone => CodeType.Equals (UReturnCodeId.SPEECH_DONE);
         public bool IsHandlersClear => CodeType.Equals (UReturnCodeId.HANDLERS_CLEAR);
-
-        public bool IsNextModel => CodeType.Equals (UReturnCodeId.NEXT_MODEL);
         public bool IsEmpty => CodeType.Equals (UReturnCodeId.NONE);
         public bool Validate => IsEmpty is false;
         #endregion

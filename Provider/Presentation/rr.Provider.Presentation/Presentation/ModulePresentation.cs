@@ -56,8 +56,8 @@ namespace rr.Provider.Presentation
         protected void ChangeTypeInfo (UHandlerModule module) => ChangeTypeInfo (TTypeInfo.Create (TEnumExtension.NameOf (module), TypeName, "TypeInfo"));
         protected void ChangeTypeInfo (string moduleName) => ChangeTypeInfo (TTypeInfo.Create (moduleName, TypeName, "TypeInfo"));
         protected void SelectActiveModule (UHandlerModule moduleName) => ActiveModule = moduleName;
-        //protected void ClearActiveModule () => ActiveModule = UHandlerModule.NONE;
-       
+        protected void ClearActiveModule () => ActiveModule = UHandlerModule.NONE;
+
         #endregion
 
         #region Property

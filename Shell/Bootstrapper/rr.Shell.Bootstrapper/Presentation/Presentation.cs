@@ -17,7 +17,6 @@ using SPAD.neXt.Interfaces.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Xml.Linq;
 //---------------------------//
 
 namespace rr.Shell

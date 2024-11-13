@@ -95,7 +95,12 @@ namespace rr.Handler.Model
             return clone;
         }
 
-        public void UpdateReceiverMessage (TModelData data) => ReceiverModel.AddVariableValue (MessageModel.NextMessageFlag ? data.MessageModel.VariableValue : MessageModel.VariableValue);
+        public void UpdateReceiverMessage (TModelData data)
+        {
+            if (data is not null) {
+                ReceiverModel.AddVariableValue (MessageModel.NextMessageFlag ? data.MessageModel.VariableValue : MessageModel.VariableValue);
+            }
+        }
         #endregion
 
         #region Static

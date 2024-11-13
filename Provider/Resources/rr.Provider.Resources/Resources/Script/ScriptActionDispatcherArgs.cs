@@ -63,7 +63,8 @@ namespace rr.Provider.Resources
         #endregion
 
         #region Members
-        public bool ContainsReturnCode<T> (T returnCode) where T : Enum => ActionReturnCode.ToString ().Equals (TEnumExtension.GetEnumValueAsString (returnCode)); 
+        public bool ContainsReturnCode<T> (T returnCode) where T : Enum => ActionReturnCode.ToString ().Equals (TEnumExtension.GetEnumValueAsString (returnCode));
+        public bool ContainsReturnCode (string returnCode) => ActionReturnCode.ToString ().Equals (returnCode);
         #endregion
 
         #region Fields

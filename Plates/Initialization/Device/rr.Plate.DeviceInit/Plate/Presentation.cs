@@ -4,9 +4,9 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Handler.Model;
 using rr.Library.EventAggregator;
 using rr.Library.Extension;
-using rr.Handler.Model;
 using rr.Provider.Message;
 using rr.Provider.Presentation;
 using rr.Provider.Resources;
@@ -17,14 +17,13 @@ using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Events;
 
 using System.ComponentModel.Composition;
-using System;
 //---------------------------//
 
 namespace rr.Plate.DeviceInit
 {
     #region Data
     //----- UVariableName
-    public enum UVariableName               // (Variable Name)
+    enum UVariableName               // (Variable Name)
     {
         // Module Handler
         MODULE_NAME_DEVICE_INIT,            // must match with RECEIVER_MODULE_NAME
@@ -38,7 +37,7 @@ namespace rr.Plate.DeviceInit
     };
     //---------------------------// 
 
-    public enum UUserActionCode
+    enum UUserActionCode
     {
         WAIT_DONE   = 210,
     };
@@ -62,8 +61,6 @@ namespace rr.Plate.DeviceInit
             SelectActiveModule (Module);
 
             ModelCatalogue = TModelCatalog.Create (HandlerModule);
-
-            //HandlerModulePresentation.NextModule += OnNextModule;
         }
         #endregion
 
@@ -86,8 +83,6 @@ namespace rr.Plate.DeviceInit
                     CreateVariables ();
                     CreateHandlerData ();
 
-                    //HandlerModulePresentation.Ready (handlerDataList);
-
                     SelectGameState ();
                 }
 
@@ -95,6 +90,7 @@ namespace rr.Plate.DeviceInit
                 if (message.IsAction (UMessageAction.PROFILE_UNLOADED)) {
                     ProfileLoad = false;
                     ModelCatalogue.Cleanup ();
+                    ClearActiveModule ();
                 }
 
                 if (IsActiveModule) {
@@ -103,12 +99,24 @@ namespace rr.Plate.DeviceInit
                         if (message.RequestParam (out TScriptActionDispatcherEventArgs eventArgs)) {
                             // User Action (210) Wait message 
                             if (eventArgs.ContainsReturnCode (UUserActionCode.WAIT_DONE)) {
+                                ModelCatalogue.ResetWaitingFlags ();
                                 ModelCatalogue.Next ();
+                                return;
                             }
 
-                            else {
-                                ModelCatalogue.ProcessScriptReturnCode (eventArgs);
+                            // Model DONE (-80) - must go to next model
+                            if (eventArgs.ContainsReturnCode (Resources.RES_NEXT_MODEL_CODE)) {
+                                ClearActiveModule ();
+
+                                var msg = TMessageInternal.CreateDefault (Module, UMessageAction.NEXT_MODULE);
+                                msg.SelectReceiverModule (UHandlerModule.PROCESS_DISPATCHER);
+                                msg.AddDestinationModule (UHandlerModule.GROUND_OPE);
+
+                                Publish (msg.Clone ());
+                                return;
                             }
+
+                            ModelCatalogue.ProcessScriptReturnCode (eventArgs);
                         }
                     }
                 }
@@ -125,19 +133,6 @@ namespace rr.Plate.DeviceInit
                 }
             }
         }
-
-        //void OnNextModule (object sender, TModuleData data)
-        //{
-        //    if (IsActiveModule) {
-        //        ClearActiveModule ();
-
-        //        var message = TMessageInternal.CreateDefault (Module, UMessageAction.NEXT_MODULE);
-        //        message.SelectParam (TParamInfo.Create (data));
-        //        message.AddDestinationModule (data.NextModule);
-
-        //        Publish (message);
-        //    }
-        //}
         #endregion
 
         #region Property

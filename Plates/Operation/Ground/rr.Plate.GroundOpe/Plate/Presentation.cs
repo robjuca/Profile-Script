@@ -4,40 +4,54 @@
 ----------------------------------------------------------------*/
 
 //----- Include
-using rr.Action.Steps;
+using rr.Handler.Model;
 using rr.Library.EventAggregator;
-using rr.Library.Types;
+using rr.Library.Extension;
 using rr.Provider.Message;
 using rr.Provider.Presentation;
 using rr.Provider.Resources;
 using rr.Provider.Resources.Properties;
+using rr.Provider.Services;
 
 using SPAD.neXt.Interfaces;
 
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 //---------------------------//
 
 namespace rr.Plate
 {
+    #region Data
+    //----- UVariableName
+    enum UVariableName               // (Variable Name)
+    {
+        // Module Handler
+        MODULE_NAME_GROUND_OPE,            // must match with RECEIVER_MODULE_NAME
+
+        // Message to Module
+        MODULE_MESSAGE_GROUND_OPE,         // message to decode (UMessageName) RECEIVER_MODULE_MESSAGE
+
+        // Speech Handler
+        SPEECH_TEXT_GROUND_OPE,            // put text to play here
+        SPEECH_ENABLE_GROUND_OPE,          // to play text condition enable (true or false)
+    };
+    //---------------------------// 
+    #endregion
+
     //----- TGroundOpePresentation
     [Export (typeof (IDefault))]
     public class TGroundOpePresentation : TModulePresentation, IModule
     {
         #region IModule
-        public UModuleId ModuleId => Module;
+        public UHandlerModule HandlerModule => Module;
         #endregion
 
         #region Constructor
         [ImportingConstructor]
         public TGroundOpePresentation (
            IEventAggregator eventAggregator, IProviderServices services)
-               : base (eventAggregator, services, UModuleId.GROUND_OPE)
+               : base (eventAggregator, services, UHandlerModule.GROUND_OPE)
         {
-            ModuleData = [];
-            ActionPresentation = TModuleActionPresentation.Create (Module);
-
-            ActionPresentation.NextModule += OnNextModule;
+            ModelCatalogue = TModelCatalog.Create (HandlerModule);
         }
         #endregion
 
@@ -45,35 +59,49 @@ namespace rr.Plate
         public override void Handle (TMessageInternal message)
         {
             if (message.ValidateReceiver (TypeInfo)) {
-                // INITIALIZE
-                if (message.IsAction (UMessageAction.INITIALIZE)) {
-                    CreateModuleData (); // just once
+                // PROFILE_LOADED
+                if (message.IsAction (UMessageAction.PROFILE_LOADED)) {
+                    ProfileLoad = true;
                 }
 
                 // PROFILE_UNLOADED
                 if (message.IsAction (UMessageAction.PROFILE_UNLOADED)) {
+                    ProfileLoad = false;
+                    ModelCatalogue.Cleanup ();
                     ClearActiveModule ();
-                    ActionPresentation.Cleanup ();
                 }
 
                 // NEXT_MODULE
                 if (message.IsAction (UMessageAction.NEXT_MODULE)) {
-                    if (message.RequestParam (out TModuleData data)) {
-                        ClearActiveModule ();
+                    ClearActiveModule ();
 
-                        if (IsMySelf (data.NextModule)) {
+                    if (IsMySelf (message.ReceiverModule)) {
+                        if (ProfileLoad) {
                             SelectActiveModule (Module);
-                            ActionPresentation.Ready (ModuleData);
-                            ActionPresentation.NextCodeId (UCodeId.C0DE_100);
+
+                            CreateVariables ();
+                            CreateHandlerData ();
                         }
                     }
                 }
 
                 if (IsActiveModule) {
-                    // SCRIPT_ACTION
+                    // SCRIPT_ACTION (from Process_Dispatcher)
                     if (message.IsAction (UMessageAction.SCRIPT_ACTION)) {
-                        if (message.RequestParam (out TActionDispatcherEventArgs eventArgs)) {
-                            ActionPresentation.ProcessAction (eventArgs);
+                        if (message.RequestParam (out TScriptActionDispatcherEventArgs eventArgs)) {
+                            // Model DONE (-80) - must go to next model
+                            if (eventArgs.ContainsReturnCode (Resources.RES_NEXT_MODEL_CODE)) {
+                                ClearActiveModule ();
+
+                                var msg = TMessageInternal.CreateDefault (Module, UMessageAction.NEXT_MODULE);
+                                msg.SelectReceiverModule (UHandlerModule.PROCESS_DISPATCHER);
+                                msg.AddDestinationModule (UHandlerModule.OUTSIDE_OPE);
+
+                                Publish (msg.Clone ());
+                                return;
+                            }
+
+                            ModelCatalogue.ProcessScriptReturnCode (eventArgs);
                         }
                     }
                 }
@@ -81,39 +109,77 @@ namespace rr.Plate
         }
         #endregion
 
-        #region Event
-        void OnNextModule (object sender, TModuleData data)
-        {
-            if (IsActiveModule) {
-                ClearActiveModule ();
-
-                var message = TMessageInternal.CreateDefault (Module, UMessageAction.NEXT_MODULE);
-                message.SelectParam (TParamInfo.Create (data));
-                message.AddDestinationModule (data.NextModule);
-
-                Publish (message);
-            }
-        }
-        #endregion
-
         #region Property
-        List<TModuleData> ModuleData { get; set; }
-        TModuleActionPresentation ActionPresentation { get; set; }
+        bool ProfileLoad { get; set; }
+        TModelCatalog ModelCatalogue { get; set; }
         #endregion
 
         #region Support
-        void CreateModuleData ()
+        void CreateVariables ()
         {
-            ModuleData.Clear ();
+            var data = TScriptDefinitionData.CreateDefault ();
 
-            var data = TModuleData.Create (Module, UCodeId.C0DE_100);
-            data.AddSpeech (Resources.RES_GroundOpeInit);
-            ModuleData.Add (data);
+            // Module Handler
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_NAME_GROUND_OPE));
+            data.AddVariableValue (Resources.RES_EMPTY_VALUE_NAME_GROUND_OPE);
+            Services.SetScriptDataValue (data.Clone ());
 
-            data = TModuleData.Create (Module, UCodeId.C0DE_200);
-            data.AddSpeech (Resources.RES_GroundOpeCode);
-            ModuleData.Add (data);
-            data.AddNextModule (UModuleId.OUTSIDE_OPE);
+            // Message to Module
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_GROUND_OPE));
+            data.AddVariableValue (Resources.RES_EMPTY_VALUE_MESSAGE_GROUND_OPE);
+            Services.SetScriptDataValue (data.Clone ());
+
+            // Speech Handler
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_GROUND_OPE));
+            data.AddVariableValue (Resources.RES_EMPTY_VALUE_SPEECH_TEXT_GROUND_OPE);
+            Services.SetScriptDataValue (data.Clone ());
+
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_GROUND_OPE));
+            data.AddVariableValue (Resources.RES_FALSE_VALUE_SPEECH_ENABLE_GROUND_OPE);
+            Services.SetScriptDataValue (data.Clone ());
+        }
+
+        void CreateHandlerData ()
+        {
+            var modelData = TModelData.Create (Services, Module);
+
+            #region common
+            // Module
+            modelData.ModuleModel.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_NAME_GROUND_OPE));
+            modelData.ModuleModel.AddVariableValue (ModuleName);
+
+            // Message
+            modelData.MessageModel.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_GROUND_OPE));
+
+            // Speech
+            modelData.SpeechModel.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_GROUND_OPE));
+            modelData.SpeechModel.AddEnableVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_GROUND_OPE));
+            modelData.SpeechModel.AddEnableVariableValue (Resources.RES_TRUE);
+            #endregion
+
+            // Text and Message - Waiting...
+            #region Waiting...
+            modelData.SpeechModel.AddVariableValue (
+                    "when ready: set beacon switch on and off : \r\n waiting..."
+                );
+
+            modelData.MessageModel.AddVariableValue ("Waiting");
+
+            modelData.PumpHandlerIndex ();
+            ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
+            #endregion
+
+            // Text and Message - Done...
+            #region Done...
+            modelData.SpeechModel.AddVariableValue (
+                    "done"
+                );
+
+            modelData.MessageModel.AddVariableValue ("Done");
+
+            modelData.PumpHandlerIndex ();
+            ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
+            #endregion
         }
         #endregion
     };

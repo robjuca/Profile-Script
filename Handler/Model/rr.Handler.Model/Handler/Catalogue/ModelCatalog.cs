@@ -14,10 +14,6 @@ namespace rr.Handler.Model
     //----- TModelCatalog
     public class TModelCatalog
     {
-        #region Event
-        //public static event EventHandler<TModelData> NextModule;
-        #endregion
-
         #region Constructor
         TModelCatalog ()
         {
@@ -61,9 +57,16 @@ namespace rr.Handler.Model
         {
             if (HasMoreData) {
                 SelectModelDataIndex (pumpIndex: true);
+
+                if (ClearWaitingFlags) {
+                    CurrentModelData.ClearWaitingModels ();
+                }
+
                 ProcessSpeech ();
             }
         }
+
+        public void ResetWaitingFlags () => ClearWaitingFlags = true;
         #endregion
 
         #region Event
@@ -75,7 +78,9 @@ namespace rr.Handler.Model
             // speech done
             if (eventArgs.IsSpeechDone) {
                 // update Receiver Message
-                CurrentModelData.UpdateReceiverMessage (NextModelData);
+                if (HasMoreData) {
+                    CurrentModelData.UpdateReceiverMessage (NextModelData);
+                }
 
                 // process all modells
                 CurrentModelData.Process ();
@@ -95,6 +100,7 @@ namespace rr.Handler.Model
         TReturnCodeModel ReturnCodeModel { get; set; }
         UHandlerModule ParentModule { get; set; }
         bool HasMoreData => (ModelDataListIndex + 1) < ModelDataList.Count;
+        bool ClearWaitingFlags { get; set; }
         #endregion
 
         #region Support

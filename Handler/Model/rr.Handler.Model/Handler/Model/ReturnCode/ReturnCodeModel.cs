@@ -38,11 +38,6 @@ namespace rr.Handler.Model
                 args = TReturnCodeArgs.Create (UReturnCodeId.SPEECH_DONE, eventArgs);
             }
 
-            // Model DONE (-80) - must go to next model
-            if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_NEXT_MODEL_CODE)) {
-                args = TReturnCodeArgs.Create (UReturnCodeId.NEXT_MODEL, eventArgs);
-            }
-
             //  DONE (-400) - clear Receiver variables, clear Module Message variables, clear Module variables
             if (eventArgs.ActionReturnCode.ToString ().Equals (Resources.RES_HANDLERS_CLEAR_CODE)) {
                 args = TReturnCodeArgs.Create (UReturnCodeId.HANDLERS_CLEAR, eventArgs);

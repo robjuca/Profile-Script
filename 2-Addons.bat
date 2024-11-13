@@ -78,15 +78,15 @@ echo.
 
 
 REM rem PLATES OPERATION GROUND
-REM echo PLATES OPERATION GROUND
-	REM "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"  "D:\Visual Studio 2022\Projects\Profile Script\Plates\Operation\Ground\Plate Ground.sln" /t:rebuild /verbosity:minimal /nologo 
+echo PLATES OPERATION GROUND
+	"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"  "D:\Visual Studio 2022\Projects\Profile Script\Plates\Operation\Ground\Plate Ground.sln" /t:rebuild /verbosity:minimal /nologo 
 	 
 	 
 
-REM echo.
-REM echo.
-REM echo.
-REM echo.
+echo.
+echo.
+echo.
+echo.
 
 REM REM rem PLATES OPERATION OUTSIDE
 REM echo PLATES OPERATION OUTSIDE

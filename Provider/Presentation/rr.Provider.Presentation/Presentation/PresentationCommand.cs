@@ -6,8 +6,6 @@
 //----- Include
 using rr.Library.Types;
 using rr.Provider.Message;
-
-using System;
 //---------------------------//
 
 namespace rr.Provider.Presentation
