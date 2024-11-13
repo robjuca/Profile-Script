@@ -17,6 +17,7 @@ using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Events;
 
 using System.ComponentModel.Composition;
+using System;
 //---------------------------//
 
 namespace rr.Plate.DeviceInit
@@ -101,7 +102,7 @@ namespace rr.Plate.DeviceInit
                     if (message.IsAction (UMessageAction.SCRIPT_ACTION)) {
                         if (message.RequestParam (out TScriptActionDispatcherEventArgs eventArgs)) {
                             // User Action (210) Wait message 
-                            if (eventArgs.ActionReturnCode.ToString ().Equals (UUserActionCode.WAIT_DONE)) {
+                            if (eventArgs.ContainsReturnCode (UUserActionCode.WAIT_DONE)) {
                                 ModelCatalogue.Next ();
                             }
 
@@ -150,21 +151,21 @@ namespace rr.Plate.DeviceInit
             var data = TScriptDefinitionData.CreateDefault ();
 
             // Module Handler
-            data.AddVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_NAME_DEVICE_INIT));
             data.AddVariableValue (Resources.RES_EMPTY_VALUE_NAME_DEVICE_INIT);
             Services.SetScriptDataValue (data.Clone ());
 
             // Message to Module
-            data.AddVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
             data.AddVariableValue (Resources.RES_EMPTY_VALUE_MESSAGE_DEVICE_INIT);
             Services.SetScriptDataValue (data.Clone ());
 
             // Speech Handler
-            data.AddVariableName (ToString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
             data.AddVariableValue (Resources.RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT);
             Services.SetScriptDataValue (data.Clone ());
 
-            data.AddVariableName (ToString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
             data.AddVariableValue (Resources.RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT);
             Services.SetScriptDataValue (data.Clone ());
         }
@@ -175,15 +176,15 @@ namespace rr.Plate.DeviceInit
 
             #region common
             // Module
-            modelData.ModuleModel.AddVariableName (ToString (UVariableName.MODULE_NAME_DEVICE_INIT));
+            modelData.ModuleModel.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_NAME_DEVICE_INIT));
             modelData.ModuleModel.AddVariableValue (ModuleName);
 
             // Message
-            modelData.MessageModel.AddVariableName (ToString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
+            modelData.MessageModel.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
 
             // Speech
-            modelData.SpeechModel.AddVariableName (ToString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
-            modelData.SpeechModel.AddEnableVariableName (ToString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
+            modelData.SpeechModel.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
+            modelData.SpeechModel.AddEnableVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
             modelData.SpeechModel.AddEnableVariableValue (Resources.RES_TRUE);
             #endregion
 
@@ -225,7 +226,8 @@ namespace rr.Plate.DeviceInit
                 );
 
             modelData.MessageModel.AddVariableValue ("Waiting");
-            modelData.ReceiverModel.AddUserActionCode (TEnumExtension.GetEnumValueAsString (UUserActionCode.WAIT_DONE));
+            modelData.ReceiverModel.EnableReceiverNameEmptyFlag ();
+            modelData.UserActionModel.AddUserActionCode (UUserActionCode.WAIT_DONE);
 
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
@@ -239,7 +241,7 @@ namespace rr.Plate.DeviceInit
                 );
 
             modelData.MessageModel.AddVariableValue ("Done");
-            modelData.ReceiverModel.RemoveUserActionCode ();
+            modelData.UserActionModel.RemoveUserActionCode ();
 
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
@@ -260,8 +262,6 @@ namespace rr.Plate.DeviceInit
                 }
             }
         }
-
-        string ToString (UVariableName name) => TEnumExtension.AsString (name);
         #endregion
     };
     //---------------------------//

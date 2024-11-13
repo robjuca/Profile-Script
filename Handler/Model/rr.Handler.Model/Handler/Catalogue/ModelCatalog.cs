@@ -79,7 +79,10 @@ namespace rr.Handler.Model
 
                 // process all modells
                 CurrentModelData.Process ();
-                Next ();
+
+                if (CurrentModelData.IsModelWaiting is false) {
+                    Next ();
+                }
             }
         }
         #endregion
@@ -91,7 +94,7 @@ namespace rr.Handler.Model
         TModelData NextModelData => ModelDataList [ ModelDataListIndex + 1 ];
         TReturnCodeModel ReturnCodeModel { get; set; }
         UHandlerModule ParentModule { get; set; }
-        bool HasMoreData => !CurrentModelData.IsModelWaiting && (ModelDataListIndex + 1) < ModelDataList.Count;
+        bool HasMoreData => (ModelDataListIndex + 1) < ModelDataList.Count;
         #endregion
 
         #region Support

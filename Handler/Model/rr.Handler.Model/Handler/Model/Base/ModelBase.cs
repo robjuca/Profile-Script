@@ -9,6 +9,8 @@ using rr.Library.Extension;
 using rr.Provider.Resources;
 using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
+
+using System;
 //---------------------------//
 
 namespace rr.Handler.Model
@@ -20,7 +22,8 @@ namespace rr.Handler.Model
         protected bool ModelEnabledFlag { get; private set; } = enableModel;
         public bool WaitingFlag { get; private set; }
         public bool NextMessageFlag { get; private set; }
-        public string UserActionCode { get; private set; }
+        protected bool ReceiverNameEmptyFlag { get; private set; }
+        protected string UserActionCode { get; private set; }
         protected UHandlerModule HandlerModule { get; private set; } = handlerModule;
         protected IProviderServices Services { get; private set; } = services;
         protected bool HasModule => HandlerModule.Equals (UHandlerModule.NONE) is false;
@@ -86,7 +89,14 @@ namespace rr.Handler.Model
         public void AddEnableVariableValue (string enableVariableValue) => EnableVariableValue = enableVariableValue;
 
         // User Action Code
-        public void AddUserActionCode (string userCode) => UserActionCode = userCode;
+        public void AddUserActionCode<T> (T userCode) where T : Enum
+        {
+            if (TEnumExtension.AsInt<T> (userCode) is int val) {
+                AddUserActionCode (val.ToString ());
+            }
+        }
+
+        protected void AddUserActionCode (string userCode) => UserActionCode = userCode;
         public void RemoveUserActionCode () => UserActionCode = Resources.RES_ZERO_STRING;
 
         public void CopyFrom (TModelBase alias)
@@ -100,6 +110,7 @@ namespace rr.Handler.Model
                 CopyEnableModelFlag (alias.ModelEnabledFlag);
                 CopyWaitingFlag (alias.WaitingFlag);
                 CopyNextMessageFlag (alias.NextMessageFlag);
+                CopyReceiverNameEmptyFlag (alias.ReceiverNameEmptyFlag);    
 
                 AddUserActionCode (alias.UserActionCode);
             }
@@ -107,15 +118,25 @@ namespace rr.Handler.Model
         #endregion
 
         #region Members
+        // Enable Flag
         public void EnableModelFlag () => ModelEnabledFlag = true;
         public void DisableEnableFlag () => ModelEnabledFlag = false;
-        public void CopyEnableModelFlag (bool enable) => ModelEnabledFlag = enable;
+        protected void CopyEnableModelFlag (bool enable) => ModelEnabledFlag = enable;
+
+        // Waiting Flag
         public void ClearWaitingFlag () => WaitingFlag = false;
         public void EnableWaitingFlag () => WaitingFlag = true;
-        public void CopyWaitingFlag (bool waiting) => WaitingFlag = waiting;
+        protected void CopyWaitingFlag (bool waiting) => WaitingFlag = waiting;
+
+        // NextMessage Flag
         public void EnableNextMessageFlag () => NextMessageFlag = true;
         public void ClearNextMessageFlag () => NextMessageFlag = false;
-        public void CopyNextMessageFlag (bool flag) => NextMessageFlag = flag;
+        protected void CopyNextMessageFlag (bool flag) => NextMessageFlag = flag;
+
+        // ReceiverName Flag
+        public void EnableReceiverNameEmptyFlag () => ReceiverNameEmptyFlag = true;
+        public void ClearReceiverNameEmptyFlag () => ReceiverNameEmptyFlag = false;
+        public void CopyReceiverNameEmptyFlag (bool flag) => ReceiverNameEmptyFlag = flag;
 
         protected TScriptDefinitionData DefinitionData => TScriptDefinitionData.CreateDefault ();
         #endregion

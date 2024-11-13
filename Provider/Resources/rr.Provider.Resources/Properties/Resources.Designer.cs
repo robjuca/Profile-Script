@@ -178,7 +178,7 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RR_USER_ACTION_CODE.
+        ///   Looks up a localized string similar to USER_ACTION_CODE.
         /// </summary>
         public static string RES_USER_ACTION_CODE {
             get {

@@ -53,7 +53,7 @@ namespace rr.Handler.Model
             var definitionData = DefinitionData;
 
             // Receiver Module
-            if (Services.ContainsDataValue (key, ModuleName)) {
+            if (Services.ContainsDataValue (key, ModuleName) | ReceiverNameEmptyFlag) {
                 dataValue = Resources.RES_EMPTY; // clear
             }
 

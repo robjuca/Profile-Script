@@ -9,8 +9,6 @@ using rr.Library.Extension;
 
 using SPAD.neXt.Interfaces;
 using SPAD.neXt.Interfaces.Configuration;
-
-using System.Runtime.Serialization.Formatters;
 //---------------------------//
 
 namespace rr.Provider.Services

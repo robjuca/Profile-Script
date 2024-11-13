@@ -4,10 +4,13 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Library.Extension;
+
 using SPAD.neXt.Interfaces.Events;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 //---------------------------//
 
 namespace rr.Provider.Resources
@@ -57,6 +60,10 @@ namespace rr.Provider.Resources
             m_Plates.Add ("SCRIPT_3_3", UHandlerModule.ENGINE_OPE);
             m_Plates.Add ("SCRIPT_3_8", UHandlerModule.FLYING_EVENT);
         }
+        #endregion
+
+        #region Members
+        public bool ContainsReturnCode<T> (T returnCode) where T : Enum => ActionReturnCode.ToString ().Equals (TEnumExtension.GetEnumValueAsString (returnCode)); 
         #endregion
 
         #region Fields

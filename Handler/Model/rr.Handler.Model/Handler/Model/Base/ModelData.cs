@@ -15,7 +15,6 @@ namespace rr.Handler.Model
     {
         #region Property
         public string ModelMessage => MessageModel.MessageName;
-        public string UserActionCode => ReceiverModel.UserActionCode;
         public UHandlerModule Module { get; private set; }
         public bool HasModule => Module.Equals (UHandlerModule.NONE) is false;
         public int HandlerIndex { get; private set; }
@@ -82,8 +81,6 @@ namespace rr.Handler.Model
         public void PumpHandlerIndex () => HandlerIndex++;
         public void SetHandlerIndex (int index) => HandlerIndex = index;
         public void ClearHandlerIndex () => HandlerIndex = 0;
-        public void AddUserActionCode (string userCode) => ReceiverModel.AddUserActionCode (userCode);
-        public void RemoveUserActionCode () => ReceiverModel.RemoveUserActionCode ();
 
         public TModelData Clone ()
         {
@@ -93,7 +90,7 @@ namespace rr.Handler.Model
             clone.ModuleModel.CopyFrom (ModuleModel);
             clone.MessageModel.CopyFrom (MessageModel);
             clone.ReceiverModel.CopyFrom (ReceiverModel);
-            clone.UserActionModel.CopyFrom (ReceiverModel);
+            clone.UserActionModel.CopyFrom (UserActionModel);
 
             return clone;
         }
