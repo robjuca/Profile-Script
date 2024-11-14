@@ -89,15 +89,15 @@ echo.
 echo.
 
 REM REM rem PLATES OPERATION OUTSIDE
-REM echo PLATES OPERATION OUTSIDE
-	REM "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"  "D:\Visual Studio 2022\Projects\Profile Script\Plates\Operation\Outside\Plate Outside.sln" 	/t:rebuild /verbosity:minimal /nologo 
+echo PLATES OPERATION OUTSIDE
+	"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"  "D:\Visual Studio 2022\Projects\Profile Script\Plates\Operation\Outside\Plate Outside.sln" 	/t:rebuild /verbosity:minimal /nologo 
 	 
 	 
 
-REM echo.
-REM echo.
-REM echo.
-REM echo.
+echo.
+echo.
+echo.
+echo.
 
 
 REM REM rem PLATES OPERATION DOOR

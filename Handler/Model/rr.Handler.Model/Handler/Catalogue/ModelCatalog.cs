@@ -26,12 +26,11 @@ namespace rr.Handler.Model
         #endregion
 
         #region Members
-        public void Execute (string messageValue)
+        public void Execute (string messageValue = default)
         {
-            if (SelectMessageValue (messageValue)) {
-                SelectModelDataIndex ();
-                ProcessSpeech ();
-            }
+            SelectMessageValue (messageValue);
+            SelectModelDataIndex ();
+            ProcessSpeech ();
         }
 
         public void AddModelData (TModelData data)
@@ -53,7 +52,7 @@ namespace rr.Handler.Model
             ModelDataListIndex = 0;
         }
 
-        public void Next()
+        public void Next ()
         {
             if (HasMoreData) {
                 SelectModelDataIndex (pumpIndex: true);
@@ -107,19 +106,19 @@ namespace rr.Handler.Model
         void SelectModelDataIndex (bool pumpIndex = false) => ModelDataListIndex = pumpIndex ? (ModelDataListIndex + 1) : ModelDataListIndex;
         void ProcessSpeech () => CurrentModelData.ProcessSpeech ();
 
-        bool SelectMessageValue (string messageValue)
+        void SelectMessageValue (string messageValue)
         {
             ModelDataListIndex = 0;
 
-            foreach (var data in ModelDataList) {
-                if (data.MessageModel.ContainsNameValue (messageValue)) {
-                    return true;
+            if (messageValue is not null) {
+                foreach (var data in ModelDataList) {
+                    if (data.MessageModel.ContainsNameValue (messageValue)) {
+                        break;
+                    }
+
+                    ModelDataListIndex++;
                 }
-
-                ModelDataListIndex++;
             }
-
-            return false;
         }
         #endregion
 

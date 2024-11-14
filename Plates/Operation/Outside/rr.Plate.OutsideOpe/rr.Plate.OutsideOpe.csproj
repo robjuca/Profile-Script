@@ -34,45 +34,36 @@
     <LangVersion>12</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="rr.Library.EventAggregator">
-      <HintPath>..\..\..\Bin\LibraryBin\rr.Library.EventAggregator.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="rr.Library.Extensions">
-      <HintPath>..\..\..\Bin\LibraryBin\rr.Library.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="rr.Library.Infrastructure">
-      <HintPath>..\..\..\Bin\LibraryBin\rr.Library.Infrastructure.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="rr.Library.Message">
-      <HintPath>..\..\..\Bin\LibraryBin\rr.Library.Message.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="rr.Library.Types">
-      <HintPath>..\..\..\Bin\LibraryBin\rr.Library.Types.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="rr.Profile.Message, Version=1.0.2024.8, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="rr.Handler.Model, Version=1.0.2024.9, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Bin\rr.Profile.Message.dll</HintPath>
+      <HintPath>..\..\..\..\Bin\rr.Handler.Model.dll</HintPath>
     </Reference>
-    <Reference Include="rr.Profile.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="rr.Library.EventAggregator, Version=1.0.2024.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Bin\rr.Profile.Presentation.dll</HintPath>
+      <HintPath>..\..\..\..\Bin\rr.Library.EventAggregator.dll</HintPath>
     </Reference>
-    <Reference Include="rr.Profile.Resources, Version=1.0.2024.8, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="rr.Library.Extensions, Version=1.0.2024.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Bin\rr.Profile.Resources.dll</HintPath>
+      <HintPath>..\..\..\..\Bin\rr.Library.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="rr.Profile.Steps, Version=1.0.2024.9, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="rr.Library.Infrastructure, Version=1.0.2024.7, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="rr.Library.Message, Version=1.0.2024.7, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="rr.Library.Types, Version=1.0.2024.7, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="rr.Provider.Message, Version=1.0.2024.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Bin\rr.Profile.Steps.dll</HintPath>
+      <HintPath>..\..\..\..\Bin\rr.Provider.Message.dll</HintPath>
     </Reference>
-    <Reference Include="SPAD.Interfaces">
-      <HintPath>C:\Program Files\SPAD.neXt\SPAD.Interfaces.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="rr.Provider.Presentation, Version=1.0.2024.8, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\rr.Provider.Presentation.dll</HintPath>
+    </Reference>
+    <Reference Include="rr.Provider.Resources, Version=1.0.2024.8, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\rr.Provider.Resources.dll</HintPath>
+    </Reference>
+    <Reference Include="rr.Provider.Services, Version=1.0.2024.8, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Bin\rr.Provider.Services.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />

@@ -13,8 +13,6 @@ using rr.Provider.Resources;
 using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 
-using SPAD.neXt.Interfaces;
-
 using System.ComponentModel.Composition;
 //---------------------------//
 
@@ -81,6 +79,8 @@ namespace rr.Plate
 
                             CreateVariables ();
                             CreateHandlerData ();
+
+                            ModelCatalogue.Execute ();
                         }
                     }
                 }
@@ -157,13 +157,13 @@ namespace rr.Plate
             modelData.SpeechModel.AddEnableVariableValue (Resources.RES_TRUE);
             #endregion
 
-            // Text and Message - Waiting...
+            // Text and Message - Begin...
             #region Waiting...
             modelData.SpeechModel.AddVariableValue (
-                    "when ready: set beacon switch on and off : \r\n waiting..."
+                    "ground operation start"
                 );
 
-            modelData.MessageModel.AddVariableValue ("Waiting");
+            modelData.MessageModel.AddVariableValue (TEnumExtension.NameOf (UMessageValue.Begin));
 
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
@@ -172,10 +172,10 @@ namespace rr.Plate
             // Text and Message - Done...
             #region Done...
             modelData.SpeechModel.AddVariableValue (
-                    "done"
+                    "ground operation done"
                 );
 
-            modelData.MessageModel.AddVariableValue ("Done");
+            modelData.MessageModel.AddVariableValue (TEnumExtension.NameOf (UMessageValue.Done));
 
             modelData.PumpHandlerIndex ();
             ModelCatalogue.AddModelData (modelData.Clone ());  // add to list 
