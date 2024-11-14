@@ -79,6 +79,15 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RES_EMPTY_VALUE_MESSAGE_DOOR_OPE.
+        /// </summary>
+        public static string RES_EMPTY_VALUE_MESSAGE_DOOR_OPE {
+            get {
+                return ResourceManager.GetString("RES_EMPTY_VALUE_MESSAGE_DOOR_OPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RES_EMPTY_VALUE_MESSAGE_GROUND_OPE.
         /// </summary>
         public static string RES_EMPTY_VALUE_MESSAGE_GROUND_OPE {
@@ -106,6 +115,15 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RES_EMPTY_VALUE_NAME_DOOR_OPE.
+        /// </summary>
+        public static string RES_EMPTY_VALUE_NAME_DOOR_OPE {
+            get {
+                return ResourceManager.GetString("RES_EMPTY_VALUE_NAME_DOOR_OPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RES_EMPTY_VALUE_NAME_GROUND_OPE.
         /// </summary>
         public static string RES_EMPTY_VALUE_NAME_GROUND_OPE {
@@ -129,6 +147,15 @@ namespace rr.Provider.Resources.Properties {
         public static string RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT {
             get {
                 return ResourceManager.GetString("RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RES_EMPTY_VALUE_SPEECH_TEXT_DOOR_OPE.
+        /// </summary>
+        public static string RES_EMPTY_VALUE_SPEECH_TEXT_DOOR_OPE {
+            get {
+                return ResourceManager.GetString("RES_EMPTY_VALUE_SPEECH_TEXT_DOOR_OPE", resourceCulture);
             }
         }
         
@@ -165,6 +192,15 @@ namespace rr.Provider.Resources.Properties {
         public static string RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT {
             get {
                 return ResourceManager.GetString("RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RES_FALSE_VALUE_SPEECH_ENABLE_DOOR_OPE.
+        /// </summary>
+        public static string RES_FALSE_VALUE_SPEECH_ENABLE_DOOR_OPE {
+            get {
+                return ResourceManager.GetString("RES_FALSE_VALUE_SPEECH_ENABLE_DOOR_OPE", resourceCulture);
             }
         }
         

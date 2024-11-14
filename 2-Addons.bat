@@ -101,15 +101,15 @@ echo.
 
 
 REM REM rem PLATES OPERATION DOOR
-REM echo PLATES OPERATION DOOR
-	REM "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"  "D:\Visual Studio 2022\Projects\Profile Script\Plates\Operation\Door\Plate Door.sln" 	/t:rebuild /verbosity:minimal /nologo 
+echo PLATES OPERATION DOOR
+	"C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\MSBuild.exe"  "D:\Visual Studio 2022\Projects\Profile Script\Plates\Operation\Door\Plate Door.sln" 	/t:rebuild /verbosity:minimal /nologo 
 	 
 	 
 
-REM echo.
-REM echo.
-REM echo.
-REM echo.
+echo.
+echo.
+echo.
+echo.
 
 
 REM rem PLATES INITIALIZATION DEVICE
