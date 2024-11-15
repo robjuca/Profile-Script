@@ -77,6 +77,16 @@ namespace rr.Provider.Message
 
             return msg;
         }
+
+        public static TMessageInternal CreateFrom (TNextModuleData data)
+        {
+            var msg = CreateDefault (data.CurrentModuleName, data.NextModuleAction);
+            msg.SelectReceiverModule (data.ReceiverModuleName);
+            msg.AddDestinationModule (data.NextModuleName);
+            msg.SelectParam (TParamInfo.Create (data));
+
+            return msg;
+        }
         #endregion
     };
     //---------------------------//

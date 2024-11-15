@@ -26,6 +26,7 @@ namespace rr.Provider.Resources
         MSG_SWITCH_ON,
         MSG_WIN_CLOSE,
         MSG_WIN_OPEN,
+        NONE
     };
     //---------------------------//
 

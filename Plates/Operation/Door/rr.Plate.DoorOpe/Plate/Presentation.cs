@@ -92,6 +92,7 @@ namespace rr.Plate
                         if (message.RequestParam (out TScriptActionDispatcherEventArgs eventArgs)) {
                             // Model DONE (-80) - must go to next model
                             if (eventArgs.ContainsReturnCode (Resources.RES_NEXT_MODEL_CODE)) {
+                                ModelCatalogue.Cleanup ();
                                 ClearActiveModule ();
 
                                 var msg = TMessageInternal.CreateDefault (Module, UMessageAction.NEXT_MODULE);

@@ -72,15 +72,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Message\Data\NextModuleData.cs" />
     <Compile Include="Message\HandleMessage.cs" />
     <Compile Include="Message\Interfaces\IHandle.cs" />
     <Compile Include="Message\Interfaces\IModulePresentation.cs" />
     <Compile Include="Message\ModuleMessage.cs" />
     <Compile Include="ModuleCatalog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

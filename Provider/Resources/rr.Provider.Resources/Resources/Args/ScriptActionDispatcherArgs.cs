@@ -10,7 +10,6 @@ using SPAD.neXt.Interfaces.Events;
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 //---------------------------//
 
 namespace rr.Provider.Resources

@@ -24,7 +24,6 @@ namespace rr.Provider.Resources
         FLYING_EVENT,
         SHELL_CREATION,
         SHELL_BOOTSTRAPPER,
-        //SHELL_STEPS,
         PROCESS_DISPATCHER,
         NONE,
     };

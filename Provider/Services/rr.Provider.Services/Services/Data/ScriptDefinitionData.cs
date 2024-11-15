@@ -48,7 +48,7 @@ namespace rr.Provider.Services
         #endregion
 
         #region Property
-        bool ValidateVariableValue => !string.IsNullOrEmpty (VariableValue) & !VariableValue.Equals (Resources.Properties.Resources.RES_EMPTY);
+        bool ValidateVariableValue => string.IsNullOrEmpty (VariableValue) is false;
         #endregion
 
         #region Static
