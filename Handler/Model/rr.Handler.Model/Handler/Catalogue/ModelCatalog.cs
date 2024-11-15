@@ -48,6 +48,8 @@ namespace rr.Handler.Model
 
         public void Cleanup ()
         {
+            CurrentModelData.Cleanup ();
+
             ModelDataList.Clear ();
             ModelDataListIndex = 0;
         }

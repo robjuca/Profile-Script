@@ -35,7 +35,7 @@ namespace rr.Handler.Model
                     if (args.IsHandlersClear) {
                         // Message
                         definitionData.AddVariableName (VariableName);
-                        definitionData.AddVariableValue (Resources.RES_EMPTY);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY_MODEL_MESSAGE_NAME_VALUE_DEFAULT);
 
                         SetScriptDataValue (definitionData.Clone ());
                     }
@@ -55,18 +55,16 @@ namespace rr.Handler.Model
 
                     SetScriptDataValue (definitionData.Clone ());
                 }
-
-                // UPDATE Receiver Message Value
-                //definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
-                //definitionData.AddVariableValue (VariableValue);
-
-                //SetScriptDataValue (definitionData.Clone ());
-
-                // Message Name Value
-                //string nameValue = WaitingFlag ? LastVariableNameValue : Resources.RES_EMPTY;
-
-               
             }
+        }
+
+        public override void Cleanup ()
+        {
+            var definitionData = DefinitionData;
+            definitionData.AddVariableName (VariableName);
+            definitionData.AddVariableValue (Resources.RES_EMPTY_MODEL_MESSAGE_NAME_VALUE_DEFAULT);
+
+            SetScriptDataValue (definitionData.Clone ());
         }
         #endregion
 

@@ -144,6 +144,7 @@ namespace rr.Handler.Model
         #region Virtual
         public virtual void Process () { }
         public virtual void ScriptReturnCode (TReturnCodeArgs args) { }
+        public virtual void Cleanup () { }
         #endregion
 
         #region Support

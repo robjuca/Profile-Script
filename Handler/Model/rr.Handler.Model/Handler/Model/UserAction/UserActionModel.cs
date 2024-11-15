@@ -32,6 +32,15 @@ namespace rr.Handler.Model
 
             SetScriptDataValue (definitionData.Clone ());
         }
+
+        public override void Cleanup ()
+        {
+            var definitionData = DefinitionData;
+            definitionData.AddVariableName (Resources.RES_USER_ACTION_CODE);
+            definitionData.AddVariableValue (Resources.RES_ZERO_STRING);
+
+            SetScriptDataValue (definitionData.Clone ());
+        }
         #endregion
 
         #region Static

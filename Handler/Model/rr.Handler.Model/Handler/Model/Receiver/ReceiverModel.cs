@@ -54,7 +54,7 @@ namespace rr.Handler.Model
 
             // Receiver Module
             if (Services.ContainsDataValue (key, ModuleName) | ReceiverNameEmptyFlag) {
-                dataValue = Resources.RES_EMPTY; // clear
+                dataValue = Resources.RES_EMPTY_MODEL_RECEIVER_NAME_VALUE_DEFAULT; // clear
             }
 
             definitionData.AddVariableName (key);
@@ -65,6 +65,23 @@ namespace rr.Handler.Model
             // Receiver Message
             definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
             definitionData.AddVariableValue (VariableValue);
+
+            SetScriptDataValue (definitionData.Clone ());
+        }
+
+        public override void Cleanup ()
+        {
+            var definitionData = DefinitionData;
+
+            // Receiver Module
+            definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_NAME));
+            definitionData.AddVariableValue (Resources.RES_EMPTY_MODEL_RECEIVER_NAME_VALUE_DEFAULT);
+
+            SetScriptDataValue (definitionData.Clone ());
+
+            // Receiver Message
+            definitionData.AddVariableName (ReceiverToString (UReceiverModule.RECEIVER_MODULE_MESSAGE));
+            definitionData.AddVariableValue (Resources.RES_EMPTY_MODEL_RECEIVER_MESSAGE_NAME_VALUE_DEFAULT);
 
             SetScriptDataValue (definitionData.Clone ());
         }

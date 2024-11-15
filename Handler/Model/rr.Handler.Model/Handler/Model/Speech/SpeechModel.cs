@@ -30,14 +30,14 @@ namespace rr.Handler.Model
 
                     if (args.IsSpeechDisable) {
                         definitionData.AddVariableName (EnableVariableName);
-                        definitionData.AddVariableValue (Resources.RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT);
+                        definitionData.AddVariableValue (Resources.RES_FALSE_MODEL_SPEECH_ENABLE_VALUE_DEFAULT);
 
                         SetScriptDataValue (definitionData.Clone ());
                     }
 
                     if (args.IsSpeechDone) {
                         definitionData.AddVariableName (VariableName);
-                        definitionData.AddVariableValue (Resources.RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT);
+                        definitionData.AddVariableValue (Resources.RES_EMPTY_MODEL_SPEECH_NAME_VALUE_DEFAULT);
 
                         SetScriptDataValue (definitionData.Clone ());
                     }
@@ -62,6 +62,21 @@ namespace rr.Handler.Model
 
                 SetScriptDataValue (definitionData.Clone ());
             }
+        }
+
+        public override void Cleanup ()
+        {
+            var definitionData = DefinitionData;
+
+            definitionData.AddVariableName (EnableVariableName);
+            definitionData.AddVariableValue (Resources.RES_FALSE_MODEL_SPEECH_ENABLE_VALUE_DEFAULT);
+
+            SetScriptDataValue (definitionData.Clone ());
+
+            definitionData.AddVariableName (VariableName);
+            definitionData.AddVariableValue (Resources.RES_EMPTY_MODEL_SPEECH_NAME_VALUE_DEFAULT);
+
+            SetScriptDataValue (definitionData.Clone ());
         }
         #endregion
 

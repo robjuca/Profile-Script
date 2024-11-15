@@ -25,15 +25,15 @@ namespace rr.Plate.DeviceInit
     //----- UVariableName
     enum UVariableName               // (Variable Name)
     {
-        // Module Handler
-        MODULE_NAME_DEVICE_INIT,            // must match with RECEIVER_MODULE_NAME
+        // Module 
+        DEVICE_INIT_MODULE,            // must match with RECEIVER_MODULE_NAME
 
-        // Message to Module
-        MODULE_MESSAGE_DEVICE_INIT,         // message to decode (UMessageName) RECEIVER_MODULE_MESSAGE
+        // Message
+        DEVICE_INIT_MESSAGE,         // message to decode (UMessageName) RECEIVER_MODULE_MESSAGE
 
-        // Speech Handler
-        SPEECH_TEXT_DEVICE_INIT,            // put text to play here
-        SPEECH_ENABLE_DEVICE_INIT,          // to play text condition enable (true or false)
+        // Speech 
+        DEVICE_INIT_SPEECH,            // put text to play here
+        DEVICE_INIT_SPEECH_ENABLE,          // to play text condition enable (true or false)
     };
     //---------------------------// 
 
@@ -145,23 +145,23 @@ namespace rr.Plate.DeviceInit
         {
             var data = TScriptDefinitionData.CreateDefault ();
 
-            // Module Handler
-            data.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_NAME_DEVICE_INIT));
-            data.AddVariableValue (Resources.RES_EMPTY_VALUE_NAME_DEVICE_INIT);
+            // Module 
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.DEVICE_INIT_MODULE));
+            data.AddVariableValue (Resources.RES_EMPTY_MODEL_MODULE_NAME_VALUE_DEFAULT);
             Services.SetScriptDataValue (data.Clone ());
 
-            // Message to Module
-            data.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
-            data.AddVariableValue (Resources.RES_EMPTY_VALUE_MESSAGE_DEVICE_INIT);
+            // Message 
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.DEVICE_INIT_MESSAGE));
+            data.AddVariableValue (Resources.RES_EMPTY_MODEL_MESSAGE_NAME_VALUE_DEFAULT);
             Services.SetScriptDataValue (data.Clone ());
 
-            // Speech Handler
-            data.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
-            data.AddVariableValue (Resources.RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT);
+            // Speech 
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.DEVICE_INIT_SPEECH));
+            data.AddVariableValue (Resources.RES_EMPTY_MODEL_SPEECH_NAME_VALUE_DEFAULT);
             Services.SetScriptDataValue (data.Clone ());
 
-            data.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
-            data.AddVariableValue (Resources.RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT);
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.DEVICE_INIT_SPEECH_ENABLE));
+            data.AddVariableValue (Resources.RES_FALSE_MODEL_SPEECH_ENABLE_VALUE_DEFAULT);
             Services.SetScriptDataValue (data.Clone ());
         }
 
@@ -171,15 +171,15 @@ namespace rr.Plate.DeviceInit
 
             #region common
             // Module
-            modelData.ModuleModel.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_NAME_DEVICE_INIT));
+            modelData.ModuleModel.AddVariableName (TEnumExtension.AsString (UVariableName.DEVICE_INIT_MODULE));
             modelData.ModuleModel.AddVariableValue (ModuleName);
 
             // Message
-            modelData.MessageModel.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_DEVICE_INIT));
+            modelData.MessageModel.AddVariableName (TEnumExtension.AsString (UVariableName.DEVICE_INIT_MESSAGE));
 
             // Speech
-            modelData.SpeechModel.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_DEVICE_INIT));
-            modelData.SpeechModel.AddEnableVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_DEVICE_INIT));
+            modelData.SpeechModel.AddVariableName (TEnumExtension.AsString (UVariableName.DEVICE_INIT_SPEECH));
+            modelData.SpeechModel.AddEnableVariableName (TEnumExtension.AsString (UVariableName.DEVICE_INIT_SPEECH_ENABLE));
             modelData.SpeechModel.AddEnableVariableValue (Resources.RES_TRUE);
             #endregion
 

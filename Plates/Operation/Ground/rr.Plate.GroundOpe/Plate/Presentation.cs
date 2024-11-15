@@ -22,15 +22,15 @@ namespace rr.Plate
     //----- UVariableName
     enum UVariableName               // (Variable Name)
     {
-        // Module Handler
-        MODULE_NAME_GROUND_OPE,            // must match with RECEIVER_MODULE_NAME
+        // Module 
+        GROUND_OPE_MODULE,            // must match with RECEIVER_MODULE_NAME
 
-        // Message to Module
-        MODULE_MESSAGE_GROUND_OPE,         // message to decode (UMessageName) RECEIVER_MODULE_MESSAGE
+        // Message 
+        GROUND_OPE_MESSAGE,         // message to decode (UMessageName) RECEIVER_MODULE_MESSAGE
 
-        // Speech Handler
-        SPEECH_TEXT_GROUND_OPE,            // put text to play here
-        SPEECH_ENABLE_GROUND_OPE,          // to play text condition enable (true or false)
+        // Speech 
+        GROUND_OPE_SPEECH,            // put text to play here
+        GROUND_OPE_SPEECH_ENABLE,          // to play text condition enable (true or false)
     };
     //---------------------------// 
     #endregion
@@ -119,23 +119,23 @@ namespace rr.Plate
         {
             var data = TScriptDefinitionData.CreateDefault ();
 
-            // Module Handler
-            data.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_NAME_GROUND_OPE));
-            data.AddVariableValue (Resources.RES_EMPTY_VALUE_NAME_GROUND_OPE);
+            // Module Model
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.GROUND_OPE_MODULE));
+            data.AddVariableValue (Resources.RES_EMPTY_MODEL_MODULE_NAME_VALUE_DEFAULT);
             Services.SetScriptDataValue (data.Clone ());
 
-            // Message to Module
-            data.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_GROUND_OPE));
-            data.AddVariableValue (Resources.RES_EMPTY_VALUE_MESSAGE_GROUND_OPE);
+            // Message Model
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.GROUND_OPE_MESSAGE));
+            data.AddVariableValue (Resources.RES_EMPTY_MODEL_MESSAGE_NAME_VALUE_DEFAULT);
             Services.SetScriptDataValue (data.Clone ());
 
             // Speech Handler
-            data.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_GROUND_OPE));
-            data.AddVariableValue (Resources.RES_EMPTY_VALUE_SPEECH_TEXT_GROUND_OPE);
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.GROUND_OPE_SPEECH));
+            data.AddVariableValue (Resources.RES_EMPTY_MODEL_SPEECH_NAME_VALUE_DEFAULT);
             Services.SetScriptDataValue (data.Clone ());
 
-            data.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_GROUND_OPE));
-            data.AddVariableValue (Resources.RES_FALSE_VALUE_SPEECH_ENABLE_GROUND_OPE);
+            data.AddVariableName (TEnumExtension.AsString (UVariableName.GROUND_OPE_SPEECH_ENABLE));
+            data.AddVariableValue (Resources.RES_FALSE_MODEL_SPEECH_ENABLE_VALUE_DEFAULT);
             Services.SetScriptDataValue (data.Clone ());
         }
 
@@ -145,15 +145,15 @@ namespace rr.Plate
 
             #region common
             // Module
-            modelData.ModuleModel.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_NAME_GROUND_OPE));
+            modelData.ModuleModel.AddVariableName (TEnumExtension.AsString (UVariableName.GROUND_OPE_MODULE));
             modelData.ModuleModel.AddVariableValue (ModuleName);
 
             // Message
-            modelData.MessageModel.AddVariableName (TEnumExtension.AsString (UVariableName.MODULE_MESSAGE_GROUND_OPE));
+            modelData.MessageModel.AddVariableName (TEnumExtension.AsString (UVariableName.GROUND_OPE_MESSAGE));
 
             // Speech
-            modelData.SpeechModel.AddVariableName (TEnumExtension.AsString (UVariableName.SPEECH_TEXT_GROUND_OPE));
-            modelData.SpeechModel.AddEnableVariableName (TEnumExtension.AsString (UVariableName.SPEECH_ENABLE_GROUND_OPE));
+            modelData.SpeechModel.AddVariableName (TEnumExtension.AsString (UVariableName.GROUND_OPE_SPEECH));
+            modelData.SpeechModel.AddEnableVariableName (TEnumExtension.AsString (UVariableName.GROUND_OPE_SPEECH_ENABLE));
             modelData.SpeechModel.AddEnableVariableValue (Resources.RES_TRUE);
             #endregion
 

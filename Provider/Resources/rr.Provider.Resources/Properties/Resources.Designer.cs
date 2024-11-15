@@ -70,110 +70,47 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_MESSAGE_DEVICE_INIT.
+        ///   Looks up a localized string similar to EMPTY_MODEL_MESSAGE_NAME_VALUE_DEFAULT.
         /// </summary>
-        public static string RES_EMPTY_VALUE_MESSAGE_DEVICE_INIT {
+        public static string RES_EMPTY_MODEL_MESSAGE_NAME_VALUE_DEFAULT {
             get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_MESSAGE_DEVICE_INIT", resourceCulture);
+                return ResourceManager.GetString("RES_EMPTY_MODEL_MESSAGE_NAME_VALUE_DEFAULT", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_MESSAGE_DOOR_OPE.
+        ///   Looks up a localized string similar to EMPTY_MODEL_MODULE_NAME_VALUE_DEFAULT.
         /// </summary>
-        public static string RES_EMPTY_VALUE_MESSAGE_DOOR_OPE {
+        public static string RES_EMPTY_MODEL_MODULE_NAME_VALUE_DEFAULT {
             get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_MESSAGE_DOOR_OPE", resourceCulture);
+                return ResourceManager.GetString("RES_EMPTY_MODEL_MODULE_NAME_VALUE_DEFAULT", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_MESSAGE_GROUND_OPE.
+        ///   Looks up a localized string similar to EMPTY_MODEL_RECEIVER_MESSAGE_NAME_VALUE_DEFAULT.
         /// </summary>
-        public static string RES_EMPTY_VALUE_MESSAGE_GROUND_OPE {
+        public static string RES_EMPTY_MODEL_RECEIVER_MESSAGE_NAME_VALUE_DEFAULT {
             get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_MESSAGE_GROUND_OPE", resourceCulture);
+                return ResourceManager.GetString("RES_EMPTY_MODEL_RECEIVER_MESSAGE_NAME_VALUE_DEFAULT", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_MESSAGE_OUTSIDE_OPE.
+        ///   Looks up a localized string similar to EMPTY_MODEL_RECEIVER_NAME_VALUE_DEFAULT.
         /// </summary>
-        public static string RES_EMPTY_VALUE_MESSAGE_OUTSIDE_OPE {
+        public static string RES_EMPTY_MODEL_RECEIVER_NAME_VALUE_DEFAULT {
             get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_MESSAGE_OUTSIDE_OPE", resourceCulture);
+                return ResourceManager.GetString("RES_EMPTY_MODEL_RECEIVER_NAME_VALUE_DEFAULT", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_NAME_DEVICE_INIT.
+        ///   Looks up a localized string similar to EMPTY_MODEL_SPEECH_NAME_VALUE_DEFAULT.
         /// </summary>
-        public static string RES_EMPTY_VALUE_NAME_DEVICE_INIT {
+        public static string RES_EMPTY_MODEL_SPEECH_NAME_VALUE_DEFAULT {
             get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_NAME_DEVICE_INIT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_NAME_DOOR_OPE.
-        /// </summary>
-        public static string RES_EMPTY_VALUE_NAME_DOOR_OPE {
-            get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_NAME_DOOR_OPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_NAME_GROUND_OPE.
-        /// </summary>
-        public static string RES_EMPTY_VALUE_NAME_GROUND_OPE {
-            get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_NAME_GROUND_OPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_NAME_OUTSIDE_OPE.
-        /// </summary>
-        public static string RES_EMPTY_VALUE_NAME_OUTSIDE_OPE {
-            get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_NAME_OUTSIDE_OPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT.
-        /// </summary>
-        public static string RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT {
-            get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_SPEECH_TEXT_DEVICE_INIT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_SPEECH_TEXT_DOOR_OPE.
-        /// </summary>
-        public static string RES_EMPTY_VALUE_SPEECH_TEXT_DOOR_OPE {
-            get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_SPEECH_TEXT_DOOR_OPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_SPEECH_TEXT_GROUND_OPE.
-        /// </summary>
-        public static string RES_EMPTY_VALUE_SPEECH_TEXT_GROUND_OPE {
-            get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_SPEECH_TEXT_GROUND_OPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RES_EMPTY_VALUE_SPEECH_TEXT_OUTSIDE_OPE.
-        /// </summary>
-        public static string RES_EMPTY_VALUE_SPEECH_TEXT_OUTSIDE_OPE {
-            get {
-                return ResourceManager.GetString("RES_EMPTY_VALUE_SPEECH_TEXT_OUTSIDE_OPE", resourceCulture);
+                return ResourceManager.GetString("RES_EMPTY_MODEL_SPEECH_NAME_VALUE_DEFAULT", resourceCulture);
             }
         }
         
@@ -187,47 +124,11 @@ namespace rr.Provider.Resources.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT.
+        ///   Looks up a localized string similar to FALSE_MODEL_SPEECH_ENABLE_VALUE_DEFAULT.
         /// </summary>
-        public static string RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT {
+        public static string RES_FALSE_MODEL_SPEECH_ENABLE_VALUE_DEFAULT {
             get {
-                return ResourceManager.GetString("RES_FALSE_VALUE_SPEECH_ENABLE_DEVICE_INIT", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RES_FALSE_VALUE_SPEECH_ENABLE_DOOR_OPE.
-        /// </summary>
-        public static string RES_FALSE_VALUE_SPEECH_ENABLE_DOOR_OPE {
-            get {
-                return ResourceManager.GetString("RES_FALSE_VALUE_SPEECH_ENABLE_DOOR_OPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RES_FALSE_VALUE_SPEECH_ENABLE_GROUND_OPE.
-        /// </summary>
-        public static string RES_FALSE_VALUE_SPEECH_ENABLE_GROUND_OPE {
-            get {
-                return ResourceManager.GetString("RES_FALSE_VALUE_SPEECH_ENABLE_GROUND_OPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RES_FALSE_VALUE_SPEECH_ENABLE_OUTSIDE_OPE.
-        /// </summary>
-        public static string RES_FALSE_VALUE_SPEECH_ENABLE_OUTSIDE_OPE {
-            get {
-                return ResourceManager.GetString("RES_FALSE_VALUE_SPEECH_ENABLE_OUTSIDE_OPE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to -400.
-        /// </summary>
-        public static string RES_HANDLERS_CLEAR_CODE {
-            get {
-                return ResourceManager.GetString("RES_HANDLERS_CLEAR_CODE", resourceCulture);
+                return ResourceManager.GetString("RES_FALSE_MODEL_SPEECH_ENABLE_VALUE_DEFAULT", resourceCulture);
             }
         }
         
@@ -237,15 +138,6 @@ namespace rr.Provider.Resources.Properties {
         public static string RES_NEXT_MODEL_CODE {
             get {
                 return ResourceManager.GetString("RES_NEXT_MODEL_CODE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to NONE.
-        /// </summary>
-        public static string RES_NONE {
-            get {
-                return ResourceManager.GetString("RES_NONE", resourceCulture);
             }
         }
         

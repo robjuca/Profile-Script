@@ -78,6 +78,15 @@ namespace rr.Handler.Model
             SpeechModel.Process ();
         }
 
+        public void Cleanup ()
+        {
+            SpeechModel.Cleanup ();
+            ModuleModel.Cleanup ();
+            MessageModel.Cleanup ();
+            ReceiverModel.Cleanup ();
+            UserActionModel.Cleanup ();
+        }
+
         public void PumpHandlerIndex () => HandlerIndex++;
         public void SetHandlerIndex (int index) => HandlerIndex = index;
         public void ClearHandlerIndex () => HandlerIndex = 0;

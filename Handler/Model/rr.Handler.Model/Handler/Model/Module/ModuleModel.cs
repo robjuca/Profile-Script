@@ -5,6 +5,7 @@
 
 //----- Include
 using rr.Provider.Resources;
+using rr.Provider.Resources.Properties;
 using rr.Provider.Services;
 //---------------------------//
 
@@ -32,6 +33,15 @@ namespace rr.Handler.Model
 
                 SetScriptDataValue (definitionData.Clone ());
             }
+        }
+
+        public override void Cleanup ()
+        {
+            var definitionData = DefinitionData;
+            definitionData.AddVariableName (VariableName);
+            definitionData.AddVariableValue (Resources.RES_EMPTY_MODEL_MODULE_NAME_VALUE_DEFAULT);
+
+            SetScriptDataValue (definitionData.Clone ());
         }
         #endregion
 
