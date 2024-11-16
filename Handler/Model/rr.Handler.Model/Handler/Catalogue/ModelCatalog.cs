@@ -41,10 +41,7 @@ namespace rr.Handler.Model
             }
         }
 
-        public void ProcessScriptReturnCode (TScriptActionDispatcherEventArgs eventArgs)
-        {
-            ReturnCodeModel.ProcessScriptReturnCode (eventArgs); // from Dispatcher
-        }
+        public void ProcessScriptReturnCode (TScriptActionDispatcherEventArgs eventArgs) => ReturnCodeModel.ProcessScriptReturnCode (eventArgs); // from Dispatcher
 
         public void Cleanup ()
         {
@@ -56,18 +53,15 @@ namespace rr.Handler.Model
 
         public void Next ()
         {
-            if (HasMoreData) {
-                SelectModelDataIndex (pumpIndex: true);
-
-                if (ClearWaitingFlags) {
-                    CurrentModelData.ClearWaitingModels ();
+            if (CurrentModelData.IsModelWaiting is false) {
+                if (HasMoreData) {
+                    SelectModelDataIndex (pumpIndex: true);
+                    ProcessSpeech ();
                 }
-
-                ProcessSpeech ();
             }
         }
 
-        public void ResetWaitingFlags () => ClearWaitingFlags = true;
+        public void ResetWaitingFlags () => CurrentModelData.ClearWaitingModels ();
         #endregion
 
         #region Event
@@ -83,12 +77,10 @@ namespace rr.Handler.Model
                     CurrentModelData.UpdateReceiverMessage (NextModelData);
                 }
 
-                // process all modells
+                // process all models
                 CurrentModelData.Process ();
-
-                if (CurrentModelData.IsModelWaiting is false) {
-                    Next ();
-                }
+                
+                Next ();
             }
         }
         #endregion
@@ -101,7 +93,6 @@ namespace rr.Handler.Model
         TReturnCodeModel ReturnCodeModel { get; set; }
         UHandlerModule ParentModule { get; set; }
         bool HasMoreData => (ModelDataListIndex + 1) < ModelDataList.Count;
-        bool ClearWaitingFlags { get; set; }
         #endregion
 
         #region Support

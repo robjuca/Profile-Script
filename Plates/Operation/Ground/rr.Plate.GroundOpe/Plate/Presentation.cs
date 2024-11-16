@@ -75,12 +75,18 @@ namespace rr.Plate
 
                     if (IsMySelf (message.ReceiverModule)) {
                         if (ProfileLoad) {
-                            SelectActiveModule (Module);
+                            if (message.RequestParam (out TNextModuleData data)) {
+                                if (data.IsMySelf (Module)) {
+                                    SelectActiveModule (Module);
 
-                            CreateVariables ();
-                            CreateHandlerData ();
+                                    CreateVariables ();
+                                    CreateHandlerData ();
 
-                            ModelCatalogue.Execute ();
+                                    CurrentMessage = data.MessageValue;
+
+                                    ModelCatalogue.Execute (data.MessageValueAsString);
+                                }
+                            }
                         }
                     }
                 }
@@ -94,14 +100,16 @@ namespace rr.Plate
                                 ModelCatalogue.Cleanup ();
                                 ClearActiveModule ();
 
-                                var data = TNextModuleData.Create (Module, UHandlerModule.OUTSIDE_OPE);
-                                data.AddMessageName (UMessageName.MSG_BEGIN);
-                                data.AddMessageAction (UMessageAction.NEXT_MODULE);
+                                if (CurrentMessage.Equals (UMessageValue.Done) is false) {
+                                    var data = TNextModuleData.Create (Module, UHandlerModule.OUTSIDE_OPE);
+                                    data.AddMessageValue (UMessageValue.Begin);
+                                    data.AddMessageAction (UMessageAction.NEXT_MODULE);
 
-                                var msg = TMessageInternal.CreateFrom (data);
-                                Publish (msg.Clone ());
+                                    var msg = TMessageInternal.CreateFrom (data);
+                                    Publish (msg.Clone ());
 
-                                return;
+                                    return;
+                                }
                             }
 
                             ModelCatalogue.ProcessScriptReturnCode (eventArgs);

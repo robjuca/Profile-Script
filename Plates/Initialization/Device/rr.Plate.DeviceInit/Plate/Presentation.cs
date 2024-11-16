@@ -111,7 +111,7 @@ namespace rr.Plate.DeviceInit
                                 ClearActiveModule ();
 
                                 var data = TNextModuleData.Create (Module, UHandlerModule.GROUND_OPE);
-                                data.AddMessageName (UMessageName.MSG_BEGIN);
+                                data.AddMessageValue (UMessageValue.Begin);
                                 data.AddMessageAction (UMessageAction.NEXT_MODULE);
 
                                 var msg = TMessageInternal.CreateFrom (data);
@@ -224,7 +224,7 @@ namespace rr.Plate.DeviceInit
                     "when ready: set beacon switch on and off : \r\n waiting..."
                 );
 
-            modelData.MessageModel.AddVariableValue ("Waiting");
+            modelData.MessageModel.AddVariableValue (TEnumExtension.AsString (UMessageValue.Waiting));
             modelData.ReceiverModel.EnableReceiverNameEmptyFlag ();
             modelData.UserActionModel.AddUserActionCode (UUserActionCode.WAIT_DONE);
 
@@ -239,7 +239,7 @@ namespace rr.Plate.DeviceInit
                     "done"
                 );
 
-            modelData.MessageModel.AddVariableValue ("Done");
+            modelData.MessageModel.AddVariableValue (TEnumExtension.AsString (UMessageValue.Done));
             modelData.UserActionModel.RemoveUserActionCode ();
 
             modelData.PumpHandlerIndex ();

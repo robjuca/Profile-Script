@@ -11,6 +11,7 @@ namespace rr.Provider.Resources
     //----- UMessageName 
     public enum UMessageName
     {
+        NONE,
         MSG_BEGIN,
         MSG_CLOSE,
         MSG_DONE,
@@ -26,13 +27,13 @@ namespace rr.Provider.Resources
         MSG_SWITCH_ON,
         MSG_WIN_CLOSE,
         MSG_WIN_OPEN,
-        NONE
     };
     //---------------------------//
 
     //----- UMessageValue 
     public enum UMessageValue
     {
+        None,
         Begin,
         Close,
         Done,
@@ -48,6 +49,7 @@ namespace rr.Provider.Resources
         SwitchOn,
         WinClose,
         WinOpen,
+        Waiting,
     };
     //---------------------------//
 

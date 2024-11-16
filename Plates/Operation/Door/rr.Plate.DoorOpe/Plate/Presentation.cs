@@ -76,12 +76,18 @@ namespace rr.Plate
 
                     if (IsMySelf (message.ReceiverModule)) {
                         if (ProfileLoad) {
-                            SelectActiveModule (Module);
+                            if (message.RequestParam (out TNextModuleData data)) {
+                                if (data.IsMySelf (Module)) {
+                                    SelectActiveModule (Module);
 
-                            CreateVariables ();
-                            CreateHandlerData ();
+                                    CreateVariables ();
+                                    CreateHandlerData ();
 
-                            ModelCatalogue.Execute ();
+                                    CurrentMessage = data.MessageValue;
+
+                                    ModelCatalogue.Execute (data.MessageValueAsString);
+                                }
+                            }
                         }
                     }
                 }
@@ -89,18 +95,23 @@ namespace rr.Plate
                 if (IsActiveModule) {
                     // SCRIPT_ACTION (from Process_Dispatcher)
                     if (message.IsAction (UMessageAction.SCRIPT_ACTION)) {
+
                         if (message.RequestParam (out TScriptActionDispatcherEventArgs eventArgs)) {
                             // Model DONE (-80) - must go to next model
                             if (eventArgs.ContainsReturnCode (Resources.RES_NEXT_MODEL_CODE)) {
                                 ModelCatalogue.Cleanup ();
                                 ClearActiveModule ();
 
-                                var msg = TMessageInternal.CreateDefault (Module, UMessageAction.NEXT_MODULE);
-                                msg.SelectReceiverModule (UHandlerModule.PROCESS_DISPATCHER);
-                                msg.AddDestinationModule (UHandlerModule.GROUND_OPE);
+                                if (CurrentMessage.Equals (UMessageValue.Done) is false) {
+                                   var data = TNextModuleData.Create (Module, UHandlerModule.GROUND_OPE);
+                                    data.AddMessageValue (UMessageValue.Done);
+                                    data.AddMessageAction (UMessageAction.NEXT_MODULE);
 
-                                Publish (msg.Clone ());
-                                return;
+                                    var msg = TMessageInternal.CreateFrom (data);
+                                    Publish (msg.Clone ());
+
+                                    return;
+                                }
                             }
 
                             ModelCatalogue.ProcessScriptReturnCode (eventArgs);

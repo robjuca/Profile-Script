@@ -76,12 +76,18 @@ namespace rr.Plate
 
                     if (IsMySelf (message.ReceiverModule)) {
                         if (ProfileLoad) {
-                            SelectActiveModule (Module);
+                            if (message.RequestParam (out TNextModuleData data)) {
+                                if (data.IsMySelf (Module)) {
+                                    SelectActiveModule (Module);
 
-                            CreateVariables ();
-                            CreateHandlerData ();
+                                    CreateVariables ();
+                                    CreateHandlerData ();
 
-                            ModelCatalogue.Execute ();
+                                    CurrentMessage = data.MessageValue;
+
+                                    ModelCatalogue.Execute (data.MessageValueAsString);
+                                }
+                            }
                         }
                     }
                 }
@@ -95,16 +101,20 @@ namespace rr.Plate
                                 ModelCatalogue.Cleanup ();
                                 ClearActiveModule ();
 
-                                var msg = TMessageInternal.CreateDefault (Module, UMessageAction.NEXT_MODULE);
-                                msg.SelectReceiverModule (UHandlerModule.PROCESS_DISPATCHER);
-                                msg.AddDestinationModule (UHandlerModule.DOOR_OPE);
+                                if (CurrentMessage.Equals (UMessageValue.Done) is false) {
+                                    var data = TNextModuleData.Create (Module, UHandlerModule.DOOR_OPE);
+                                    data.AddMessageValue (UMessageValue.Begin);
+                                    data.AddMessageAction (UMessageAction.NEXT_MODULE);
 
-                                Publish (msg.Clone ());
-                                return;
+                                    var msg = TMessageInternal.CreateFrom (data);
+                                    Publish (msg.Clone ());
+
+                                    return;
+                                }
                             }
-
-                            ModelCatalogue.ProcessScriptReturnCode (eventArgs);
                         }
+
+                        ModelCatalogue.ProcessScriptReturnCode (eventArgs);
                     }
                 }
             }

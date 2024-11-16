@@ -4,6 +4,7 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Library.Extension;
 using rr.Provider.Resources;
 //---------------------------//
 
@@ -30,8 +31,10 @@ namespace rr.Provider.Message
         #region Property
         public UHandlerModule CurrentModuleName { get; private set; }
         public UHandlerModule NextModuleName { get; private set; }
-        public UMessageName MessageName { get; private set; }
+        public UMessageValue MessageValue { get; private set; }
         public UMessageAction MessageAction { get; private set; }
+
+        public string MessageValueAsString => TEnumExtension.AsString (MessageValue);
 
         public UMessageAction NextModuleAction => UMessageAction.NEXT_MODULE;           // always
         public UHandlerModule ReceiverModuleName => UHandlerModule.PROCESS_DISPATCHER;  // always
@@ -40,31 +43,33 @@ namespace rr.Provider.Message
         #region Members
         public void AddCurrentModule (UHandlerModule currentModule) => CurrentModuleName = currentModule;
         public void AddNextModule (UHandlerModule nextModule) => NextModuleName = nextModule;
-        public void AddMessageName (UMessageName messageName) => MessageName = messageName;
+        public void AddMessageValue (UMessageValue messageName) => MessageValue = messageName;
         public void AddMessageAction (UMessageAction messageAction) => MessageAction = messageAction;
+
+        public bool IsMySelf (UHandlerModule moduleName) => NextModuleName == moduleName;
         #endregion
 
         #region Static
         static public TNextModuleData CreateDefault => new () {
             CurrentModuleName = UHandlerModule.NONE,
             NextModuleName = UHandlerModule.NONE,
-            MessageName = UMessageName.NONE,
+            MessageValue = UMessageValue.None,
             MessageAction = UMessageAction.NONE,
         };
 
         static public TNextModuleData Create (UHandlerModule current, UHandlerModule next) => new () {
             CurrentModuleName = current,
             NextModuleName = next,
-            MessageName = UMessageName.NONE,
+            MessageValue = UMessageValue.None,
             MessageAction = UMessageAction.NONE,
         };
 
-        static public TNextModuleData Create (UHandlerModule current, UHandlerModule next, UMessageName messageName, UMessageAction messageAction) => new () {
+        static public TNextModuleData Create (UHandlerModule current, UHandlerModule next, UMessageValue messageName, UMessageAction messageAction) => new () {
             CurrentModuleName = current,
             NextModuleName = next,
-            MessageName = messageName,
+            MessageValue = messageName,
             MessageAction = messageAction
-        }; 
+        };
         #endregion
     };
     //---------------------------//

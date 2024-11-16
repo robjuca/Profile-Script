@@ -26,6 +26,7 @@ namespace rr.Provider.Presentation
         protected bool IsActiveModule => ActiveModule.Equals (Module);
         protected IProviderServices Services { get; private set; }
         protected System.Array AllModules => Services.AllHandlerModule;
+        public UMessageValue CurrentMessage { get; set; }
 
         #endregion
 
@@ -35,7 +36,8 @@ namespace rr.Provider.Presentation
         {
             TypeName = GetType ().Name;
             Module = moduleName;
-            //ActiveModule = UHandlerModule.NONE;
+            ActiveModule = UHandlerModule.NONE;
+            CurrentMessage= UMessageValue.None;
 
             SetPresentationCommand (this);
 
