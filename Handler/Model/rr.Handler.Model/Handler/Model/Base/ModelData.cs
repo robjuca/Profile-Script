@@ -4,6 +4,7 @@
 ----------------------------------------------------------------*/
 
 //----- Include
+using rr.Library.Infrastructure;
 using rr.Provider.Resources;
 using rr.Provider.Services;
 //---------------------------//
@@ -28,6 +29,13 @@ namespace rr.Handler.Model
         public TMessageModel MessageModel { get; private set; }
         public TReceiverModel ReceiverModel { get; private set; }
         public TUserActionModel UserActionModel { get; private set; }
+        #endregion
+
+        #region Constructor
+        static TModelData ()
+        {
+            ProcessSpeechIdle = true;
+        }
         #endregion
 
         #region Interface
@@ -58,6 +66,8 @@ namespace rr.Handler.Model
 
         public void ScriptReturnCode (TReturnCodeArgs eventArgs)
         {
+            ProcessSpeechIdle = eventArgs.IsSpeechDone;
+
             SpeechModel.ScriptReturnCode (eventArgs);
             ModuleModel.ScriptReturnCode (eventArgs);
             MessageModel.ScriptReturnCode (eventArgs);
@@ -75,7 +85,16 @@ namespace rr.Handler.Model
 
         public void ProcessSpeech ()
         {
-            SpeechModel.Process ();
+            if (ProcessSpeechIdle) {
+                ProcessSpeechIdle = false;
+
+                SpeechModel.Process ();
+            }
+
+            // wait async
+            else {
+                TAsync.Run (TAsyncArgs.Create (OnAsyncReturn, ProcessSpeech));
+            }
         }
 
         public void Cleanup ()
@@ -110,6 +129,21 @@ namespace rr.Handler.Model
                 ReceiverModel.AddVariableValue (MessageModel.NextMessageFlag ? data.MessageModel.VariableValue : MessageModel.VariableValue);
             }
         }
+        #endregion
+
+        #region Async Event
+        public void OnAsyncReturn (TAsyncArgs args)
+        {
+            if (ProcessSpeechIdle) {
+                args.CallSingle ();
+            }
+
+            args.Again ();
+        } 
+        #endregion
+
+        #region Property
+        static bool ProcessSpeechIdle { get; set; }
         #endregion
 
         #region Static

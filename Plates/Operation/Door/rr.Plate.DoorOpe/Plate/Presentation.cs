@@ -36,9 +36,9 @@ namespace rr.Plate
     //---------------------------// 
     #endregion
 
-    //----- TDOOROpePresentation
+    //----- TDoorOpePresentation
     [Export (typeof (IDefault))]
-    public class TDOOROpePresentation : TModulePresentation, IModule
+    public class TDoorOpePresentation : TModulePresentation, IModule
     {
         #region IModule
         public UHandlerModule HandlerModule => Module;
@@ -46,7 +46,7 @@ namespace rr.Plate
 
         #region Constructor
         [ImportingConstructor]
-        public TDOOROpePresentation (
+        public TDoorOpePresentation (
            IEventAggregator eventAggregator, IProviderServices services)
                : base (eventAggregator, services, UHandlerModule.DOOR_OPE)
         {
@@ -173,7 +173,7 @@ namespace rr.Plate
             // Text and Message - Begin...
             #region Waiting...
             modelData.SpeechModel.AddVariableValue (
-                    "DOOR operation start"
+                    "door operation start"
                 );
 
             modelData.MessageModel.AddVariableValue (TEnumExtension.NameOf (UMessageValue.Begin));
@@ -185,7 +185,7 @@ namespace rr.Plate
             // Text and Message - Done...
             #region Done...
             modelData.SpeechModel.AddVariableValue (
-                    "DOOR operation done"
+                    "door operation done"
                 );
 
             modelData.MessageModel.AddVariableValue (TEnumExtension.NameOf (UMessageValue.Done));
